@@ -1,0 +1,32 @@
+<section>
+<h1>Customer</h1>
+  <dt>Name</dt>
+    <dd><%=h @bill.customer.name %></dd>
+  <dt>Phone</dt>
+    <dd><%=h @bill.customer.phone %></dd>
+  <dt>Address</dt>
+    <dd><%=h @bill.customer.address %></dd>
+</section>
+
+<table>
+  <thead>
+    <tr>
+      <th>Product Batch</th>
+      <th>Quantity</th>
+      <th>discount</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% for item in @bill.bill_items %>
+    <tr>
+      <td><%=h item.product_batch %></td>
+      <td><%=h item.quantity %></td>
+      <td><%=h item.discount %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+
+<%= link_to 'Edit', edit_bill_path(@bill) %> |
+<%= link_to 'Back', bills_path %>

@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  product: 
+  batch_code: MyString
+  mfg_date: 2009-12-15
+  exp_date: 2009-12-15
+  price: 9.99
+
+two:
+  product: 
+  batch_code: MyString
+  mfg_date: 2009-12-15
+  exp_date: 2009-12-15
+  price: 9.99

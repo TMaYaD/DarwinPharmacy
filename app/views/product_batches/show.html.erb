@@ -1,0 +1,28 @@
+<p>
+  <b>Product:</b>
+  <%=h @product_batch.product %>
+</p>
+
+<p>
+  <b>Batch code:</b>
+  <%=h @product_batch.batch_code %>
+</p>
+
+<p>
+  <b>Mfg date:</b>
+  <%=h @product_batch.mfg_date %>
+</p>
+
+<p>
+  <b>Exp date:</b>
+  <%=h @product_batch.exp_date %>
+</p>
+
+<p>
+  <b>Price:</b>
+  <%=h @product_batch.price %>
+</p>
+
+
+<%= link_to 'Edit', edit_product_batch_path(@product_batch) %> |
+<%= link_to 'Back', product_batches_path %>

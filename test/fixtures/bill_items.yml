@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  bill: 
+  product_batch: 
+  quantity: 1
+  discount: 9.99
+
+two:
+  bill: 
+  product_batch: 
+  quantity: 1
+  discount: 9.99

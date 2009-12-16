@@ -1,0 +1,10 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  customer: 
+  created_by: 
+
+two:
+  customer: 
+  created_by:
+  modified_by: 
