@@ -4,6 +4,16 @@
 </p>
 
 <p>
+  <b>e-mail:</b>
+  <%=h @user.email %>
+</p>
+
+<p>
+  <b>phone:</b>
+  <%=h @user.phone %>
+</p>
+
+<p>
   <b>Crypted password:</b>
   <%=h @user.crypted_password %>
 </p>
@@ -57,7 +67,6 @@
   <b>Last login ip:</b>
   <%=h @user.last_login_ip %>
 </p>
-
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

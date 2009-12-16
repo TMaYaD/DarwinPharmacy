@@ -3,6 +3,8 @@
 <table>
   <tr>
     <th>Login</th>
+    <th>email</th>
+    <th>phone</th>
     <th>Login count</th>
     <th>Failed login count</th>
     <th>Last request at</th>
@@ -14,6 +16,8 @@
 <% @users.each do |user| %>
   <tr>
     <td><%=h user.login %></td>
+    <td><%=h user.email %></td>
+    <td><%=h user.phone %></td>
     <td><%=h user.login_count %></td>
     <td><%=h user.failed_login_count %></td>
     <td><%=h user.last_request_at %></td>
