@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091215083043) do
+ActiveRecord::Schema.define(:version => 20091218073620) do
 
   create_table "bill_items", :force => true do |t|
     t.integer  "bill_id"
@@ -42,6 +42,18 @@ ActiveRecord::Schema.define(:version => 20091215083043) do
     t.date     "mfg_date"
     t.date     "exp_date"
     t.decimal  "price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "products", :force => true do |t|
+    t.string   "name"
+    t.string   "manufacturer"
+    t.string   "category"
+    t.text     "composition"
+    t.string   "dosage"
+    t.string   "strength"
+    t.text     "common_uses"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
