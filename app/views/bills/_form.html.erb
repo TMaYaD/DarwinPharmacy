@@ -1,6 +1,10 @@
 <% semantic_form_for(@bill) do |f| %>
-  <%= debug @bill %>
-  <%= debug @bill.bill_items %>
-  <%= f.inputs %>
+  <%= f.inputs :for => :customer, :name => 'Customer', :id => 'bill_customer' %>
+  <div id='bill_items'>
+    <%= f.inputs :product_batch, :quantity, :discount, :for => :bill_items, :name => "Item %i" %>
+  </div>
   <%= f.buttons %>
+<% end %>
+<% semantic_form_for @bill, :html => { :id => 'bill_item_template' } do |f| %>
+  <%= f.inputs :product_batch, :quantity, :discount, :for => BillItem.new, :name => "Item MARKER", :for_options => {:index => 'MARKER'} %>
 <% end %>

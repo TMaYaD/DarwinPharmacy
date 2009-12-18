@@ -1,0 +1,12 @@
+fieldset.item {
+  padding-top: 0;
+  padding-bottom: 7px;
+}
+
+.hint {
+  color: grey;
+}
+
+#phone {
+  /*float: right;*/
+}
