@@ -1,10 +1,10 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  customer: 
-  created_by: 
+  customer_id: 1
+  created_by: 1
 
 two:
-  customer: 
-  created_by:
-  modified_by: 
+  customer_id: 2
+  created_by: 2
+  modified_by: 1
