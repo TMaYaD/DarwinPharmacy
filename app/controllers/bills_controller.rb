@@ -45,6 +45,7 @@ class BillsController < ApplicationController
   def create
     @bill = Bill.new(params[:bill])
     @bill.created_by = current_user
+    @bill.bill_items.each { |item| item.discount ||= 10 }
 
     respond_to do |format|
       if @bill.save

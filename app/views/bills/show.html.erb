@@ -11,7 +11,9 @@
 <table>
   <thead>
     <tr>
-      <th>Product-Batch</th>
+      <th>Product</th>
+      <th>Batch</th>
+      <th>Exp. Date</th>
       <th>Quantity</th>
       <th>Rate</th>
       <th>Discount</th>
@@ -21,7 +23,9 @@
   <tbody>
   <% for item in @bill.bill_items %>
     <tr>
-      <td><%=h item.product_batch.to_label %></td>
+      <td><%=h item.product_batch.product.name %></td>
+      <td><%=h item.product_batch.batch_code %></td>
+      <td><%=h item.product_batch.exp_date %></td>
       <td><%=h item.quantity %></td>
       <td><%=h item.product_batch.price %></td>
       <td><%=h item.discount %>%</td>

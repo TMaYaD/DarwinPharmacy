@@ -1,0 +1,12 @@
+fieldset>ol {
+	list-style-type: none;
+}
+fieldset>ol>li {
+	display: inline-block;
+}
+fieldset.buttons {
+	border-style: none;
+}
+textarea {
+	margin: 0px;
+}
