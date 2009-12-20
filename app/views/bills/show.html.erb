@@ -11,20 +11,30 @@
 <table>
   <thead>
     <tr>
-      <th>Product Batch</th>
+      <th>Product-Batch</th>
       <th>Quantity</th>
-      <th>discount</th>
+      <th>Rate</th>
+      <th>Discount</th>
+      <th>amount</th>
     </tr>
   </thead>
   <tbody>
   <% for item in @bill.bill_items %>
     <tr>
-      <td><%=h item.product_batch %></td>
+      <td><%=h item.product_batch.to_label %></td>
       <td><%=h item.quantity %></td>
-      <td><%=h item.discount %></td>
+      <td><%=h item.product_batch.price %></td>
+      <td><%=h item.discount %>%</td>
+      <td><%=h item.price %></td>
     </tr>
   <% end %>
   </tbody>
+  <tfoot>
+    <tr>
+      <th colspan=4>Total Amount:</th>
+      <td><%=h @bill.amount %></td>
+    </tr>
+  </tfoot>
 </table>
 
 

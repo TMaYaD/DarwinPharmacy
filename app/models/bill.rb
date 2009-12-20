@@ -6,4 +6,10 @@ class Bill < ActiveRecord::Base
 
   accepts_nested_attributes_for :customer
   accepts_nested_attributes_for :bill_items, :allow_destroy => true, :reject_if => proc { |attrs| attrs.all? { |k, v| v.blank? } }
+
+  def amount
+    sum = 0
+    self.bill_items.each { |item| sum += item.price }
+    sum
+  end
 end
