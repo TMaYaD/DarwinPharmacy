@@ -1,4 +1,6 @@
 class BillsController < ApplicationController
+  before_filter :require_user
+
   # GET /bills
   # GET /bills.xml
   def index
