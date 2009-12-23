@@ -1,0 +1,33 @@
+<% content_for :title do %>
+  Work with us
+<% end %>
+<% content_for :style_sheets do %>
+  <%= stylesheet_link_tag 'franchise' %>
+<% end %>
+
+<% content_for :aside do %>
+  <nav>
+    <ul>
+    <% for i in (1..7) %>
+        <li href=<%= url_for :id => i %>>
+          <img id='next_thumb' src="/franchise/tn_slide<%=i%>.jpg" width="80" height="60">
+      </li>
+    <% end %>
+    </ul>
+  </nav>
+<% end %>
+
+<%  id = (params[:id] or 1).to_i;  %>
+
+<div id='presentation'>
+  <div id='slide_control'>
+    <% if id>1 %>
+	    <%= image_tag "Back.png", :style => 'float:left;', :href => url_for(:id=>id-1) %> 
+    <% end %>
+    <% if id<7 %>
+      <%= image_tag "Next.png", :style => 'float:right;', :href => url_for(:id=>id+1) %> 
+    <% end %>
+  </div>
+  <img id='slide' src="/franchise/slide<%=id%>.jpg" width="800" height="600" alt="Darwin Pharmacy Franchise">
+  
+</div>

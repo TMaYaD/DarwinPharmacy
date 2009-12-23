@@ -1,0 +1,10 @@
+@charset "utf-8";
+/* CSS Document */
+
+header, footer, aside {
+	display:block;
+}
+
+hgroup, nav {
+	display:inline-block;
+}
