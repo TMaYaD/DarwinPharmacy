@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(:version => 20091218073620) do
     t.integer  "bill_id"
     t.integer  "product_batch_id"
     t.integer  "quantity"
-    t.decimal  "discount"
+    t.integer  "discount",         :limit => 10, :precision => 10, :scale => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(:version => 20091218073620) do
     t.string   "batch_code"
     t.date     "mfg_date"
     t.date     "exp_date"
-    t.decimal  "price"
+    t.integer  "price",      :limit => 10, :precision => 10, :scale => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
