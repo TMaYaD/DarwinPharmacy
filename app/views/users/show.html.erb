@@ -9,8 +9,13 @@
 </p>
 
 <p>
-  <b>phone:</b>
+  <b>Phone:</b>
   <%=h @user.phone %>
+</p>
+
+<p>
+  <b>Role:</b>
+  <%=h @user.role.to_s.humanize %>
 </p>
 
 <p>

@@ -45,6 +45,12 @@ nav ul li.disabled {
 hgroup#title img{
 	margin-bottom:-16px;
 }
+hgroup#login {
+	margin: 1em;
+	position: absolute;
+	right: 1em;
+	top: 0pc;
+}
 hgroup#search {
 	width: 240px;
 	text-align:right;
