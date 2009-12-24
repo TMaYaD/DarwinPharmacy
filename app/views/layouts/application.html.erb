@@ -33,6 +33,14 @@
     <h2>Happy and Healthy</h2>
 	-->
   </hgroup>
+  <hgroup id='login'>
+    <% if current_user %>
+      <%= link_to "Edit Profile",edit_user_path(:current) %>  
+      <%= link_to "Log out", logout_path %>
+    <% else %>
+      <%= link_to "Log in", login_path %>  
+    <% end %>
+  </hgroup>
   <nav>
     <!-- main blog navigation links -->
     <ul>
@@ -51,13 +59,19 @@
           placeholder="To search, type and hit enter" />
     </form>
   </hgroup>
+
 </header>
 <div id='wrapper'>
   <div id="container">
-    <div id='main'> <%= yield %> </div>
+    <div id='main'>
+      <p class='error banner'><%= flash[:error] %></p>
+      <p class='notice banner'><%= flash[:notice] %></p>
+      <%= yield %>
+    </div>
   </div>
   <aside>
     <!-- sidebar -->
+    <%= render :partial => 'layouts/user_links' %>
     <%= yield :aside %>
   </aside>
   <div class='clear'></div>

@@ -1,5 +1,5 @@
 class BillsController < ApplicationController
-  before_filter :require_user
+  filter_resource_access
 
   # GET /bills
   # GET /bills.xml

@@ -1,4 +1,13 @@
 <% semantic_form_for(@user) do |f| %>
-  <%= f.inputs :login, :password, :password_confirmation, :email, :phone %>
+  <% f.inputs do %>
+    <%= f.input :login %>
+    <%= f.input :password %>
+    <%= f.input :password_confirmation %>
+    <%= f.input :email %>
+    <%= f.input :phone %>
+    <% if current_user.role == 'admin' %>
+      <%= f.input :role, :collection => User::ROLES, :label_method => Proc.new{ |a| a.to_s.humanize } %>
+    <% end %>
+  <% end %>
   <%= f.buttons %>
 <% end %>
