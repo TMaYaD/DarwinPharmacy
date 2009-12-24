@@ -64,7 +64,8 @@
 <div id='wrapper'>
   <div id="container">
     <div id='main'>
-      <p style="color: green"><%= flash[:notice] %></p>
+      <p class='error banner'><%= flash[:error] %></p>
+      <p class='notice banner'><%= flash[:notice] %></p>
       <%= yield %>
     </div>
   </div>

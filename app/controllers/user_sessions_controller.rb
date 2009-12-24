@@ -1,4 +1,5 @@
 class UserSessionsController < ApplicationController
+  filter_access_to :all
   
   def new
     @user_session = UserSession.new
