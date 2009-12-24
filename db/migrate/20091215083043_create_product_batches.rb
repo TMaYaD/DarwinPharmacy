@@ -5,7 +5,7 @@ class CreateProductBatches < ActiveRecord::Migration
       t.string :batch_code
       t.date :mfg_date
       t.date :exp_date
-      t.decimal :price
+      t.decimal :price, :precision => 8, :scale => 2
 
       t.timestamps
     end

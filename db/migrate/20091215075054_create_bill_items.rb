@@ -4,7 +4,7 @@ class CreateBillItems < ActiveRecord::Migration
       t.references :bill
       t.references :product_batch
       t.integer :quantity
-      t.decimal :discount
+      t.decimal :discount, :precision => 4, :scale => 2
 
       t.timestamps
     end
