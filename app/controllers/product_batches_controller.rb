@@ -1,5 +1,6 @@
 class ProductBatchesController < ApplicationController
-  before_filter :require_user
+  filter_resource_access
+
   # GET /product_batches
   # GET /product_batches.xml
   def index

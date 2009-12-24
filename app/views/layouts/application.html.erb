@@ -63,10 +63,14 @@
 </header>
 <div id='wrapper'>
   <div id="container">
-    <div id='main'> <%= yield %> </div>
+    <div id='main'>
+      <p style="color: green"><%= flash[:notice] %></p>
+      <%= yield %>
+    </div>
   </div>
   <aside>
     <!-- sidebar -->
+    <%= render :partial => 'layouts/user_links' %>
     <%= yield :aside %>
   </aside>
   <div class='clear'></div>

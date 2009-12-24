@@ -6,6 +6,6 @@ class User < ActiveRecord::Base
   ROLES = %w[admin franchise operator]
 
   def role_symbols
-    role.underscore.to_sym
+    [ role.underscore.to_sym ]
   end
 end

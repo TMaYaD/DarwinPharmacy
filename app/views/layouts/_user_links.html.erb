@@ -1,0 +1,7 @@
+<nav><ul>
+<% for resource in [:users, :customers, :products, :product_batches, :bills] %>
+  <% if permitted_to? :index, resource %>
+    <li><%= link_to resource.to_s.humanize, :controller => resource %></li>
+  <% end %>
+<% end %>
+</ul></nav>

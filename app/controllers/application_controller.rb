@@ -7,19 +7,22 @@ class ApplicationController < ActionController::Base
 
   # Scrub sensitive parameters from your log
   filter_parameter_logging :password, :password_confirmation
-  #before_filter { |c| Authorization.current_user = c.current_user }
-  #
   helper_method :current_user
-
-  private  
-  def current_user_session  
-    return @current_user_session if defined?(@current_user_session)  
-    @current_user_session = UserSession.find  
-  end  
+  before_filter { |c| Authorization.current_user = c.current_user }
     
   def current_user  
     @current_user = current_user_session && current_user_session.record  
   end  
 
+  def permission_denied  
+    flash[:error] = "Sorry, you not allowed to access that page."  
+    redirect_to root_url  
+  end  
+  
+  private  
+  def current_user_session  
+    return @current_user_session if defined?(@current_user_session)  
+    @current_user_session = UserSession.find  
+  end  
 
 end

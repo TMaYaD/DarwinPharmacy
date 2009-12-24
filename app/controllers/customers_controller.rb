@@ -1,5 +1,6 @@
 class CustomersController < ApplicationController
-  before_filter :require_user
+  filter_resource_access
+
   # GET /customers
   # GET /customers.xml
   def index

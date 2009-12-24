@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
-  before_filter :require_user
+  filter_resource_access
+
   # GET /products
   # GET /products.xml
   def index
