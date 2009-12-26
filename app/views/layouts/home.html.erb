@@ -5,7 +5,17 @@
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 <meta http-equiv="X-UA-Compatible" content="chrome=1" />
 
-<%= stylesheet_link_tag 'yui', 'html5', 'layout/application' %>
+<!--[if IE]-->
+  <%= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js' %>
+  <script>
+    CFInstall.check({});
+  </script>
+<!--[endif]-->
+<%= stylesheet_link_tag 'http://yui.yahooapis.com/2.8.0r4/build/reset/reset-min.css' %>
+<%= stylesheet_link_tag 'http://yui.yahooapis.com/2.8.0r4/build/fonts/fonts-min.css' %>
+<%= stylesheet_link_tag 'http://yui.yahooapis.com/2.8.0r4/build/base/base-min.css' %>
+<%= stylesheet_link_tag 'html5' %>
+<%= stylesheet_link_tag 'layout' %>
 <%= yield :style_sheets %>
 
 <%= javascript_include_tag 'jquery' %>
@@ -31,7 +41,17 @@
       <%= link_to "Log in", login_path %>  
     <% end %>
   </hgroup>
-  <%= render :partial => 'layouts/user_links' %>
+  <nav>
+    <!-- main blog navigation links -->
+    <ul>
+      <li href=<%= url_for :controller => 'home' %>>Home</li>
+      <li class='disabled'>Services</li>
+      <li class='disabled'>Store Locator</li>
+      <li class='disabled'>Medicine Cabinet</li>
+      <li href=<%= url_for :controller => 'home', :action => 'franchise' %>>Work With Us</li>
+      <li href=<%= url_for :controller => 'home', :action => 'about' %>>About Us</li>
+    </ul>
+  </nav>
   <hgroup id='search'>
     <h3>Search</h3>
     <form action="…">
@@ -51,6 +71,7 @@
   </div>
   <aside>
     <!-- sidebar -->
+    <%= render :partial => 'layouts/user_links' %>
     <%= yield :aside %>
   </aside>
   <div class='clear'></div>
@@ -59,5 +80,17 @@
   <!-- site footer -->
   <p>Copyright © 2009 Darwin Pharmacy. All rights reserved.</p>
 </footer>
+<!-- Google Analytics -->
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+  var pageTracker = _gat._getTracker("UA-11112987-2");
+  pageTracker._trackPageview();
+} catch(err) {}
+</script>
+
 </body>
 </html>
