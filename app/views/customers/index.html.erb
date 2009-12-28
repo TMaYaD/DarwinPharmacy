@@ -1,12 +1,14 @@
 <h1>Listing customers</h1>
 
-<table>
+<% datatable do %>
+<thead>
   <tr>
     <th>Name</th>
     <th>Phone</th>
     <th>Address</th>
   </tr>
-
+</thead>
+<tbody>
 <% @customers.each do |customer| %>
   <tr>
     <td><%=h customer.name %></td>
@@ -17,7 +19,8 @@
     <td><%= link_to 'Destroy', customer, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
-</table>
+</tbody>
+<% end %>
 
 <br />
 

@@ -1,6 +1,7 @@
 <h1>Listing products</h1>
 
-<table>
+<% datatable do %>
+<thead>
   <tr>
     <th>Name</th>
     <th>Manufacturer</th>
@@ -10,7 +11,8 @@
     <th>Strength</th>
     <th>Common uses</th>
   </tr>
-
+</thead>
+<tbody>
 <% @products.each do |product| %>
   <tr>
     <td><%=h product.name %></td>
@@ -25,7 +27,8 @@
     <td><%= link_to 'Destroy', product, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
-</table>
+</tbody>
+<% end %>
 
 <br />
 

@@ -1,6 +1,7 @@
 <h1>Listing product_batches</h1>
 
-<table>
+<% datatable do %>
+<thead>
   <tr>
     <th>Product</th>
     <th>Batch code</th>
@@ -8,7 +9,8 @@
     <th>Exp date</th>
     <th>Price</th>
   </tr>
-
+</thead>
+<tbody>
 <% @product_batches.each do |product_batch| %>
   <tr>
     <td><%=h product_batch.product %></td>
@@ -21,7 +23,8 @@
     <td><%= link_to 'Destroy', product_batch, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
-</table>
+</tbody>
+<% end %>
 
 <br />
 
