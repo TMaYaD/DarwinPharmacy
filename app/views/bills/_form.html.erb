@@ -1,5 +1,7 @@
 <% semantic_form_for(@bill) do |f| %>
   <%= f.inputs :for => :customer, :name => 'Customer', :id => 'bill_customer' %>
+  <a name='bill_items'>
+  <%= link_to 'Add Item', '#bill_items', :id => 'add_item' %>
   <div id='bill_items'>
   </div>
   <%= f.buttons %>
@@ -8,6 +10,6 @@
   <% f.inputs :product_batch, :quantity, :discount, :for => BillItem.new, :name => "Item MARKER", :for_options => {:index => 'MARKER'} do |item_f| %>
     <%= item_f.input :product_batch %>
     <%= item_f.input :quantity %>
-    <%= item_f.input :discount, :input_html => {:value => 10, :disabled => true} %>
+    <%= item_f.input :discount, :input_html => {:value => 'discount: 10%', :disabled => true} %>
   <% end %>
 <% end %>
