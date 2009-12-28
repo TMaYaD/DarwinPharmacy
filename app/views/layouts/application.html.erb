@@ -6,11 +6,10 @@
 <meta http-equiv="X-UA-Compatible" content="chrome=1" />
 
 <%= stylesheet_link_tag 'yui', 'html5', 'layout/application' %>
-<%= yield :style_sheets %>
 
 <%= javascript_include_tag 'jquery' %>
 <%= javascript_include_tag 'html5' %>
-<%= yield :javascripts %>
+<%= yield :head %>
 </head>
 <body>
 <header>

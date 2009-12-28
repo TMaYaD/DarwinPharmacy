@@ -4,3 +4,5 @@
 db/test.sqlite3
 
 Thumbs.db
+
+/db/development.sqlite3
