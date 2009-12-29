@@ -4,11 +4,16 @@ class ProductBatchesController < ApplicationController
   # GET /product_batches
   # GET /product_batches.xml
   def index
-    @product_batches = ProductBatch.all
+    if params[:q]
+      @product_batches = ProductBatch.all :joins => :product
+    else
+      @product_batches = ProductBatch.all
+    end
 
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @product_batches }
+      format.js # index.js.erb
     end
   end
 
