@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title><%= yield :page_title or 'Darwin Pharmacy' %></title>
+<title>Darwin Pharmacy - <%= controller_name.titleize %></title>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 <meta http-equiv="X-UA-Compatible" content="chrome=1" />
 
@@ -31,13 +31,6 @@
     <% end %>
   </hgroup>
   <%= render :partial => 'layouts/user_links' %>
-  <hgroup id='search'>
-    <h3>Search</h3>
-    <form action="…">
-      <input name="q" type="search"
-          placeholder="To search, type and hit enter" />
-    </form>
-  </hgroup>
 
 </header>
 <div id='wrapper'>

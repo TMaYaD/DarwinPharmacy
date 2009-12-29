@@ -1,4 +1,5 @@
-<nav><ul>
+<nav><h1><%= (current_user.login + "  >>  " + controller_name).titleize %></h1>
+<ul>
 <% for resource in [:users, :customers, :products, :product_batches, :bills] %>
   <% if permitted_to? :index, resource %>
     <li><%= link_to resource.to_s.humanize, :controller => resource %></li>
