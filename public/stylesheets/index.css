@@ -1,17 +1,27 @@
+@import "/themes/ui-darkness/jquery-ui-1.7.2.custom.css";
+
 table#data {
     margin-bottom: -1px;
 }
 
+tr {
+    color: #FFF;
+}
+
 tr.odd {
-    background-color: #DDD;
+    background-color: #555;
 }
 
 tr.even {
-    background-color: #EEE;
+    background-color: #666;
 }
 
 td, th {
     border: inherit;
+}
+
+th span.css_right {
+    float: right;
 }
 
 div.ui-widget-header {
