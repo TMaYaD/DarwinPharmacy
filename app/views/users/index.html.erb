@@ -29,12 +29,10 @@
     <td><%=h user.last_login_ip %></td>
     <td><%= link_to 'Show', user %></td>
     <td><%= link_to 'Edit', edit_user_path(user) %></td>
-    <td><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete, :class =>'ui-icon ui-icon-trash' %></td>
   </tr>
 <% end %>
 </tbody>
 <% end %>
 
-<br />
-
-<%= link_to 'New user', new_user_path %>
+<%= link_to 'New user', new_user_path, :id => 'add_new', :class => 'ui-icon ui-icon-plusthick' %>

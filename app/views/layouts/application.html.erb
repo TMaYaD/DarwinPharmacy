@@ -5,7 +5,7 @@
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 <meta http-equiv="X-UA-Compatible" content="chrome=1" />
 
-<%= stylesheet_link_tag 'yui', 'html5', 'layout/application' %>
+<%= stylesheet_link_tag 'yui', 'html5', 'layout/application', action_name %>
 
 <%= javascript_include_tag 'jquery' %>
 <%= javascript_include_tag 'html5' %>
@@ -36,8 +36,6 @@
 <div id='wrapper'>
   <div id="container">
     <div id='main'>
-      <p class='error banner'><%= flash[:error] %></p>
-      <p class='notice banner'><%= flash[:notice] %></p>
       <%= yield %>
     </div>
   </div>
@@ -48,8 +46,12 @@
   <div class='clear'></div>
 </div>
 <footer>
-  <!-- site footer -->
-  <p>Copyright © 2009 Darwin Pharmacy. All rights reserved.</p>
+<!-- site footer -->
+  <div class='tip'>
+      <p class='error banner'><%= flash[:error] %></p>
+      <p class='notice banner'><%= flash[:notice] %></p>
+  </div> 
+  <p>Copyright &copy; 2009 Darwin Pharma Pvt. Ltd. All rights reserved.</p>
 </footer>
 </body>
 </html>

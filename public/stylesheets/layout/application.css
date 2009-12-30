@@ -45,7 +45,7 @@ hgroup#search>* {
 
 header nav {
 /*	margin-left: -520px;*/
-/*	margin-right: -250px;*/
+	margin-bottom: -2px;
 	width:100%;
 	background:#4c4c4c;
 }
@@ -114,12 +114,19 @@ aside {
 footer {
 	width: 100%;
 	text-align:center;
-	padding:2px;
 	clear:both;
-	border-top:1px solid #222222;
 /*	margin: 2px;*/
 }
 
-footer p {
+footer .tip {
+	background-color: #4c4c4c;
+	width: 100%;
+	height: 2em;
+	border-top:1px solid #222222;
+	margin-top: -2px;
+}
+
+footer>p {
+	border-top:1px solid #222222;
 	margin:0px;
 }

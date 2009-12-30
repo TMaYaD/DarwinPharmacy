@@ -1,77 +1,48 @@
-<p>
-  <b>Login:</b>
-  <%=h @user.login %>
-</p>
+<dt>Login:</dt>
+<dd><%=h @user.login %></dd>
 
-<p>
-  <b>e-mail:</b>
-  <%=h @user.email %>
-</p>
+<dt>e-mail:</dt>
+<dd><%=h @user.email %></dd>
 
-<p>
-  <b>Phone:</b>
-  <%=h @user.phone %>
-</p>
+<dt>Phone:</dt>
+<dd><%=h @user.phone %></dd>
 
-<p>
-  <b>Role:</b>
-  <%=h @user.role.to_s.humanize %>
-</p>
+<dt>Role:</dt>
+<dd><%=h @user.role.to_s.humanize %></dd>
 
-<p>
-  <b>Crypted password:</b>
-  <%=h @user.crypted_password %>
-</p>
+<dt>Crypted password:</dt>
+<dd><%=h @user.crypted_password %></dd>
 
-<p>
-  <b>Password salt:</b>
-  <%=h @user.password_salt %>
-</p>
+<dt>Password salt:</dt>
+<dd><%=h @user.password_salt %></dd>
 
-<p>
-  <b>Persistence token:</b>
-  <%=h @user.persistence_token %>
-</p>
+<dt>Persistence token:</dt>
+<dd><%=h @user.persistence_token %></dd>
 
-<p>
-  <b>Single access token:</b>
-  <%=h @user.single_access_token %>
-</p>
+<dt>Single access token:</dt>
+<dd><%=h @user.single_access_token %></dd>
 
-<p>
-  <b>Perishable token:</b>
-  <%=h @user.perishable_token %>
-</p>
+<dt>Perishable token:</dt>
+<dd><%=h @user.perishable_token %></dd>
 
-<p>
-  <b>Login count:</b>
-  <%=h @user.login_count %>
-</p>
+<dt>Login count:</dt>
+<dd><%=h @user.login_count %></dd>
 
-<p>
-  <b>Failed login count:</b>
-  <%=h @user.failed_login_count %>
-</p>
+<dt>Failed login count:</dt>
+<dd><%=h @user.failed_login_count %></dd>
 
-<p>
-  <b>Last request at:</b>
-  <%=h @user.last_request_at %>
-</p>
+<dt>Last request at:</dt>
+<dd><%=h @user.last_request_at %></dd>
 
-<p>
-  <b>Current login at:</b>
-  <%=h @user.current_login_at %>
-</p>
+<dt>Current login at:</dt>
+<dd><%=h @user.current_login_at %></dd>
 
-<p>
-  <b>Current login ip:</b>
-  <%=h @user.current_login_ip %>
-</p>
+<dt>Current login ip:</dt>
+<dd><%=h @user.current_login_ip %></dd>
 
-<p>
-  <b>Last login ip:</b>
-  <%=h @user.last_login_ip %>
-</p>
+<dt>Last login ip:</dt>
+<dd><%=h @user.last_login_ip %></dd>
 
+<br>
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

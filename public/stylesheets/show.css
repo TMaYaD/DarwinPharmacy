@@ -1,0 +1,14 @@
+dt {
+	float: left;
+	clear: left;
+	width: 25em;
+}
+
+dd {
+	float: left;
+	clear: right;
+}
+
+br {
+	clear: both;
+}

@@ -1,0 +1,47 @@
+table#data {
+    margin-bottom: -1px;
+}
+
+tr.odd {
+    background-color: #DDD;
+}
+
+tr.even {
+    background-color: #EEE;
+}
+
+td, th {
+    border: inherit;
+}
+
+div.ui-widget-header {
+    border: inherit;
+    text-align: center;
+}
+
+#data_length {
+    float: right;
+}
+
+#data_filter {
+    float: left;
+}
+
+#add_new {
+    float: left;
+}
+
+#data_info {
+    display: inline-block;
+}
+
+#data_paginate {
+    float: right;
+}
+
+#add_new {
+/*
+    position: relative;
+    top: -1em;
+ */
+}
