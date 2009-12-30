@@ -10,12 +10,10 @@
     <td><%=h bill.customer.name %></td>
     <td><%= link_to 'Show', bill %></td>
     <td><%= link_to 'Edit', edit_bill_path(bill) %></td>
-    <td><%= link_to 'Destroy', bill, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Destroy', bill, :confirm => 'Are you sure?', :method => :delete, :class =>'ui-icon ui-icon-trash' %></td>
   </tr>
 <% end %>
 </thead>
 <% end %>
 
-<br />
-
-<%= link_to 'New bill', new_bill_path %>
+<%= link_to 'New bill', new_bill_path, :id => 'add_new', :class => 'ui-icon ui-icon-plusthick' %>

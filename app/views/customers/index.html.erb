@@ -14,12 +14,10 @@
     <td><%=h customer.address %></td>
     <td><%= link_to 'Show', customer %></td>
     <td><%= link_to 'Edit', edit_customer_path(customer) %></td>
-    <td><%= link_to 'Destroy', customer, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Destroy', customer, :confirm => 'Are you sure?', :method => :delete, :class =>'ui-icon ui-icon-trash' %></td>
   </tr>
 <% end %>
 </tbody>
 <% end %>
 
-<br />
-
-<%= link_to 'New customer', new_customer_path %>
+<%= link_to 'New customer', new_customer_path, :id => 'add_new', :class => 'ui-icon ui-icon-plusthick' %>

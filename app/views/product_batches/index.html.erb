@@ -18,12 +18,10 @@
     <td><%=h product_batch.price %></td>
     <td><%= link_to 'Show', product_batch %></td>
     <td><%= link_to 'Edit', edit_product_batch_path(product_batch) %></td>
-    <td><%= link_to 'Destroy', product_batch, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Destroy', product_batch, :confirm => 'Are you sure?', :method => :delete, :class =>'ui-icon ui-icon-trash' %></td>
   </tr>
 <% end %>
 </tbody>
 <% end %>
 
-<br />
-
-<%= link_to 'New product_batch', new_product_batch_path %>
+<%= link_to 'New product_batch', new_product_batch_path, :id => 'add_new', :class => 'ui-icon ui-icon-plusthick' %>
