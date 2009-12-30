@@ -1,28 +1,19 @@
-<p>
-  <b>Product:</b>
-  <%=h @product_batch.product %>
-</p>
+<dt>Product:</dt>
+<dd><%=h @product_batch.product.name %></dd>
 
-<p>
-  <b>Batch code:</b>
-  <%=h @product_batch.batch_code %>
-</p>
+<dt>Batch code:</dt>
+<dd><%=h @product_batch.batch_code %></dd>
 
-<p>
-  <b>Mfg date:</b>
-  <%=h @product_batch.mfg_date %>
-</p>
+<dt>Mfg date:</dt>
+<dd><%=h @product_batch.mfg_date %></dd>
 
-<p>
-  <b>Exp date:</b>
-  <%=h @product_batch.exp_date %>
-</p>
+<dt>Exp date:</dt>
+<dd><%=h @product_batch.exp_date %></dd>
 
-<p>
-  <b>Price:</b>
-  <%=h @product_batch.price %>
-</p>
+<dt>Price:</dt>
+<dd><%=h @product_batch.price %></dd>
 
+<br>
 
 <%= link_to 'Edit', edit_product_batch_path(@product_batch) %> |
 <%= link_to 'Back', product_batches_path %>

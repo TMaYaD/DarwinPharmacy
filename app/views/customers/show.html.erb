@@ -1,18 +1,13 @@
-<p>
-  <b>Name:</b>
-  <%=h @customer.name %>
-</p>
+<dt>Name:</dt>
+<dd><%=h @customer.name %></dd>
 
-<p>
-  <b>Phone:</b>
-  <%=h @customer.phone %>
-</p>
+<dt>Phone:</dt>
+<dd><%=h @customer.phone %></dd>
 
-<p>
-  <b>Address:</b>
-  <%=h @customer.address %>
-</p>
+<dt>Address:</dt>
+<dd><%=h @customer.address %></dd>
 
+<br>
 
 <%= link_to 'Edit', edit_customer_path(@customer) %> |
 <%= link_to 'Back', customers_path %>
