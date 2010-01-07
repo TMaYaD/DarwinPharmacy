@@ -14,12 +14,10 @@
 <%= stylesheet_link_tag 'http://yui.yahooapis.com/2.8.0r4/build/reset/reset-min.css' %>
 <%= stylesheet_link_tag 'http://yui.yahooapis.com/2.8.0r4/build/fonts/fonts-min.css' %>
 <%= stylesheet_link_tag 'http://yui.yahooapis.com/2.8.0r4/build/base/base-min.css' %>
-<%= stylesheet_link_tag 'html5' %>
-<%= stylesheet_link_tag 'layout/home' %>
+<%= stylesheet_link_tag 'html5', 'layout/home' %>
 <%= yield :style_sheets %>
 
-<%= javascript_include_tag 'jquery' %>
-<%= javascript_include_tag 'html5' %>
+<%= javascript_include_tag 'jquery-1.3.2.min', 'html5' %>
 <%= yield :javascripts %>
 </head>
 <body>
@@ -71,7 +69,6 @@
   </div>
   <aside>
     <!-- sidebar -->
-    <%= render :partial => 'layouts/user_links' %>
     <%= yield :aside %>
   </aside>
   <div class='clear'></div>
