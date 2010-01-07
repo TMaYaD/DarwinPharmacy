@@ -23,7 +23,13 @@
             replace(/bill_item/g, 'bill_items_attributes')
       ).appendTo('#bill_items');
       $('label', $item_set).labelOver().validate();
-      $('.autocomplete', $item_set).autocomplete('<%= autocomplete_product_batches_url %>').
+      $('.autocomplete', $item_set).
+          autocomplete('<%= autocomplete_product_batches_url %>', {
+            autoFill: true,
+            max: 10,
+            minChars: 3,
+            selectFirst: true,
+          }).
           result(function(event, data, formatted) {
             if(data)
               $(this).parent().next().find('input').val(data[1]);
