@@ -1,19 +1,14 @@
 class ProductBatchesController < ApplicationController
-  filter_resource_access
+  filter_resource_access :collection => :autocomplete
 
   # GET /product_batches
   # GET /product_batches.xml
   def index
-    if params[:q]
-      @product_batches = ProductBatch.all :joins => :product
-    else
-      @product_batches = ProductBatch.all
-    end
+    @product_batches = ProductBatch.all
 
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @product_batches }
-      format.js # index.js.erb
     end
   end
 
@@ -88,5 +83,10 @@ class ProductBatchesController < ApplicationController
       format.html { redirect_to(product_batches_url) }
       format.xml  { head :ok }
     end
+  end
+
+  def autocomplete
+    @product_batches = ProductBatch.all :joins => :product
+    render :layout => false, :content_type => 'text/plain'
   end
 end
