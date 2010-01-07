@@ -1,7 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :products
 
-  map.resources :product_batches
+  map.resources :product_batches, :collection => { :autocomplete => :get }
 
   map.resources :franchises
 

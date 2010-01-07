@@ -1,5 +1,5 @@
 class ProductBatchesController < ApplicationController
-  filter_resource_access
+  filter_resource_access :collection => :autocomplete
 
   # GET /product_batches
   # GET /product_batches.xml
@@ -83,5 +83,14 @@ class ProductBatchesController < ApplicationController
       format.html { redirect_to(product_batches_url) }
       format.xml  { head :ok }
     end
+  end
+
+  def autocomplete
+    @product_batches = ProductBatch.all(
+      :conditions => ["batch_code LIKE :q OR products.name LIKE :q", {:q => '%' + params[:q] + '%' }],
+      :limit => params[:limit],
+      :joins => :product
+    )
+    render :layout => false, :content_type => 'text/plain'
   end
 end

@@ -1,4 +1,5 @@
 class BillsController < ApplicationController
+  before_filter :remove_autocomplete_fields, :only => :create
   filter_resource_access
 
   # GET /bills
@@ -89,5 +90,10 @@ class BillsController < ApplicationController
       format.html { redirect_to(bills_url) }
       format.xml  { head :ok }
     end
+  end
+
+private
+  def remove_autocomplete_fields
+    params[:bill][:bill_items_attributes].each { |key, value| value.delete(:product_batch) }
   end
 end
