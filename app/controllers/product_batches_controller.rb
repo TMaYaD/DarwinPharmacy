@@ -1,5 +1,5 @@
 class ProductBatchesController < ApplicationController
-  filter_resource_access :collection => :autocomplete
+  filter_resource_access :additional_collection => :autocomplete
 
   # GET /product_batches
   # GET /product_batches.xml
