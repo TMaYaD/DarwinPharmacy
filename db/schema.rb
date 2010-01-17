@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091223150025) do
+ActiveRecord::Schema.define(:version => 20100117121458) do
 
   create_table "bill_items", :force => true do |t|
     t.integer  "bill_id"
@@ -54,6 +54,35 @@ ActiveRecord::Schema.define(:version => 20091223150025) do
     t.string   "dosage_form"
     t.string   "strength"
     t.text     "common_uses"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "purchase_bill_items", :force => true do |t|
+    t.integer  "purchase_bill_id"
+    t.integer  "product_batch_id"
+    t.integer  "sale_quantity"
+    t.integer  "free_quantity"
+    t.decimal  "discount"
+    t.decimal  "rate"
+    t.decimal  "vat"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "purchase_bills", :force => true do |t|
+    t.string   "bill_number"
+    t.integer  "supplier_id"
+    t.date     "due_date"
+    t.integer  "created_by_id"
+    t.integer  "modified_by_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "suppliers", :force => true do |t|
+    t.string   "name"
+    t.text     "address"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

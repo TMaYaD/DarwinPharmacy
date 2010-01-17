@@ -5,8 +5,15 @@ class ProductBatch < ActiveRecord::Base
   validates_numericality_of :price, :greater_than => 0
   validates_uniqueness_of :batch_code, :scope => :product_id
   validate :exp_date_cannot_be_in_the_past,
-	  :exp_date_cannot_be_earlier_than_mfg_date,
-	  :mfg_date_cannot_be_in_the_future
+    :exp_date_cannot_be_earlier_than_mfg_date,
+    :mfg_date_cannot_be_in_the_future
+
+  def product_name
+    product.name if product
+  end
+  def product_name=(name)
+    self.product = Product.find_by_name(name) unless name.blank?
+  end
 
   def to_label
     self.product.name + ':' + self.batch_code

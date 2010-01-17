@@ -1,0 +1,11 @@
+<% semantic_form_for(@purchase_bill) do |f| %>
+  <% f.inputs do %>
+    <%= f.input :supplier_name %>
+    <%= f.input :bill_number %>
+    <%= f.input :due_date %>
+  <% end %>
+  <% f.inputs :for => :purchase_bill_items do |builder| %>
+      <%= render 'item_inputs', :f => builder %>
+  <% end %>
+  <%= f.buttons %>
+<% end %>

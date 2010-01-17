@@ -1,0 +1,24 @@
+<h1>Listing purchase_bills</h1>
+
+<table>
+  <tr>
+    <th>Bill number</th>
+    <th>Supplier</th>
+    <th>Due date</th>
+  </tr>
+
+<% @purchase_bills.each do |purchase_bill| %>
+  <tr>
+    <td><%=h purchase_bill.bill_number %></td>
+    <td><%=h purchase_bill.supplier %></td>
+    <td><%=h purchase_bill.due_date %></td>
+    <td><%= link_to 'Show', purchase_bill %></td>
+    <td><%= link_to 'Edit', edit_purchase_bill_path(purchase_bill) %></td>
+    <td><%= link_to 'Destroy', purchase_bill, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New purchase_bill', new_purchase_bill_path %>

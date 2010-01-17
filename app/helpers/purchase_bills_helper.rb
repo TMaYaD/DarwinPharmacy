@@ -1,0 +1,2 @@
+module PurchaseBillsHelper
+end

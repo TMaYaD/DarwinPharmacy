@@ -1,0 +1,18 @@
+<p>
+  <b>Bill number:</b>
+  <%=h @purchase_bill.bill_number %>
+</p>
+
+<p>
+  <b>Supplier:</b>
+  <%=h @purchase_bill.supplier %>
+</p>
+
+<p>
+  <b>Due date:</b>
+  <%=h @purchase_bill.due_date %>
+</p>
+
+
+<%= link_to 'Edit', edit_purchase_bill_path(@purchase_bill) %> |
+<%= link_to 'Back', purchase_bills_path %>
