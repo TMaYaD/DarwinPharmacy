@@ -1,0 +1,24 @@
+fieldset.item {
+	border: solid thin;
+}
+fieldset>ol {
+	list-style-type: none;
+}
+fieldset>ol>li {
+	display: inline-block;
+}
+fieldset.buttons {
+	border-style: none;
+}
+textarea {
+	margin: 0px;
+}
+li.date>fieldset {
+	margin: 0px;
+}
+li.date>fieldset>ol {
+	margin: 0px;
+}
+li.date>fieldset>ol>li:last-child {
+	display: none;
+}

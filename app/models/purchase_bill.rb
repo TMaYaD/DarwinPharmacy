@@ -6,7 +6,7 @@ class PurchaseBill < ActiveRecord::Base
 
   validates_associated :purchase_bill_items
   validates_size_of :purchase_bill_items, :minimum => 1
-  validates_presence_of :supplier_id, :due_date, :bill_number
+  validates_presence_of :supplier_name, :due_date, :bill_number
 
   accepts_nested_attributes_for :purchase_bill_items, :allow_destroy => true, :reject_if => proc { |attrs| attrs.all? { |k, v| v.blank? } }
 
@@ -15,7 +15,7 @@ class PurchaseBill < ActiveRecord::Base
   end
   
   def supplier_name=(name)
-    self.supplier = Supplier.find_by_name(name) unless name.blank?
+    self.supplier = Supplier.find_or_create_by_name(name) unless name.blank?
   end
 
 end

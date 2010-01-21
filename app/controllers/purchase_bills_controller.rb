@@ -25,8 +25,6 @@ class PurchaseBillsController < ApplicationController
   # GET /purchase_bills/new.xml
   def new
     @purchase_bill = PurchaseBill.new
-    @purchase_bill.purchase_bill_items.build
-    @purchase_bill.purchase_bill_items.each { |item| item.product_batch = ProductBatch.new }
 
     respond_to do |format|
       format.html # new.html.erb

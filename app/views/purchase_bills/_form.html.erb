@@ -4,8 +4,13 @@
     <%= f.input :bill_number %>
     <%= f.input :due_date %>
   <% end %>
-  <% f.inputs :for => :purchase_bill_items do |builder| %>
-      <%= render 'item_inputs', :f => builder %>
+  <%= f.buttons %>
+  <% f.inputs do %>
+    <% f.object.purchase_bill_items.build if f.object.purchase_bill_items.count == 0 %>
+    <% f.inputs :for => :purchase_bill_items, :class => 'item' do |builder| %>
+      <%= render 'purchase_bill_item_inputs', :f => builder %>
+    <% end %>
+    <%= link_to_add_fieldset "Add Item", f, :purchase_bill_items %>
   <% end %>
   <%= f.buttons %>
 <% end %>

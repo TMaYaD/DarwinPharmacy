@@ -16,7 +16,7 @@ class ProductBatch < ActiveRecord::Base
   end
 
   def to_label
-    self.product.name + ':' + self.batch_code
+    product_name + ':' + self.batch_code
   end
 
   private

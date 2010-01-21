@@ -1,4 +1,5 @@
-<% f.inputs :for => :product_batch do |builder| %>
+<% f.object.product_batch ||= ProductBatch.new %>
+<% f.semantic_fields_for :product_batch do |builder| %>
   <%= render 'product_batch_inputs', :f => builder %>
 <% end %>
 <%= f.input :sale_quantity %>
@@ -6,3 +7,4 @@
 <%= f.input :discount %>
 <%= f.input :rate %>
 <%= f.input :vat %>
+<%= link_to_remove_fieldset "remove", f %>

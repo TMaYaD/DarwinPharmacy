@@ -1,18 +1,48 @@
-<p>
-  <b>Bill number:</b>
-  <%=h @purchase_bill.bill_number %>
-</p>
+<dt>Bill number:</dt>
+<dd><%=h @purchase_bill.bill_number %></dd>
 
-<p>
-  <b>Supplier:</b>
-  <%=h @purchase_bill.supplier %>
-</p>
+<dt>Supplier:</dt>
+<dd><%=h @purchase_bill.supplier_name %></dd>
+<dd><%=h @purchase_bill.supplier.address %></dd>
 
-<p>
-  <b>Due date:</b>
-  <%=h @purchase_bill.due_date %>
-</p>
-
+<dt>Due date:</dt>
+<dd><%=h @purchase_bill.due_date %></dd>
+<table>
+  <thead>
+    <tr>
+      <th>MFG</th>
+      <th>Product Name</th>
+      <th>Batch Code</th>
+      <th>Quantity</th>
+      <th>Free</th>
+      <th>Discount</th>
+      <th>Rate</th>
+      <th>VAT %</th>
+      <th>VAT Amount</th>
+      <th>Amount</th>
+      <th>MRP</th>
+      <th>Exp. Date</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @purchase_bill.purchase_bill_items.each do |item| %>
+    <tr>
+      <td><%=h item.product_batch.product.manufacturer %></td>
+      <td><%=h item.product_batch.product_name %></td>
+      <td><%=h item.product_batch.batch_code %></td>
+      <td><%=h item.sale_quantity %></td>
+      <td><%=h item.free_quantity %></td>
+      <td><%=h item.discount %></td>
+      <td><%=h item.rate %></td>
+      <td><%=h item.vat %></td>
+      <td><%=h item.rate * item.vat / 100 %></td>
+      <td><%=h item.rate * item.sale_quantity %></td>
+      <td><%=h item.product_batch.price %></td>
+      <td><%=h item.product_batch.exp_date %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
 
 <%= link_to 'Edit', edit_purchase_bill_path(@purchase_bill) %> |
 <%= link_to 'Back', purchase_bills_path %>
