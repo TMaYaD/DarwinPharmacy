@@ -1,0 +1,18 @@
+<p>
+  <b>Franchisee:</b>
+  <%=h @franchise.franchisee %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%=h @franchise.name %>
+</p>
+
+<p>
+  <b>Address:</b>
+  <%=h @franchise.address %>
+</p>
+
+
+<%= link_to 'Edit', edit_franchise_path(@franchise) %> |
+<%= link_to 'Back', franchises_path %>

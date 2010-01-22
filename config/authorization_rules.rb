@@ -1,6 +1,6 @@
 authorization do  
   role :admin do  
-    has_permission_on [:bills, :customers, :product_batches, :purchase_bills, :sale_bills, :products, :users], :to => [:index, :show, :new, :create, :edit, :update, :destroy]  
+    has_permission_on [:bills, :customers, :product_batches, :purchase_bills, :sale_bills, :products, :users, :franchises], :to => [:index, :show, :new, :create, :edit, :update, :destroy]  
     has_permission_on :user_sessions, :to => [:destroy]
     has_permission_on :product_batches, :to => [:autocomplete]
   end
