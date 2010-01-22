@@ -7,6 +7,7 @@ authorization do
   role :operator do
     has_permission_on [:product_batches, :products], :to => [:index, :show, :new, :create, :edit, :update]  
     has_permission_on :user_sessions, :to => [:destroy]
+    has_permission_on [:purchase_bill_items], :to => [:index, :show, :new, :create]
   end
   role :franchise do
     has_permission_on :customers, :to => [:index, :show, :new, :create, :edit, :update] 
