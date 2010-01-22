@@ -1,0 +1,18 @@
+<p>
+  <b>Franchise:</b>
+  <%=h @sale_bill.franchise %>
+</p>
+
+<p>
+  <b>Created by:</b>
+  <%=h @sale_bill.created_by %>
+</p>
+
+<p>
+  <b>Modified by:</b>
+  <%=h @sale_bill.modified_by %>
+</p>
+
+
+<%= link_to 'Edit', edit_sale_bill_path(@sale_bill) %> |
+<%= link_to 'Back', sale_bills_path %>
