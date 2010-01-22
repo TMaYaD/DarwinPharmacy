@@ -40,7 +40,7 @@ for (var n=0; n< jsFiles.length; n++) {
 if (!$.require.loadedLib[jsFiles[n]]) {
 $.ajax({
 type: "GET",
-url: $.scriptPath + jsFiles[n],
+url: ( jsFiles[n][0] == '/' ) ? jsFiles[n] : $.scriptPath + jsFiles[n],
 success: cBack,
 dataType: "script",
 cache: eCache,

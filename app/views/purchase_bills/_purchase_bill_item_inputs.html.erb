@@ -6,5 +6,5 @@
 <%= f.input :free_quantity %>
 <%= f.input :discount %>
 <%= f.input :rate %>
-<%= f.input :vat %>
+<%= f.input :vat, :as => :select, :collection => PurchaseBillItem::VATS, :label_method => Proc.new{ |a| a.to_s + " %" } %>
 <%= link_to_remove_fieldset "remove", f %>
