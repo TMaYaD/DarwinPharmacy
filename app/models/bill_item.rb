@@ -6,7 +6,7 @@ class BillItem < ActiveRecord::Base
   validates_numericality_of :quantity, :only_integer => true, :greater_than => 0
   validates_numericality_of :discount, :less_than => 100
 
-  def price
-    self.product_batch.price * self.quantity * (100 - self.discount) /100
+  def mrp
+    self.product_batch.mrp * self.quantity * (100 - self.discount) /100
   end
 end

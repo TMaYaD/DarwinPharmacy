@@ -1,12 +1,16 @@
 class ProductBatch < ActiveRecord::Base
   belongs_to :product
 
-  validates_presence_of :product_id, :batch_code, :mfg_date, :exp_date, :price
-  validates_numericality_of :price, :greater_than => 0
+  VATS = [4, 12.5, 14.5]
+
+  validates_presence_of :product_id, :batch_code, :mfg_date, :exp_date, :mrp, :rate, :vat
+  validates_numericality_of :mrp, :rate, :greater_than => 0
   validates_uniqueness_of :batch_code, :scope => :product_id
   validate :exp_date_cannot_be_in_the_past,
     :exp_date_cannot_be_earlier_than_mfg_date,
     :mfg_date_cannot_be_in_the_future
+  # :has_profit
+  validates_inclusion_of :vat, :in => VATS
 
   def product_name
     product.name if product

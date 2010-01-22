@@ -13,7 +13,7 @@ class Bill < ActiveRecord::Base
 
   def amount
     sum = 0
-    self.bill_items.each { |item| sum += item.price }
+    self.bill_items.each { |item| sum += item.mrp }
     sum
   end
 end

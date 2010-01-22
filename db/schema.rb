@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100122114621) do
+ActiveRecord::Schema.define(:version => 20100122130539) do
 
   create_table "bill_items", :force => true do |t|
     t.integer  "bill_id"
@@ -36,14 +36,24 @@ ActiveRecord::Schema.define(:version => 20100122114621) do
     t.datetime "updated_at"
   end
 
+  create_table "franchises", :force => true do |t|
+    t.integer  "franchisee_id"
+    t.string   "name"
+    t.text     "address"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "product_batches", :force => true do |t|
     t.integer  "product_id"
     t.string   "batch_code"
     t.date     "mfg_date"
     t.date     "exp_date"
-    t.decimal  "price",      :precision => 8, :scale => 2
+    t.decimal  "mrp",        :precision => 8, :scale => 2
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.decimal  "vat",        :precision => 4, :scale => 2
+    t.decimal  "rate",       :precision => 8, :scale => 2
   end
 
   create_table "products", :force => true do |t|
@@ -63,9 +73,7 @@ ActiveRecord::Schema.define(:version => 20100122114621) do
     t.integer  "product_batch_id"
     t.integer  "sale_quantity"
     t.integer  "free_quantity"
-    t.decimal  "discount"
-    t.decimal  "rate"
-    t.decimal  "vat"
+    t.decimal  "discount",        :precision => 4, :scale => 2
     t.datetime "created_at"
     t.datetime "updated_at"
   end

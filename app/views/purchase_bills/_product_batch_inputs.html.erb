@@ -2,4 +2,6 @@
 <%= f.input :batch_code %>
 <%= f.input :mfg_date %>
 <%= f.input :exp_date %>
-<%= f.input :price %>
+<%= f.input :rate %>
+<%= f.input :vat, :as => :select, :collection => ProductBatch::VATS, :label_method => Proc.new{ |a| a.to_s + " %" } %>
+<%= f.input :mrp %>

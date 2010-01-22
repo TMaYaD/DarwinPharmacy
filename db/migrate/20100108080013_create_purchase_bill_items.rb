@@ -5,9 +5,9 @@ class CreatePurchaseBillItems < ActiveRecord::Migration
       t.references :product_batch
       t.integer :sale_quantity
       t.integer :free_quantity
-      t.decimal :discount
-      t.decimal :rate
-      t.decimal :vat
+      t.decimal :discount, :precision => 4, :scale => 2
+      t.decimal :rate, :precision => 8, :scale => 2
+      t.decimal :vat, :precision => 4, :scale => 2
 
       t.timestamps
     end

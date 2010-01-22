@@ -17,9 +17,9 @@
       <th>Free</th>
       <th>Discount</th>
       <th>Rate</th>
+      <th>Amount</th>
       <th>VAT %</th>
       <th>VAT Amount</th>
-      <th>Amount</th>
       <th>MRP</th>
       <th>Exp. Date</th>
     </tr>
@@ -33,11 +33,11 @@
       <td><%=h item.sale_quantity %></td>
       <td><%=h item.free_quantity %></td>
       <td><%=h item.discount %></td>
-      <td><%=h item.rate %></td>
-      <td><%=h item.vat %></td>
-      <td><%=h item.rate * item.vat / 100 %></td>
-      <td><%=h item.rate * item.sale_quantity %></td>
-      <td><%=h item.product_batch.price %></td>
+      <td><%=h item.product_batch.rate %></td>
+      <td><%=h item.amount %></td>
+      <td><%=h item.product_batch.vat %></td>
+      <td><%=h item.vat_amount %></td>
+      <td><%=h item.product_batch.mrp %></td>
       <td><%=h item.product_batch.exp_date %></td>
     </tr>
   <% end %>

@@ -8,7 +8,13 @@ class PurchaseBill < ActiveRecord::Base
   validates_size_of :purchase_bill_items, :minimum => 1
   validates_presence_of :supplier_name, :due_date, :bill_number
 
-  accepts_nested_attributes_for :purchase_bill_items, :allow_destroy => true, :reject_if => proc { |attrs| attrs.all? { |k, v| v.blank? } }
+  accepts_nested_attributes_for :purchase_bill_items, :allow_destroy => true, :reject_if => proc { |attrs|
+    attrs[:product_batch_attributes][:product_name].blank? &&
+    attrs[:product_batch_attributes][:batch_code].blank? &&
+    attrs[:product_batch_attributes][:rate].blank? &&
+    attrs[:product_batch_attributes][:mrp].blank? &&
+    attrs[:sale_quantity].blank?
+  }
 
   def supplier_name
     supplier.name if supplier

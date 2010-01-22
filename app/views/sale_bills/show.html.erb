@@ -1,17 +1,39 @@
-<p>
-  <b>Franchise:</b>
-  <%=h @sale_bill.franchise %>
-</p>
+<b>Franchise:</b>
+<%=h @sale_bill.franchise.name %>
+<%=h @sale_bill.franchise.address %>
 
-<p>
-  <b>Created by:</b>
-  <%=h @sale_bill.created_by %>
-</p>
-
-<p>
-  <b>Modified by:</b>
-  <%=h @sale_bill.modified_by %>
-</p>
+<table>
+	<thead>
+		<tr>
+			<th>Product Name</th>
+			<th>Batch Code</th>
+			<th>Exp. Date</th>
+			<th>MRP</th>
+			<th>Qty</th>
+			<th>Free Qty</th>
+			<th>Rate</th>
+			<th>Discount</th>
+			<th>VAT</th>
+			<th>Amount</th>
+		</tr>
+	</thead>
+	<tbody>
+	<% @sale_bill.sale_bill_items.each do |item| %>
+		<tr>
+			<td><%= item.product_batch.product_name %></td>
+			<td><%= item.product_batch.batch_code %></td>
+			<td><%= item.product_batch.exp_date %></td>
+			<td><%= item.product_batch.mrp %></td>
+			<td><%= item.quantity %></td>
+			<td><%= 0 %></td><!-- No frees -->
+			<td><%= item.product_batch.rate %></td>
+			<td><%= 0 %></td><!-- No Discount -->
+			<td><%= item.product_batch.vat %></td>
+			<td><%= item.quantity * item.product_batch.rate %></td>
+		 </tr>
+	<% end %>
+	</tbody>
+</table>
 
 
 <%= link_to 'Edit', edit_sale_bill_path(@sale_bill) %> |
