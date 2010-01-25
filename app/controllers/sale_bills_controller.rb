@@ -1,4 +1,6 @@
 class SaleBillsController < ApplicationController
+  filter_resource_access
+
   # GET /sale_bills
   # GET /sale_bills.xml
   def index

@@ -1,4 +1,6 @@
 class PurchaseBillsController < ApplicationController
+  filter_resource_access
+
   # GET /purchase_bills
   # GET /purchase_bills.xml
   def index

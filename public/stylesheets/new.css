@@ -19,6 +19,6 @@ li.date>fieldset {
 li.date>fieldset>ol {
 	margin: 0px;
 }
-li.date>fieldset>ol>li:last-child {
+select.month[name*="(3i)"] {
 	display: none;
 }

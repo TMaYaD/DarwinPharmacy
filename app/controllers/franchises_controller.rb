@@ -1,4 +1,6 @@
 class FranchisesController < ApplicationController
+  filter_resource_access
+
   # GET /franchises
   # GET /franchises.xml
   def index

@@ -1,4 +1,6 @@
 class SuppliersController < ApplicationController
+  filter_resource_access
+
   # GET /suppliers
   # GET /suppliers.xml
   def index

@@ -2,6 +2,7 @@
   <% f.inputs do %>
     <%= f.input :supplier_name %>
     <%= f.input :bill_number %>
+    <%= f.input :created_at, :as => :date %>
     <%= f.input :due_date %>
   <% end %>
   <%= f.buttons %>
