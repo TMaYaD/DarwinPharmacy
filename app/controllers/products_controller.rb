@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  filter_resource_access
+  filter_resource_access :additional_collection => :autocomplete
 
   # GET /products
   # GET /products.xml
@@ -15,8 +15,6 @@ class ProductsController < ApplicationController
   # GET /products/1
   # GET /products/1.xml
   def show
-    @product = Product.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @product }
@@ -26,8 +24,6 @@ class ProductsController < ApplicationController
   # GET /products/new
   # GET /products/new.xml
   def new
-    @product = Product.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @product }
@@ -36,14 +32,11 @@ class ProductsController < ApplicationController
 
   # GET /products/1/edit
   def edit
-    @product = Product.find(params[:id])
   end
 
   # POST /products
   # POST /products.xml
   def create
-    @product = Product.new(params[:product])
-
     respond_to do |format|
       if @product.save
         flash[:notice] = 'Product was successfully created.'
@@ -59,8 +52,6 @@ class ProductsController < ApplicationController
   # PUT /products/1
   # PUT /products/1.xml
   def update
-    @product = Product.find(params[:id])
-
     respond_to do |format|
       if @product.update_attributes(params[:product])
         flash[:notice] = 'Product was successfully updated.'
@@ -76,12 +67,19 @@ class ProductsController < ApplicationController
   # DELETE /products/1
   # DELETE /products/1.xml
   def destroy
-    @product = Product.find(params[:id])
     @product.destroy
 
     respond_to do |format|
       format.html { redirect_to(products_url) }
       format.xml  { head :ok }
     end
+  end
+
+  def autocomplete
+    @products = Product.all(
+      :conditions => ["name LIKE ?", "%#{params[:q]}%"],
+      :limit => params[:limit]
+    )
+    render :layout => false, :content_type => 'text/plain'
   end
 end

@@ -1,7 +1,16 @@
-$.require(['jquery.labelover.js', 'jquery.livequery.js']);
+$.require(['jquery.livequery.js', 'jquery.labelover.js', 'jquery.autocomplete.min.js']);
 $(document).ready(function() {
   $('li>label').livequery( function() {
     $(this).labelOver();
+  });
+  $('input[autocomplete]').livequery( function() {
+    $this = $(this);
+    $this.autocomplete( $this.attr('autocomplete'), {
+      autoFill: true,
+      max: 10,
+      minChars: 3,
+      selectFirst: true,
+    });
   });
 });
 function remove_fieldset(link) {

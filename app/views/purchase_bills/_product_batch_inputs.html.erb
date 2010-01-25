@@ -1,6 +1,6 @@
-<%= f.input :product_name %>
+<%= f.input :product_name, :input_html => { :autocomplete => autocomplete_products_url } %>
 <%= f.input :batch_code %>
-<%= f.input :exp_date, :input_html => { :class => 'month' } %>
+<%= f.input :exp_date, :wrapper_html => { :class => 'month' } %>
 <%= f.input :rate %>
 <%= f.input :vat, :as => :select, :collection => ProductBatch::VATS, :label_method => Proc.new{ |a| a.to_s + " %" } %>
 <%= f.input :mrp %>
