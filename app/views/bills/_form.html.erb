@@ -1,6 +1,8 @@
+
+<%= debug @bill %>
 <% semantic_form_for(@bill) do |f| %>
   <% f.object.customer ||= Customer.new %>
-  <%= f.inputs :for => :customer, :name => 'Customer', :id => 'bill_customer' %>
+  <%= f.inputs :for => :customer %>
   <%= f.buttons %>
   <% f.inputs do %>
     <% f.object.bill_items.build if f.object.bill_items.count == 0 %>

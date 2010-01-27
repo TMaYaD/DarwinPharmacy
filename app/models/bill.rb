@@ -6,7 +6,7 @@ class Bill < ActiveRecord::Base
 
   validates_associated :bill_items
   validates_size_of :bill_items, :minimum => 1
-#validates_presence_of :customer_id
+  #validates_presence_of :customer_id
   
   accepts_nested_attributes_for :customer
   accepts_nested_attributes_for :bill_items, :allow_destroy => true, :reject_if => proc { |attrs|

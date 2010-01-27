@@ -24,6 +24,9 @@ class ProductBatch < ActiveRecord::Base
   def to_label
     "#{product_name} : #{batch_code}"
   end
+  def ProductBatch.from_label(label)
+    ProductBatch.first(:joins => :product, :conditions => ["products.name = ? and batch_code = ?", *(label.split(' : '))])
+  end
 
   private
   def exp_date_cannot_be_in_the_past
