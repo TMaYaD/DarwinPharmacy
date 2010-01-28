@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
 
   ROLES = %w[admin franchise operator]
 
+  validates_inclusion_of :role, :in => ROLES
+
   def role_symbols
     role ? [ role.underscore.to_sym ] : []
   end
