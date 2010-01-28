@@ -1,47 +1,53 @@
 require 'test_helper'
 
 class ProductsControllerTest < ActionController::TestCase
+  setup :activate_authlogic
   def setup
+    @product_id = Factory(:product).to_param
+    # All tests are run as default role operator unless other wise mentioned
     @user = Factory(:user)
+    UserSession.create(@user)
   end
 
   test "should get index" do
-    get_with @user, :index
+    get :index
     assert_response :success
     assert_not_nil assigns(:products)
   end
 
   test "should get new" do
-    get_with users(:operator_one), :new
+    get :new
     assert_response :success
   end
 
   test "should create product" do
     assert_difference('Product.count') do
-      post_with users(:operator_one), :create, :product => { }
+      post :create, :product => Factory.attributes_for(:product)
     end
 
     assert_redirected_to product_path(assigns(:product))
   end
 
   test "should show product" do
-    get_with users(:operator_one), :show, :id => products(:one).to_param
+    get :show, :id => @product_id
     assert_response :success
   end
 
   test "should get edit" do
-    get_with users(:operator_one), :edit, :id => products(:one).to_param
+    get :edit, :id => @product_id
     assert_response :success
   end
 
   test "should update product" do
-    put_with users(:operator_one), :update, :id => products(:one).to_param, :product => { }
+    put :update, :id => @product_id, :product => Factory.attributes_for(:product)
     assert_redirected_to product_path(assigns(:product))
   end
 
   test "should destroy product" do
+    # Only an admin can delete a product
+    UserSession.create(Factory(:user, :role => 'admin'))
     assert_difference('Product.count', -1) do
-      delete_with users(:operator_one), :destroy, :id => products(:one).to_param
+      delete :destroy, :id => @product_id
     end
 
     assert_redirected_to products_path
