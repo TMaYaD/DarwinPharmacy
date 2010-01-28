@@ -1,6 +1,12 @@
 require 'test_helper'
 
 class CustomersControllerTest < ActionController::TestCase
+  setup :activate_authlogic
+  def setup
+    @customer_id = Factory(:customer).to_param
+    UserSession.create(Factory(:user, :role => 'franchise'))
+  end
+
   test "should get index" do
     get :index
     assert_response :success
@@ -14,30 +20,31 @@ class CustomersControllerTest < ActionController::TestCase
 
   test "should create customer" do
     assert_difference('Customer.count') do
-      post :create, :customer => { }
+      post :create, :customer => Factory.attributes_for(:customer)
     end
 
     assert_redirected_to customer_path(assigns(:customer))
   end
 
   test "should show customer" do
-    get :show, :id => customers(:one).to_param
+    get :show, :id => @customer_id
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, :id => customers(:one).to_param
+    get :edit, :id => @customer_id
     assert_response :success
   end
 
   test "should update customer" do
-    put :update, :id => customers(:one).to_param, :customer => { }
+    put :update, :id => @customer_id, :customer => Factory.attributes_for(:customer)
     assert_redirected_to customer_path(assigns(:customer))
   end
 
   test "should destroy customer" do
+    UserSession.create(Factory(:user, :role => 'admin'))
     assert_difference('Customer.count', -1) do
-      delete :destroy, :id => customers(:one).to_param
+      delete :destroy, :id => @customer_id
     end
 
     assert_redirected_to customers_path
