@@ -1,6 +1,11 @@
 require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
+  setup :activate_authlogic
+  def setup
+    @user_id = Factory(:user)
+    UserSession.create(Factory(:user, :role => 'admin'))
+  end
   test "should get index" do
     get :index
     assert_response :success
@@ -14,30 +19,30 @@ class UsersControllerTest < ActionController::TestCase
 
   test "should create user" do
     assert_difference('User.count') do
-      post :create, :user => { :login => 'TestUser', :password => 'passwd', :password_confirmation => 'passwd', :email => 'test+user@darwin.co.in' }
+      post :create, :user => Factory.attributes_for(:user)
     end
 
     assert_redirected_to user_path(assigns(:user))
   end
 
   test "should show user" do
-    get :show, :id => users(:one).to_param
+    get :show, :id => @user_id
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, :id => users(:one).to_param
+    get :edit, :id => @user_id
     assert_response :success
   end
 
   test "should update user" do
-    put :update, :id => users(:one).to_param, :user => { :password => 'newpass', :password_confirmation => 'newpass' }
+    put :update, :id => @user_id, :user => { :password => 'newpass', :password_confirmation => 'newpass' }
     assert_redirected_to user_path(assigns(:user))
   end
 
   test "should destroy user" do
     assert_difference('User.count', -1) do
-      delete :destroy, :id => users(:one).to_param
+      delete :destroy, :id => @user_id
     end
 
     assert_redirected_to users_path
