@@ -6,8 +6,8 @@ class PurchaseBillItem < ActiveRecord::Base
   validates_associated :product_batch
   #validates_presence_of :purchase_bill_id, :product_batch_id
   validates_presence_of :sale_quantity
-  validates_numericality_of :sale_quantity, :only_integer => true, :greater_than => 0
-  validates_numericality_of :free_quantity, :only_integer => true
+  validates_numericality_of :sale_quantity, :greater_than => 0
+  validates_numericality_of :free_quantity
   validates_numericality_of :discount, :less_than => 100
 
   accepts_nested_attributes_for :product_batch

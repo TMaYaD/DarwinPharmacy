@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100122130539) do
+ActiveRecord::Schema.define(:version => 20100129104317) do
 
   create_table "bill_items", :force => true do |t|
     t.integer  "bill_id"
@@ -71,9 +71,9 @@ ActiveRecord::Schema.define(:version => 20100122130539) do
   create_table "purchase_bill_items", :force => true do |t|
     t.integer  "purchase_bill_id"
     t.integer  "product_batch_id"
-    t.integer  "sale_quantity"
-    t.integer  "free_quantity"
-    t.decimal  "discount",        :precision => 4, :scale => 2
+    t.decimal  "sale_quantity"
+    t.decimal  "free_quantity"
+    t.integer  "discount",         :limit => 10
     t.datetime "created_at"
     t.datetime "updated_at"
   end
