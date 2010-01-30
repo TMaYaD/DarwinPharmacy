@@ -24,4 +24,8 @@ class PurchaseBill < ActiveRecord::Base
     self.supplier = Supplier.find_or_create_by_name(name) unless name.blank?
   end
 
+  def amount
+    self.purchase_bill_items.reduce(0) { |sum, item| sum += item.amount }
+  end
+
 end
