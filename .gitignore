@@ -2,3 +2,6 @@
 *.swp
 *.log
 Thumbs.db
+
+/db/development.sqlite3
+/public/favicon.ico

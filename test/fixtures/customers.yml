@@ -2,12 +2,12 @@
 
 one:
   id: 1
-  name: MyString
-  phone: 1
-  address: MyText
+  name: Customer 1
+  phone: 9000000001
+  address: Address 1
 
 two:
   id: 2
-  name: MyString
-  phone: 1
-  address: MyText
+  name: Customer 2
+  phone: 9000000002
+  address: Address 2
