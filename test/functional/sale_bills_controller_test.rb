@@ -1,6 +1,12 @@
 require 'test_helper'
 
 class SaleBillsControllerTest < ActionController::TestCase
+  setup :activate_authlogic
+  def setup
+    UserSession.create(Factory(:user))
+    @sale_bill_id = Factory(:sale_bill)
+  end
+
   test "should get index" do
     get :index
     assert_response :success
@@ -14,30 +20,31 @@ class SaleBillsControllerTest < ActionController::TestCase
 
   test "should create sale_bill" do
     assert_difference('SaleBill.count') do
-      post :create, :sale_bill => { }
+      post :create, :sale_bill => Factory.attributes_for(:sale_bill, :franchise_name => Factory(:franchise).name)
     end
 
     assert_redirected_to sale_bill_path(assigns(:sale_bill))
   end
 
   test "should show sale_bill" do
-    get :show, :id => sale_bills(:one).to_param
+    get :show, :id => @sale_bill_id
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, :id => sale_bills(:one).to_param
+    get :edit, :id => @sale_bill_id
     assert_response :success
   end
 
   test "should update sale_bill" do
-    put :update, :id => sale_bills(:one).to_param, :sale_bill => { }
+    put :update, :id => @sale_bill_id, :sale_bill => Factory.attributes_for(:sale_bill)
     assert_redirected_to sale_bill_path(assigns(:sale_bill))
   end
 
   test "should destroy sale_bill" do
+    UserSession.create(Factory(:user, :role => 'admin'))
     assert_difference('SaleBill.count', -1) do
-      delete :destroy, :id => sale_bills(:one).to_param
+      delete :destroy, :id => @sale_bill_id
     end
 
     assert_redirected_to sale_bills_path
