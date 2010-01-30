@@ -14,6 +14,7 @@ authorization do
   
   role :franchise do
     has_permission_on :customers, :to => [:index, :show, :new, :create, :edit, :update] 
+    has_permission_on :bills, :to => [:index, :new, :create] 
     has_permission_on :bills do
       to :show
       if_attribute :created_by => is {user}
