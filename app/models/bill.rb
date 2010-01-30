@@ -12,8 +12,6 @@ class Bill < ActiveRecord::Base
   accepts_nested_attributes_for :bill_items, :allow_destroy => true, :reject_if => proc { |attrs| attrs.all? { |k, v| v.blank? } }
 
   def amount
-    sum = 0
-    self.bill_items.each { |item| sum += item.mrp }
-    sum
+    self.bill_items.reduce(0) { |sum, item| sum += item.mrp }
   end
 end
