@@ -1,7 +1,7 @@
 class Product < ActiveRecord::Base
-  DOSAGE_FORMS = %w[Ampoule Capsule Cream Drops Gel Granules Injection Inhaler Liquid Lotion Ointment Powder Suspension Spray Syrup Tablets]
+  DOSAGE_FORMS = %w[Ampoule Capsule Cream Drops Gel Granules Injection Inhaler Liquid Lotion Ointment Powder Soap Suspension Spray Syrup Tablets]
 
-  validates_presence_of :name, :manufacturer, :composition, :dosage_form, :strength
+  validates_presence_of :name, :manufacturer, :dosage_form 
   validates_uniqueness_of :name
   validates_inclusion_of :dosage_form, :in => DOSAGE_FORMS
 end

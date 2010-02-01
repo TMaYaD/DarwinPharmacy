@@ -1,4 +1,4 @@
-<nav><h1><%= ((current_user ? current_user.login + "  >>  " : ' ') + controller_name).titleize %></h1>
+<nav><h1><%= ((current_user ? current_user.login + "  >>  " : ' ') + controller_name + ' >> ' + (params[:id] || '')).titleize %></h1>
 <ul>
 <% for resource in [:users, :franchises, :customers, :products, :purchase_bills, :sale_bills, :product_batches, :bills] %>
   <% if permitted_to? :index, resource %>

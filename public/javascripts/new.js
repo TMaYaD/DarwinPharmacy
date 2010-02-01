@@ -20,7 +20,10 @@ function remove_fieldset(link) {
 
 function add_fieldset(link, association, content) {
   var new_id = new Date().getTime();
-  var regexp = new RegExp("new_" + association, "g");
-  $(link).before(content.replace(regexp, new_id));
+  var regex = new RegExp("new_" + association, "g");
+  $content = $(content.replace(regex, new_id));
+  $(link).before($content);
+  $('html,body').animate({scrollTop: $content.offset().top-[50]},500);
+  $('input:first', $content).focus();
 }
 
