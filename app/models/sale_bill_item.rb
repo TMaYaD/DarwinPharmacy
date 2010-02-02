@@ -11,7 +11,7 @@ class SaleBillItem < ActiveRecord::Base
   def product_batch_code=(code)
     self.product_batch = ProductBatch.find_by_batch_code(code,
       :conditions => ['products.name like ?', "%#{@product_name}%" ],
-      :joins => :product,
+      :joins => :product
     ) unless code.blank?
   end
 
