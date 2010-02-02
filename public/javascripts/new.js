@@ -5,11 +5,22 @@ $(document).ready(function() {
   });
   $('input[autocomplete]').livequery( function() {
     $this = $(this);
+    function get_ac_params() {
+        var ac_params = {};
+        for each (param in eval($this.attr('ac_params'))) {
+	  ac_params[param] = function() {
+	    // The selector below is rather eloborate. I don't like it!
+	    return $this.parent().prev('[id*='+param+']').children('input').val();
+	  };
+	};
+	return ac_params;
+    };
     $this.autocomplete( $this.attr('autocomplete'), {
       autoFill: true,
       max: 10,
       minChars: 3,
       selectFirst: true,
+      extraParams: get_ac_params(),
     });
   });
 });

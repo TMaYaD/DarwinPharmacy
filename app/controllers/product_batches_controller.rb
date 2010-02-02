@@ -87,7 +87,7 @@ class ProductBatchesController < ApplicationController
 
   def autocomplete
     @product_batches = ProductBatch.all(
-      :conditions => ["batch_code LIKE :q OR products.name LIKE :q", {:q => '%' + params[:q] + '%' }],
+      :conditions => ["batch_code LIKE :q AND products.name = :product_name", {:q => "%#{params[:q]}%", :product_name => params[:product_name] }],
       :limit => params[:limit],
       :joins => :product
     )
