@@ -1,4 +1,4 @@
 <%= f.input :product_name, :input_html => { :autocomplete => autocomplete_products_url } %>
-<%= f.input :product_batch_code, :input_html => { :autocomplete => autocomplete_product_batches_url, :ac_params => "['product_name']" } %>
+<%= f.input :product_batch_code, :input_html => { :autocomplete => autocomplete_product_batches_url, :ac_params => "['product_name']", :ac_minChars => 0 } %>
 <%= f.input :quantity %>
 <%= link_to_remove_fieldset "remove", f %>

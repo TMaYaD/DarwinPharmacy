@@ -18,7 +18,7 @@ $(document).ready(function() {
     $this.autocomplete( $this.attr('autocomplete'), {
       autoFill: true,
       max: 10,
-      minChars: 3,
+      minChars: ($this.attr('ac_minChars') ? $this.attr('ac_minChars') : 3),
       selectFirst: true,
       extraParams: get_ac_params(),
     });
