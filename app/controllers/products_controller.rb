@@ -4,11 +4,23 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.xml
   def index
-    @products = Product.all
+    params[:iDisplayLength] ||= 10
+    params[:iDisplayStart] ||= 0
+
+    @products = Product.all(
+        :limit => params[:iDisplayLength],
+        :offset => params[:iDisplayStart]
+    )
 
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @products }
+      format.js  { render :json => { 
+        :sEcho => params[:sEcho],
+        :iTotalRecords => Product.count,
+        :iTotalDisplayRecords => @products.count * 3,
+        :ajData => @products,
+      }}
     end
   end
 
