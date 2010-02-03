@@ -6,10 +6,12 @@ class ProductsController < ApplicationController
   def index
     params[:iDisplayLength] ||= 10
     params[:iDisplayStart] ||= 0
+    params[:sSort] ||='name'
 
     @products = Product.all(
         :limit => params[:iDisplayLength],
-        :offset => params[:iDisplayStart]
+        :offset => params[:iDisplayStart],
+        :order => params[:sSort],
     )
 
     respond_to do |format|
@@ -18,7 +20,7 @@ class ProductsController < ApplicationController
       format.js  { render :json => { 
         :sEcho => params[:sEcho],
         :iTotalRecords => Product.count,
-        :iTotalDisplayRecords => @products.count * 3,
+        :iTotalDisplayRecords => Product.count,
         :ajData => @products,
       }}
     end

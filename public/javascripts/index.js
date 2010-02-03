@@ -10,15 +10,23 @@ $(document).ready(function() {
         'bServerSide': true,
         'sAjaxSource': document.location,
         'fnServerData': function ( sSource, aoData, fnCallback ) {
+          aoData.push({
+            'name': 'sSort',
+            'value': [
+              sColumns[item[0]] + ' ' + item[1]
+              for each(item in $(this).dataTableSettings[0].aaSorting)
+              ].join(',')
+          });
+          
           $.getJSON( sSource, aoData, function ( data, textStatus) {
-            aoData = {
+            asData = {
               'sColumns': sColumns.join(','),
               'sEcho': data['sEcho'],
               'iTotalRecords': data['iTotalRecords'],
               'iTotalDisplayRecords': data['iTotalDisplayRecords'],
             };
-            aoData['aaData'] = [ [ record[tName][colName] for each (colName in sColumns) ] for each (record in data['ajData']) ];
-            fnCallback(aoData, textStatus);
+            asData['aaData'] = [ [ record[tName][colName] for each (colName in sColumns) ] for each (record in data['ajData']) ];
+            fnCallback(asData, textStatus);
           });
         },
     });
