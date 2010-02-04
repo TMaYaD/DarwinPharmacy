@@ -21,3 +21,8 @@ li.date>fieldset {
 li.date>fieldset>ol {
 	margin: 0px;
 }
+
+.inline-errors {
+ color: red;
+ font-weight: bold;
+}
