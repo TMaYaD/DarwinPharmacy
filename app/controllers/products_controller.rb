@@ -7,11 +7,17 @@ class ProductsController < ApplicationController
     params[:iDisplayLength] ||= 10
     params[:iDisplayStart] ||= 0
     params[:sSort] ||='name'
+    conditions = [' name LIKE :q
+      OR manufacturer LIKE :q
+      OR composition LIKE :q
+      OR common_uses LIKE :q
+      ', { :q => "%#{params[:sSearch]}%" } ]
 
     @products = Product.all(
         :limit => params[:iDisplayLength],
         :offset => params[:iDisplayStart],
         :order => params[:sSort],
+        :conditions => conditions,
     )
 
     respond_to do |format|
@@ -20,7 +26,7 @@ class ProductsController < ApplicationController
       format.js  { render :json => { 
         :sEcho => params[:sEcho],
         :iTotalRecords => Product.count,
-        :iTotalDisplayRecords => Product.count,
+        :iTotalDisplayRecords => Product.count(:conditions => conditions),
         :ajData => @products,
       }}
     end

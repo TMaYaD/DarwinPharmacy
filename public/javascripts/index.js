@@ -17,7 +17,7 @@ $(document).ready(function() {
               for each(item in $(this).dataTableSettings[0].aaSorting)
               ].join(',')
           });
-          
+
           $.getJSON( sSource, aoData, function ( data, textStatus) {
             asData = {
               'sColumns': sColumns.join(','),
@@ -26,6 +26,7 @@ $(document).ready(function() {
               'iTotalDisplayRecords': data['iTotalDisplayRecords'],
             };
             asData['aaData'] = [ [ record[tName][colName] for each (colName in sColumns) ] for each (record in data['ajData']) ];
+            console.log(asData);
             fnCallback(asData, textStatus);
           });
         },
