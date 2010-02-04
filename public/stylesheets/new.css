@@ -24,3 +24,8 @@ li.date>fieldset>ol {
 .month li:last-child {
 	display: none;
 }
+
+.inline-errors {
+ color: red;
+ font-weight: bold;
+}
