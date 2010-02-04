@@ -21,6 +21,3 @@ li.date>fieldset {
 li.date>fieldset>ol {
 	margin: 0px;
 }
-.month li:last-child {
-	display: none;
-}
