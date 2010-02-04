@@ -17,7 +17,7 @@ class ProductsController < ApplicationController
         :limit => params[:iDisplayLength],
         :offset => params[:iDisplayStart],
         :order => params[:sSort],
-        :conditions => conditions,
+        :conditions => conditions
     )
 
     respond_to do |format|
