@@ -5,7 +5,7 @@ class BillsControllerTest < ActionController::TestCase
   def setup
     @user = Factory(:user, :role => 'franchise')
     UserSession.create(@user)
-    @bill_id = Factory(:bill, :created_by => @user)
+    @bill_id = Factory(:bill, :created_by => @user).to_param
   end
 
   test "should get index" do

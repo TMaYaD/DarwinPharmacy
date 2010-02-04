@@ -3,7 +3,7 @@ require 'test_helper'
 class UsersControllerTest < ActionController::TestCase
   setup :activate_authlogic
   def setup
-    @user_id = Factory(:user)
+    @user_id = Factory(:user).to_param
     UserSession.create(Factory(:user, :role => 'admin'))
   end
   test "should get index" do

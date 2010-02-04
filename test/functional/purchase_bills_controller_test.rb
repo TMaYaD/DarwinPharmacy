@@ -4,7 +4,7 @@ class PurchaseBillsControllerTest < ActionController::TestCase
   setup :activate_authlogic
   def setup
     UserSession.create(Factory(:user))
-    @purchase_bill_id = Factory(:purchase_bill)
+    @purchase_bill_id = Factory(:purchase_bill).to_param
   end
 
   test "should get index" do
