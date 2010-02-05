@@ -17,4 +17,12 @@ class SaleBill < ActiveRecord::Base
   def franchise_name=(name)
     self.franchise = Franchise.find_by_name(name) unless name.blank?
   end
+
+  def amount
+    self.sale_bill_items.reduce(0) { |sum, item| sum += item.amount }
+  end
+
+  def tax
+    self.sale_bill_items.reduce({}) { |sum, item| sum = item.tax_add (sum) }
+  end
 end

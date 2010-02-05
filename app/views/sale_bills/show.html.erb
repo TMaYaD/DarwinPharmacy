@@ -30,11 +30,26 @@
 			<td><%= 0 %></td><!-- No frees -->
 			<td><%= item.product_batch.rate %></td>
 			<td><%= 0 %></td><!-- No Discount -->
-			<td><%= item.product_batch.vat %></td>
-			<td><%= item.quantity * item.product_batch.rate %></td>
+			<td><%= item.product_batch.vat %> %</td>
+			<td><%= item.amount %></td>
 		 </tr>
 	<% end %>
 	</tbody>
+  <tfoot>
+    <tr>
+      <td colspan=8 rowspan=3>&nbsp;</td>
+      <th border='none'>Total Amount</th>
+      <td border-left='none'>&nbsp;</td>
+      <td><%= @sale_bill.amount %></td>
+    </tr>
+	  <% @sale_bill.tax.each do |key, val| %>
+    <tr>
+      <th>Total <%= key %>% Tax</th>
+      <td>&nbsp;</td>
+      <td><%= val %></td>
+    </tr>
+	  <% end %>
+  </tfoot>
 </table>
 
 

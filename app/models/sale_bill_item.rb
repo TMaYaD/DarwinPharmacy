@@ -16,9 +16,21 @@ class SaleBillItem < ActiveRecord::Base
   end
 
   def product_name
-    @product_name
+    self.product_batch.product_name if self.product_batch
   end
   def product_name=(name)
     @product_name = name
   end
+
+  def amount
+    self.quantity * self.product_batch.rate
+  end
+
+  def tax_add (visitor)
+    vat_slab = self.product_batch.vat
+    visitor[vat_slab] ||= 0
+    visitor[vat_slab]  += (self.amount * vat_slab).floor / 100
+    return visitor
+  end
+    
 end
