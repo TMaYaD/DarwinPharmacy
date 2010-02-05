@@ -28,6 +28,25 @@ class ProductBatch < ActiveRecord::Base
     ProductBatch.first(:joins => :product, :conditions => ["products.name = ? and batch_code = ?", *(label.split(' : '))])
   end
 
+  module AutocompleteFields
+    def product_name
+      self.product_batch.product_name if self.product_batch
+    end
+    def product_name=(name)
+      @product_name = name
+    end
+
+    def product_batch_code
+      self.product_batch.batch_code if self.product_batch
+    end
+    def product_batch_code=(code)
+      self.product_batch = ProductBatch.find_by_batch_code(code,
+        :conditions => ['products.name like ?', "%#{@product_name}%" ],
+        :joins => :product
+      ) unless code.blank?
+    end
+  end
+
   private
   def exp_date_cannot_be_in_the_past
     errors.add(:exp_date, "can't be in the past") if  !exp_date.blank? and exp_date < Date.today
