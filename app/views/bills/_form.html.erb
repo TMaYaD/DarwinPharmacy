@@ -1,61 +1,13 @@
-<% content_for :head do %>
-<%= stylesheet_link_tag 'form' %>
-<%= javascript_include_tag 'jquery', 'jquery-ui', 'jquery.metadata', 'jquery.labelover', 'jquery.validate', 'jquery.autocomplete.min' %>
-<script>
-  $(document).ready(function(){
-    //set some defaults
-    $.metadata.setType('attr', 'meta');
-    $('label').labelOver();
-    $('#bill').validate();
-    $('a[href="#rm"]').click( function() {
-      $(this).parent().remove();
-    });
-
-    $('#bill_item_template').hide();
-    var counter = 1;
-    $('#add_item').click(function() {
-      counter++;
-      var $item_set = $(
-        $('#bill_item_template').
-            //parent().
-            html().
-            replace(/MARKER/g, counter).
-            replace(/bill_item/g, 'bill_items_attributes')
-      ).appendTo('#bill_items');
-      $('label', $item_set).labelOver().validate();
-      $('.autocomplete', $item_set).
-          autocomplete('<%= autocomplete_product_batches_url %>', {
-            autoFill: true,
-            max: 10,
-            minChars: 3,
-            selectFirst: true,
-          }).
-          result(function(event, data, formatted) {
-            if(data)
-              $(this).parent().next().find('input').val(data[1]);
-          });
-      $('a[href="#rm"]', $item_set).click( function() {
-        $item_set.remove();
-      });
-      $('input', $item_set)[0].focus();
-    });
-  });
-</script>
-
-<% end %>
 <% semantic_form_for(@bill) do |f| %>
+  <% f.object.customer ||= Customer.new %>
   <%= f.inputs :for => :customer, :name => 'Customer', :id => 'bill_customer' %>
-  <a name='bill_items'>
-  <%= link_to 'Add Item', '#bill_items', :id => 'add_item' %>
-  <div id='bill_items'>
-  </div>
   <%= f.buttons %>
-<% end %>
-<% semantic_form_for @bill, :html => { :id => 'bill_item_template' } do |f| %>
-  <% f.inputs :product_batch, :quantity, :discount, :for => BillItem.new, :name => "Item MARKER", :for_options => {:index => 'MARKER'} do |item_f| %>
-    <%= item_f.input :product_batch, :as => :string, :input_html => { :class => 'autocomplete discard' } %>
-    <%= item_f.input :product_batch_id, :as => :hidden %>
-    <%= item_f.input :quantity %>
-    <%= item_f.input :discount, :input_html => {:value => 'discount: 10%', :disabled => true} %>
+  <% f.inputs do %>
+    <% f.object.bill_items.build if f.object.bill_items.count == 0 %>
+    <% f.inputs :for => :bill_items, :class => 'item' do |builder| %>
+      <%= render 'bill_item_inputs', :f => builder %>
+    <% end %>
+    <%= link_to_add_fieldset 'Add Item', f, :bill_items %>
   <% end %>
+  <%= f.buttons %>
 <% end %>

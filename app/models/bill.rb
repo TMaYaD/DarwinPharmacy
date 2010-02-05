@@ -6,12 +6,16 @@ class Bill < ActiveRecord::Base
 
   validates_associated :bill_items
   validates_size_of :bill_items, :minimum => 1
-  validates_presence_of :customer_id
+#validates_presence_of :customer_id
   
   accepts_nested_attributes_for :customer
-  accepts_nested_attributes_for :bill_items, :allow_destroy => true, :reject_if => proc { |attrs| attrs.all? { |k, v| v.blank? } }
+  accepts_nested_attributes_for :bill_items, :allow_destroy => true, :reject_if => proc { |attrs|
+    attrs[:product_name].blank? &&
+    attrs[:product_batch_code].blank? &&
+    attrs[:quantity].blank?
+  }
 
   def amount
-    self.bill_items.reduce(0) { |sum, item| sum += item.mrp }
+    self.bill_items.reduce(0) { |sum, item| sum += item.amount }
   end
 end
