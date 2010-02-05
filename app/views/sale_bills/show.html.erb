@@ -1,6 +1,21 @@
-<b>Franchise:</b>
-<%=h @sale_bill.franchise.name %>
-<%=h @sale_bill.franchise.address %>
+<h1>Darwin Pharma Pvt. Ltd.</h1>
+<h3>#54-18-37/4, AIR Colony, Near ITI College, Vijayawada - 520 008, Ph. +91 866 6451144</h3>
+<h3>DL20B: 208/AP/KR-V2/2009/W        DL21B: 208/AP/KR-V2/2009/W        TIN: 28856909282</h3>
+<table>
+  <tr>
+    <th rowspan=2>Franchise:</th>
+    <td rowspan=2>
+      <%=h @sale_bill.franchise.name %>
+      <pre><%=h @sale_bill.franchise.address %></pre>
+    </td>
+    <th>TIN</th>
+    <td><%=h @sale_bill.franchise.tin %></td>
+  </tr>
+  <tr>
+    <th>DL</th>
+    <td><%=h @sale_bill.franchise.dl %></td>
+  </tr>
+</table>
 
 <table>
 	<thead>
@@ -37,16 +52,18 @@
 	</tbody>
   <tfoot>
     <tr>
-      <td colspan=8 rowspan=3>&nbsp;</td>
-      <th border='none'>Total Amount</th>
-      <td border-left='none'>&nbsp;</td>
+      <td colspan=8>&nbsp;</td>
+      <th>Total Amount</th>
+      <td>&nbsp;</td>
       <td><%= @sale_bill.amount %></td>
     </tr>
 	  <% @sale_bill.tax.each do |key, val| %>
     <tr>
+      <th>Total <%= key %>% Taxable Amount</th>
+      <td><%= val[:amount] %></td>
       <th>Total <%= key %>% Tax</th>
-      <td>&nbsp;</td>
-      <td><%= val %></td>
+      <td><%= val[:tax] %></td>
+      <td colspan=7>&nbsp;</td>
     </tr>
 	  <% end %>
   </tfoot>

@@ -1,24 +1,4 @@
-<h1>Editing franchise</h1>
-
-<% form_for(@franchise) do |f| %>
-  <%= f.error_messages %>
-
-  <p>
-    <%= f.label :franchisee %><br />
-    <%= f.text_field :franchisee %>
-  </p>
-  <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.label :address %><br />
-    <%= f.text_area :address %>
-  </p>
-  <p>
-    <%= f.submit 'Update' %>
-  </p>
-<% end %>
+<%= render 'form' %>
 
 <%= link_to 'Show', @franchise %> |
 <%= link_to 'Back', franchises_path %>
