@@ -1,5 +1,4 @@
-<%= f.input :product_name, :input_html => { :autocomplete => autocomplete_products_url } %>
-<%= f.input :product_id, :as => :hidden %>
+<%= render 'products/autocomplete_inputs', :f => f %>
 <%= f.input :batch_code %>
 <%= f.input :pack %>
 <%= f.input :exp_date, :discard_day => true %>

@@ -1,5 +1,6 @@
 class ProductBatch < ActiveRecord::Base
   belongs_to :product
+  include Product::AutocompleteFields
 
   VATS = [4, 12.5, 14.5]
 
@@ -14,36 +15,14 @@ class ProductBatch < ActiveRecord::Base
   # :has_profit
   validates_inclusion_of :vat, :in => VATS
 
-  def product_name
-    product.name if product
-  end
-  def product_name=(name)
-    self.product = Product.find_by_name(name) unless name.blank?
-  end
-
-  def to_label
-    "#{product_name} : #{batch_code}"
-  end
-  def ProductBatch.from_label(label)
-    ProductBatch.first(:joins => :product, :conditions => ["products.name = ? and batch_code = ?", *(label.split(' : '))])
-  end
-
   module AutocompleteFields
-    def product_name
-      self.product_batch.product_name if self.product_batch
-    end
-    def product_name=(name)
-      @product_name = name
-    end
+    include Product::AutocompleteFields
 
     def product_batch_code
       self.product_batch.batch_code if self.product_batch
     end
     def product_batch_code=(code)
-      self.product_batch = ProductBatch.find_by_batch_code(code,
-        :conditions => ['products.name like ?', "%#{@product_name}%" ],
-        :joins => :product
-      ) unless code.blank?
+      @product_batch_code = code
     end
   end
 
