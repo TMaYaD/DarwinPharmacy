@@ -21,6 +21,10 @@ $(document).ready(function() {
       minChars: ($this.attr('ac_minChars') ? $this.attr('ac_minChars') : 3),
       selectFirst: true,
       extraParams: get_ac_params(),
+    }).result( function (event, data, formatted) {
+      if (data) {
+        $(this).parent().next().find('input[type=hidden]').val(data[1]);
+      };
     });
   });
 });
