@@ -2,7 +2,7 @@ class ProductBatch < ActiveRecord::Base
   belongs_to :product
   include Product::AutocompleteFields
 
-  VATS = [4, 12.5, 14.5]
+  VATS = [0, 4, 12.5, 14.5]
 
   validates_presence_of :product_id, :batch_code, :exp_date, :mrp, :rate, :vat
   # validates_presence_of :mfg_date 
