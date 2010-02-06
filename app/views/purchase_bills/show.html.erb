@@ -20,7 +20,6 @@
       <th>Rate</th>
       <th>Amount</th>
       <th>VAT %</th>
-      <th>VAT Amount</th>
       <th>MRP</th>
       <th>Exp. Date</th>
     </tr>
@@ -38,7 +37,6 @@
       <td><%=h item.product_batch.rate %></td>
       <td><%=h item.amount %></td>
       <td><%=h item.product_batch.vat %></td>
-      <td><%=h item.vat_amount %></td>
       <td><%=h item.product_batch.mrp %></td>
       <td><%=h item.product_batch.exp_date %></td>
     </tr>
@@ -46,9 +44,24 @@
   </tbody>
   <tfoot>
     <tr>
-      <th colspan=9>&nbsp;</th>
-      <th colspan=3>Amount</th>
-      <td><%= @purchase_bill.amount %></td>
+      <td colspan=3>&nbsp;</td>
+      <th colspan=8>Amount</th>
+      <td><% net_amount = @purchase_bill.amount %><%= @purchase_bill.amount %></td>
+    </tr>
+	  <% @purchase_bill.tax.each do |key, val| %>
+    <tr>
+      <td colspan=3>&nbsp;</td>
+      <th colspan = 3>Total <%= key %>% Taxable Amount</th>
+      <td><%= val[:amount] %></td>
+      <td colspan=1>&nbsp;</td>
+      <th colspan = 3>Total <%= key %>% Tax</th>
+      <td><%= val[:tax] %><% net_amount += val[:tax] %></td>
+    </tr>
+    <% end %>
+    <tr>
+      <td colspan=3>&nbsp;</td>
+      <th colspan=8>Net Amount</th>
+      <td><strong><%= net_amount %></strong></td>
     </tr>
   </tfoot>
 </table>
