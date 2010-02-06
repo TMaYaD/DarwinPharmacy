@@ -5,10 +5,15 @@ class Product < ActiveRecord::Base
   validates_uniqueness_of :name
   validates_inclusion_of :dosage_form, :in => DOSAGE_FORMS
 
+  def to_label
+      "#{self.name} : #{self.dosage_form} : #{self.strength || ''}"
+  end
+
   module AutocompleteFields
     def product_name
-      return self.product.name if self.respond_to?(:product) && self.product
-      return self.product_batch.product_name if self.respond_to?(:product_batch) && self.product_batch
+      product = self.product if self.respond_to?(:product) && self.product
+      product = self.product_batch.product if self.respond_to?(:product_batch) && self.product_batch
+      product.to_label if product
     end
     def product_name=(name)
       @product_name = name

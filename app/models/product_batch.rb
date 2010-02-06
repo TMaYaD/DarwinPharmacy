@@ -18,6 +18,13 @@ class ProductBatch < ActiveRecord::Base
   module AutocompleteFields
     include Product::AutocompleteFields
 
+    def product_id
+      self.product_batch.product_id if self.product_batch
+    end
+    def product_id=(id)
+      @product_id = id
+    end
+
     def product_batch_code
       self.product_batch.batch_code if self.product_batch
     end
