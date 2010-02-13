@@ -10,4 +10,8 @@ class User < ActiveRecord::Base
   def role_symbols
     role ? [ role.underscore.to_sym ] : []
   end
+
+  def franchise
+    Franchise.find_by_user_id(self.id)
+  end
 end
