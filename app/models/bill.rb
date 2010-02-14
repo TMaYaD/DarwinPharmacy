@@ -19,7 +19,7 @@ class Bill < ActiveRecord::Base
     self.bill_items.reduce(0) { |sum, item| sum += item.amount }
   end
 
-  def before_save
-    self.franchise = current_user.franchise
+  def savings
+    self.bill_items.reduce(0) { |sum, item| sum += item.savings }
   end
 end

@@ -8,6 +8,10 @@ class BillItem < ActiveRecord::Base
   validates_numericality_of :discount, :less_than => 15
 
   def amount
-    self.product_batch.mrp * self.quantity / self.product_batch.pack * (100 - self.discount) /100
+    (self.product_batch.mrp * self.quantity / self.product_batch.pack * (100 - self.discount)).ceil / 100
+  end
+
+  def savings
+    (self.product_batch.mrp * self.quantity / self.product_batch.pack * self.discount).ceil / 100
   end
 end
