@@ -18,4 +18,8 @@ class Bill < ActiveRecord::Base
   def amount
     self.bill_items.reduce(0) { |sum, item| sum += item.amount }
   end
+
+  def savings
+    self.bill_items.reduce(0) { |sum, item| sum += item.savings }
+  end
 end

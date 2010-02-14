@@ -23,6 +23,6 @@ class SaleBill < ActiveRecord::Base
   end
 
   def tax
-    self.sale_bill_items.reduce({}) { |sum, item| sum = item.tax_add (sum) }
+    self.sale_bill_items.reduce({}) { |sum, item| sum = item.tax_add(sum) }
   end
 end

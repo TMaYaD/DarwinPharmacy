@@ -17,11 +17,11 @@ authorization do
     has_permission_on :bills, :to => [:index, :new, :create] 
     has_permission_on :bills do
       to :show
-      if_attribute :created_by => is {user}
+      if_attribute :franchise => is {user.franchise}
     end
     has_permission_on :sale_bills do
       to :show
-      if_attribute :franchise => is {Franchise.find_by_franchisee_id(user.id)}
+      if_attribute :franchise => is {user.franchise}
     end
     has_permission_on [:products, :product_batches], :to => [:autocomplete]
     has_permission_on :user_sessions, :to => [:destroy]
