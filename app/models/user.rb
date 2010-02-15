@@ -5,13 +5,11 @@ class User < ActiveRecord::Base
 
   ROLES = %w[admin franchise operator]
 
+  has_and_belongs_to_many :franchises
+
   validates_inclusion_of :role, :in => ROLES
 
   def role_symbols
     role ? [ role.underscore.to_sym ] : []
-  end
-
-  def franchise
-    Franchise.find_by_user_id(self.id)
   end
 end

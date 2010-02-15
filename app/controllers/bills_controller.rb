@@ -4,7 +4,7 @@ class BillsController < ApplicationController
   # GET /bills
   # GET /bills.xml
   def index
-    @bills = Bill.all(:conditions => ["franchise_id = ?", current_user.franchise.id])
+    @bills = Bill.with_permissions_to(:show)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -37,7 +37,7 @@ class BillsController < ApplicationController
   # POST /bills
   # POST /bills.xml
   def create
-    @bill.created_by = current_user
+    @bill.franchise = current_user.franchises[0]
 
     respond_to do |format|
       if @bill.save
