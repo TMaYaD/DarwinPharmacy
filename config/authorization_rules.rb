@@ -6,7 +6,7 @@ authorization do
   end
 
   role :operator do
-    has_permission_on [:product_batches, :products], :to => [:index, :show, :new, :create, :edit, :update]  
+    has_permission_on [:products], :to => [:index, :show, :new, :create, :edit, :update]  
     has_permission_on :user_sessions, :to => [:destroy]
     has_permission_on [:purchase_bills, :sale_bills], :to => [:index, :show, :new, :create, :edit, :update]
     has_permission_on [:products, :product_batches], :to => [:autocomplete]
