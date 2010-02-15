@@ -7,12 +7,12 @@ $(document).ready(function() {
     $this = $(this);
     function get_ac_params() {
         var ac_params = {};
-        for each (param in eval($this.attr('ac_params'))) {
+        $.each( eval($this.attr('ac_params')) || [], function(index, param) {
 	  ac_params[param] = function() {
 	    // The selector below is rather eloborate. I don't like it!
 	    return $this.parent().prev('[id*='+param+']').children('input').val();
 	  };
-	};
+	});
 	return ac_params;
     };
     $this.autocomplete( $this.attr('autocomplete'), {
