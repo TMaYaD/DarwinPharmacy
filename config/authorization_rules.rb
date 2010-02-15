@@ -17,7 +17,7 @@ authorization do
     has_permission_on :bills, :to => [:index, :new, :create] 
     has_permission_on :bills do
       to :show
-      if_attribute :franchise => is {user.franchise}
+      if_attribute :franchise => is_in {user.franchises}
     end
     has_permission_on :sale_bills do
       to :show
