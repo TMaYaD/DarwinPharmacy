@@ -5,14 +5,14 @@ $(document).ready(function() {
   });
   $('input[autocomplete]').livequery( function() {
     $this = $(this);
-    function get_ac_params() {
+    function get_ac_params($ac_field) {
         var ac_params = {};
-        for each (param in eval($this.attr('ac_params'))) {
+        $.each( eval($ac_field.attr('ac_params')) || [], function(index, param) {
 	  ac_params[param] = function() {
 	    // The selector below is rather eloborate. I don't like it!
-	    return $this.parent().prev('[id*='+param+']').children('input').val();
+	    return $ac_field.parent().prev('[id*='+param+']').children('input').val();
 	  };
-	};
+	});
 	return ac_params;
     };
     $this.autocomplete( $this.attr('autocomplete'), {
@@ -20,7 +20,7 @@ $(document).ready(function() {
       max: 10,
       minChars: ($this.attr('ac_minChars') ? $this.attr('ac_minChars') : 3),
       selectFirst: true,
-      extraParams: get_ac_params(),
+      extraParams: get_ac_params($this),
     }).result( function (event, data, formatted) {
       if (data) {
         $(this).parent().next().find('input[type=hidden]').val(data[1]);
