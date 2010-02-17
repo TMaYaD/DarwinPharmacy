@@ -5,7 +5,7 @@ class BillItem < ActiveRecord::Base
 
   validates_presence_of :product_batch_id
   validates_numericality_of :quantity, :only_integer => true, :greater_than => 0
-  validates_numericality_of :discount, :less_than => 15
+  validates_numericality_of :discount, :less_than => 16
 
   def amount
     (self.product_batch.mrp * self.quantity / self.product_batch.pack * (100 - self.discount)).ceil / 100
