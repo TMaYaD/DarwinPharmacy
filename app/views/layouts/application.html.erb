@@ -24,7 +24,7 @@
   </hgroup>
   <hgroup id='login'>
     <% if current_user %>
-      <%= link_to "Edit Profile",edit_user_path(:current) %>  
+      <%= link_to "Edit Profile",edit_user_path(current_user) %>  
       <%= link_to "Log out", logout_path %>
     <% else %>
       <%= link_to "Log in", login_path %>  
