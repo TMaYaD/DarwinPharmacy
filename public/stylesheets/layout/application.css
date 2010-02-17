@@ -130,3 +130,10 @@ footer>p {
 	border-top:1px solid #222222;
 	margin:0px;
 }
+
+.notice {
+	color: green;
+}
+.error {
+	color: red;
+}
