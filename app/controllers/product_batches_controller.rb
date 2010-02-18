@@ -13,12 +13,12 @@ class ProductBatchesController < ApplicationController
       ', { :q => "%#{params[:sSearch]}%" } ]
 
     @product_batches = ProductBatch.all(
+        :select => params[:sColumns],
         :limit => params[:iDisplayLength],
         :offset => params[:iDisplayStart],
         :order => params[:sSort],
-        :conditions => conditions,
         :joins => :product,
-        :select => params[:sColumns]
+        :conditions => conditions
     )
 
     respond_to do |format|

@@ -4,11 +4,32 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.xml
   def index
-    @users = User.all
+    params[:iDisplayLength] ||= 10
+    params[:iDisplayStart] ||= 0
+    params[:sColumns] ||= '*'
+    params[:sSort] ||= 'login'
+    conditions = [ 'login LIKE :q
+        OR phone LIKE :q
+        OR email LIKE :q
+    ', { :q => "%#{params[:sSearch]}%" } ]
+
+    @users = User.all(
+        :select => params[:sColumns],
+        :limit => params[:iDisplayLength],
+        :offset => params[:iDisplayStart],
+        :order => params[:sSort],
+        :conditions => conditions
+    )
 
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @users }
+      format.js { render :json => {
+        :sEcho => params[:sEcho],
+        :iTotalRecords => User.count,
+        :iTotalDisplayRecords => User.count(:conditions => conditions),
+        :ajData => @users,
+      }}
     end
   end
 
@@ -73,7 +94,6 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.xml
   def destroy
-    @user = User.find(params[:id])
     @user.destroy
 
     respond_to do |format|
