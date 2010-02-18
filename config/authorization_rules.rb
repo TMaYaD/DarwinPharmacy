@@ -1,14 +1,14 @@
 authorization do
   role :admin do
-    has_permission_on [:bills, :customers, :product_batches, :purchase_bills, :sale_bills, :products, :users, :franchises, :suppliers], :to => [:index, :show, :new, :create, :edit, :update, :destroy]
+    has_permission_on [:bills, :customers, :product_batches, :purchase_bills, :sale_bills, :products, :users, :franchises, :suppliers], :to => [:index, :crud]
     has_permission_on [:products, :product_batches], :to => [:autocomplete]
 
     has_permission_on :user_sessions, :to => [:destroy]
   end
 
   role :operator do
-    has_permission_on [:products], :to => [:index, :show, :new, :create, :edit, :update]
-    has_permission_on [:purchase_bills, :sale_bills], :to => [:index, :show, :new, :create, :edit, :update]
+    has_permission_on [:products], :to => [:index, :read, :create, :update]
+    has_permission_on [:purchase_bills, :sale_bills], :to => [:index, :read, :create, :update]
     has_permission_on [:products, :product_batches], :to => [:autocomplete]
     has_permission_on :users do
       to :update
@@ -19,14 +19,14 @@ authorization do
   end
 
   role :franchise do
-    has_permission_on :customers, :to => [:index, :show, :new, :create, :edit, :update]
-    has_permission_on :bills, :to => [:index, :new, :create]
+    has_permission_on :customers, :to => [:index, :read, :create, :update]
+    has_permission_on :bills, :to => [:index, :create]
     has_permission_on :bills do
-      to :show
+      to :read
       if_attribute :franchise => is_in {user.franchises}
     end
     has_permission_on :sale_bills do
-      to :show
+      to :read
       if_attribute :franchise => is {user.franchise}
     end
     has_permission_on [:products, :product_batches], :to => [:autocomplete]
@@ -42,8 +42,17 @@ authorization do
   end
 end
 privileges do
+  privilege :create do
+    includes :new
+  end
+  privilege :read do
+    includes :show
+  end
   privilege :update do
     includes :edit
+  end
+  privilege :crud do
+    includes :create, :read, :update, :destroy
   end
 end
 
