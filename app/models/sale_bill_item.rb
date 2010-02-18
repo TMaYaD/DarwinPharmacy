@@ -1,4 +1,6 @@
 class SaleBillItem < ActiveRecord::Base
+  acts_as_audited
+
   belongs_to :sale_bill
   belongs_to :product_batch
   include ProductBatch::AutocompleteFields

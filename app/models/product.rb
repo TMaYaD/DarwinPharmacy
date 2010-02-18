@@ -1,4 +1,6 @@
 class Product < ActiveRecord::Base
+  acts_as_audited
+
   DOSAGE_FORMS = %w[Ampoule Capsule Cream Drops Gel Gelly Granules Injection Inhaler Liquid Lotion Ointment Powder Sachet Soap Suspension Spray Syrup Tablet]
 
   validates_presence_of :name, :manufacturer, :dosage_form 
