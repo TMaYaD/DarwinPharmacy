@@ -4,19 +4,38 @@ class CustomersController < ApplicationController
   # GET /customers
   # GET /customers.xml
   def index
-    @customers = Customer.all
+    params[:iDisplayLength] ||= 10
+    params[:iDisplayStart] ||= 0
+    params[:sColumns] ||= '*'
+    params[:sSort] ||= 'name'
+    conditions = [ 'name LIKE :q
+        OR phone LIKE :q
+        OR address LIKE :q
+    ', { :q => "%#{params[:sSearch]}%" } ]
+
+    @customers = Customer.all(
+        :select => params[:sColumns],
+        :limit => params[:iDisplayLength],
+        :offset => params[:iDisplayStart],
+        :order => params[:sSort],
+        :conditions => conditions
+    )
 
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @customers }
-    end
+      format.js { render :json => {
+        :sEcho => params[:sEcho],
+        :iTotalRecords => Customer.count,
+        :iTotalDisplayRecords => Customer.count(:conditions => conditions),
+        :ajData => @customers,
+      }}
+     end
   end
 
   # GET /customers/1
   # GET /customers/1.xml
   def show
-    @customer = Customer.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @customer }
@@ -26,8 +45,6 @@ class CustomersController < ApplicationController
   # GET /customers/new
   # GET /customers/new.xml
   def new
-    @customer = Customer.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @customer }
@@ -36,14 +53,11 @@ class CustomersController < ApplicationController
 
   # GET /customers/1/edit
   def edit
-    @customer = Customer.find(params[:id])
   end
 
   # POST /customers
   # POST /customers.xml
   def create
-    @customer = Customer.new(params[:customer])
-
     respond_to do |format|
       if @customer.save
         flash[:notice] = 'Customer was successfully created.'
@@ -59,8 +73,6 @@ class CustomersController < ApplicationController
   # PUT /customers/1
   # PUT /customers/1.xml
   def update
-    @customer = Customer.find(params[:id])
-
     respond_to do |format|
       if @customer.update_attributes(params[:customer])
         flash[:notice] = 'Customer was successfully updated.'
@@ -76,7 +88,6 @@ class CustomersController < ApplicationController
   # DELETE /customers/1
   # DELETE /customers/1.xml
   def destroy
-    @customer = Customer.find(params[:id])
     @customer.destroy
 
     respond_to do |format|

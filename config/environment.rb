@@ -24,6 +24,7 @@ Rails::Initializer.run do |config|
   config.gem "declarative_authorization"
   config.gem "factory_girl"
   config.gem 'acts_as_audited', :lib => false
+  config.gem "tabletastic"
 
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named

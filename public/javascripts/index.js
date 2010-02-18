@@ -2,7 +2,7 @@ $.require(['jquery.dataTables.min.js', 'jquery-ui-1.7.2.custom.min.js']);
 //   toolbar_class = 'fg-toolbar ui-widget-header ui-corner-tl ui-corner-tr ui-helper.clearfix'
 //               'sDom': '<lfr>t<<\"ui-icon ui-icon-plusthick\">pi>',
 $(document).ready(function() {
-    $('#data').dataTable({
+    $('.data').dataTable({
         'bJQueryUI': true,
         'sPaginationType': 'full_numbers',
         'aoColumns': [{'sName': colName} for each (colName in sColumns)],
@@ -25,7 +25,8 @@ $(document).ready(function() {
               'iTotalRecords': data['iTotalRecords'],
               'iTotalDisplayRecords': data['iTotalDisplayRecords'],
             };
-            asData['aaData'] = [ [ record[tName][colName] || '' for each (colName in sColumns) ] for each (record in data['ajData']) ];
+            data['aColumns'] = data['aColumns'] || {};
+            asData['aaData'] = [ [ record[tName][data['aColumns'][colName] || colName] || '' for each (colName in sColumns) ] for each (record in data['ajData']) ];
             fnCallback(asData, textStatus);
           });
         },

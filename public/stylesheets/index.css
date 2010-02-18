@@ -1,14 +1,15 @@
 @import "/themes/ui-darkness/jquery-ui-1.7.2.custom.css";
 
-table#data {
+table.data {
     margin-bottom: -1px;
+    width: 100%;
 }
 
 tr {
     color: teal;
 }
 
-#data tr {
+.data tr {
     color: white;
 }
 

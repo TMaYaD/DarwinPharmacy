@@ -5,21 +5,8 @@
   </script>
 <% end %>
 
-<table id='data'>
-<thead>
-  <tr>
-    <th>ID</th>
-    <th>Name</th>
-    <th>Manufacturer</th>
-    <th>Schedule</th>
-    <th>Composition</th>
-    <th>Dosage Form</th>
-    <th>Strength</th>
-    <th>Common uses</th>
-  </tr>
-</thead>
-<tbody>
-</tbody>
-</table>
+<% table_for @products, :html => { :class => 'data' } do |t| %>
+    <%= t.data :id, :name, :manufacturer, :schedule, :composition, :dosage_form, :strength, :common_uses %>
+<% end %>
 
 <%= link_to 'New product', new_product_path, :id => 'add_new', :class => 'ui-icon ui-icon-plusthick' %>

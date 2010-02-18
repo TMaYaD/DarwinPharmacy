@@ -4,11 +4,36 @@ class FranchisesController < ApplicationController
   # GET /franchises
   # GET /franchises.xml
   def index
-    @franchises = Franchise.all
+    params[:iDisplayLength] ||= 10
+    params[:iDisplayStart] ||= 0
+    params[:sColumns] ||= '*'
+    params[:sSort] ||= 'name'
+    conditions = [ 'name LIKE :q
+        OR users.login LIKE :q
+        OR address LIKE :q
+        OR dl LIKE :q
+        OR tin LIKE :q
+    ', { :q => "%#{params[:sSearch]}%" } ]
+
+    @franchises = Franchise.all(
+        :select => params[:sColumns],
+        :limit => params[:iDisplayLength],
+        :offset => params[:iDisplayStart],
+        :order => params[:sSort],
+        :joins => :franchisee,
+        :conditions => conditions
+    )
 
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @franchises }
+      format.js { render :json => {
+        :sEcho => params[:sEcho],
+        :iTotalRecords => Franchise.count,
+        :iTotalDisplayRecords => Franchise.count(:joins => :franchisee, :conditions => conditions),
+        :aColumns => { 'users.login' => 'login', 'franchises.id' => 'id' },
+        :ajData => @franchises,
+      }}
     end
   end
 

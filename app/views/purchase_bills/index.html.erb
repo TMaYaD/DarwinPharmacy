@@ -1,24 +1,12 @@
-<h1>Listing purchase_bills</h1>
-
-<table>
-  <tr>
-    <th>Bill number</th>
-    <th>Supplier</th>
-    <th>Due date</th>
-  </tr>
-
-<% @purchase_bills.each do |purchase_bill| %>
-  <tr>
-    <td><%=h purchase_bill.bill_number %></td>
-    <td><%=h purchase_bill.supplier.name %></td>
-    <td><%=h purchase_bill.due_date %></td>
-    <td><%= link_to 'Show', purchase_bill %></td>
-    <td><%= link_to 'Edit', edit_purchase_bill_path(purchase_bill) %></td>
-    <td><%= link_to 'Destroy', purchase_bill, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+<% content_for :head do %>
+  <script>
+    var sColumns = [ 'purchase_bills.id', 'bill_number', 'suppliers.name', 'due_date' ]
+    var tName = 'purchase_bill'
+  </script>
 <% end %>
-</table>
 
-<br />
+<% table_for @purchase_bills, :html => { :class => 'data' } do |t| %>
+  <%= t.data :id, :bill_number, :supplier, :due_date %>
+<% end %>
 
-<%= link_to 'New purchase_bill', new_purchase_bill_path %>
+<%= link_to 'New purchase_bill', new_purchase_bill_path, :id => 'add_new', :class => 'ui-icon ui-icon-plusthick' %>
