@@ -1,4 +1,6 @@
 class Customer < ActiveRecord::Base
+  acts_as_audited
+
   validates_presence_of :name, :phone, :address
   validates_numericality_of :phone, :only_integer => true, :greater_than => 1000000000, :less_than => 9999999999
 #validates_uniqueness_of :phone

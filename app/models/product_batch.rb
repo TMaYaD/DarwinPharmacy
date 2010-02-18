@@ -1,4 +1,6 @@
 class ProductBatch < ActiveRecord::Base
+  acts_as_audited
+
   belongs_to :product
   include Product::AutocompleteFields
 

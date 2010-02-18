@@ -1,4 +1,6 @@
 class PurchaseBillItem < ActiveRecord::Base
+  acts_as_audited
+
   belongs_to :purchase_bill
   belongs_to :product_batch
 

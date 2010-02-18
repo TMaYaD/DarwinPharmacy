@@ -1,4 +1,6 @@
 class PurchaseBill < ActiveRecord::Base
+  acts_as_audited
+
   belongs_to :supplier
   belongs_to :created_by, :class_name => "User"
   belongs_to :modified_by, :class_name => "User"

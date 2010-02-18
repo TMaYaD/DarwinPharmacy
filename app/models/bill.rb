@@ -1,5 +1,6 @@
 class Bill < ActiveRecord::Base
   using_access_control
+  acts_as_audited
 
   belongs_to :customer
   belongs_to :franchise
