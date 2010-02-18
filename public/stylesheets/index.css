@@ -8,6 +8,10 @@ tr {
     color: teal;
 }
 
+#data tr {
+    color: white;
+}
+
 tr.odd {
     background-color: #555;
 }

@@ -9,7 +9,7 @@
 
 <% @franchises.each do |franchise| %>
   <tr>
-    <td><%=h franchise.franchisee %></td>
+    <td><%=h franchise.franchisee.login %></td>
     <td><%=h franchise.name %></td>
     <td><%=h franchise.address %></td>
     <td><%= link_to 'Show', franchise %></td>

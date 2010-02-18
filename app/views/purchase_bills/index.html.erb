@@ -10,7 +10,7 @@
 <% @purchase_bills.each do |purchase_bill| %>
   <tr>
     <td><%=h purchase_bill.bill_number %></td>
-    <td><%=h purchase_bill.supplier %></td>
+    <td><%=h purchase_bill.supplier.name %></td>
     <td><%=h purchase_bill.due_date %></td>
     <td><%= link_to 'Show', purchase_bill %></td>
     <td><%= link_to 'Edit', edit_purchase_bill_path(purchase_bill) %></td>

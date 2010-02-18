@@ -1,5 +1,6 @@
 <% semantic_form_for(@sale_bill) do |f| %>
   <%= f.inputs :franchise %>
+  <%= f.inputs :created_at %>
   <%= f.buttons %>
   <% f.inputs do %>
     <% f.object.sale_bill_items.build if f.object.sale_bill_items.count == 0 %>
