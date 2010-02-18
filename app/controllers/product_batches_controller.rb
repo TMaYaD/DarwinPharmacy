@@ -4,11 +4,33 @@ class ProductBatchesController < ApplicationController
   # GET /product_batches
   # GET /product_batches.xml
   def index
-    @product_batches = ProductBatch.all
+    params[:iDisplayLength] ||= 10
+    params[:iDisplayStart] ||= 0
+    params[:sSort] ||='batch_code'
+    params[:sColumns] ||= '*'
+    conditions = [ 'products.name LIKE :q
+      OR batch_code LIKE :q
+      ', { :q => "%#{params[:sSearch]}%" } ]
+
+    @product_batches = ProductBatch.all(
+        :limit => params[:iDisplayLength],
+        :offset => params[:iDisplayStart],
+        :order => params[:sSort],
+        :conditions => conditions,
+        :joins => :product,
+        :select => params[:sColumns]
+    )
 
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @product_batches }
+      format.js  { render :json => {
+        :sEcho => params[:sEcho],
+        :iTotalRecords => ProductBatch.count,
+        :iTotalDisplayRecords => ProductBatch.count(:joins => :product, :conditions => conditions),
+        :aColumns => { 'products.name' => 'name', 'product_batches.id' => 'id' },
+        :ajData => @product_batches,
+      }}
     end
   end
 

@@ -25,7 +25,8 @@ $(document).ready(function() {
               'iTotalRecords': data['iTotalRecords'],
               'iTotalDisplayRecords': data['iTotalDisplayRecords'],
             };
-            asData['aaData'] = [ [ record[tName][colName] || '' for each (colName in sColumns) ] for each (record in data['ajData']) ];
+            data['aColumns'] = data['aColumns'] || {};
+            asData['aaData'] = [ [ record[tName][data['aColumns'][colName] || colName] || '' for each (colName in sColumns) ] for each (record in data['ajData']) ];
             fnCallback(asData, textStatus);
           });
         },
