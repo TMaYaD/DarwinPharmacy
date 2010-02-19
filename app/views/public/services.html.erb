@@ -1,0 +1,16 @@
+<% content_for :title do %>
+  Services offered at Darwin Pharmacy
+<% end %> 
+
+<% content_for :aside do %>
+  <section>
+    <h1>Services</h1>
+	<ul>
+	  <li href=<%= url_for :controller => 'public', :action => 'clinic' %>>Clinic</li>
+	  <li href=<%= url_for :controller => 'public', :action => 'lab' %>>Diagnostic Lab</li>
+	  <li href=<%= url_for :controller => 'public', :action => 'store' %>>Medical Store</li>
+	</ul>
+  </section>
+<% end %>
+
+<p>Each darwin pharmacy is equipped with a state of the art lab, a clinic with qualified doctor and a well stocked medical store.</p>
