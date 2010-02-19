@@ -9,7 +9,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100130122852) do
+ActiveRecord::Schema.define(:version => 20100218104034) do
+
+  create_table "audits", :force => true do |t|
+    t.integer  "auditable_id"
+    t.string   "auditable_type"
+    t.integer  "user_id"
+    t.string   "user_type"
+    t.string   "username"
+    t.string   "action"
+    t.text     "changes"
+    t.integer  "version",        :default => 0
+    t.datetime "created_at"
+  end
+
+  add_index "audits", ["auditable_id", "auditable_type"], :name => "auditable_index"
+  add_index "audits", ["created_at"], :name => "index_audits_on_created_at"
+  add_index "audits", ["user_id", "user_type"], :name => "user_index"
 
   create_table "bill_items", :force => true do |t|
     t.integer  "bill_id"
@@ -26,11 +42,12 @@ ActiveRecord::Schema.define(:version => 20100130122852) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "modified_by_id"
+    t.integer  "franchise_id"
   end
 
   create_table "customers", :force => true do |t|
     t.string   "name"
-    t.integer  "phone"
+    t.string   "phone"
     t.text     "address"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -42,6 +59,13 @@ ActiveRecord::Schema.define(:version => 20100130122852) do
     t.text     "address"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "dl"
+    t.string   "tin"
+  end
+
+  create_table "franchises_users", :id => false, :force => true do |t|
+    t.integer "franchise_id"
+    t.integer "user_id"
   end
 
   create_table "product_batches", :force => true do |t|
@@ -72,9 +96,9 @@ ActiveRecord::Schema.define(:version => 20100130122852) do
   create_table "purchase_bill_items", :force => true do |t|
     t.integer  "purchase_bill_id"
     t.integer  "product_batch_id"
-    t.decimal  "sale_quantity"
-    t.decimal  "free_quantity"
-    t.integer  "discount",         :limit => 10
+    t.decimal  "sale_quantity",                  :precision => 8,  :scale => 2
+    t.decimal  "free_quantity",                  :precision => 8,  :scale => 2
+    t.integer  "discount",         :limit => 10, :precision => 10, :scale => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -115,7 +139,7 @@ ActiveRecord::Schema.define(:version => 20100130122852) do
   create_table "users", :force => true do |t|
     t.string   "login"
     t.string   "email"
-    t.integer  "phone"
+    t.string   "phone"
     t.string   "crypted_password"
     t.string   "password_salt"
     t.string   "persistence_token"
