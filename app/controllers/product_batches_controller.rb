@@ -4,7 +4,8 @@ class ProductBatchesController < ApplicationController
   # GET /product_batches
   # GET /product_batches.xml
   def index
-    @product_batches = ProductBatch.all
+    @search = ProductBatch.search(params[:search])
+    @product_batches = @search.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -15,8 +16,6 @@ class ProductBatchesController < ApplicationController
   # GET /product_batches/1
   # GET /product_batches/1.xml
   def show
-    @product_batch = ProductBatch.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @product_batch }
@@ -26,8 +25,6 @@ class ProductBatchesController < ApplicationController
   # GET /product_batches/new
   # GET /product_batches/new.xml
   def new
-    @product_batch = ProductBatch.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @product_batch }
@@ -36,14 +33,11 @@ class ProductBatchesController < ApplicationController
 
   # GET /product_batches/1/edit
   def edit
-    @product_batch = ProductBatch.find(params[:id])
   end
 
   # POST /product_batches
   # POST /product_batches.xml
   def create
-    @product_batch = ProductBatch.new(params[:product_batch])
-
     respond_to do |format|
       if @product_batch.save
         flash[:notice] = 'ProductBatch was successfully created.'
@@ -59,8 +53,6 @@ class ProductBatchesController < ApplicationController
   # PUT /product_batches/1
   # PUT /product_batches/1.xml
   def update
-    @product_batch = ProductBatch.find(params[:id])
-
     respond_to do |format|
       if @product_batch.update_attributes(params[:product_batch])
         flash[:notice] = 'ProductBatch was successfully updated.'
@@ -76,7 +68,6 @@ class ProductBatchesController < ApplicationController
   # DELETE /product_batches/1
   # DELETE /product_batches/1.xml
   def destroy
-    @product_batch = ProductBatch.find(params[:id])
     @product_batch.destroy
 
     respond_to do |format|

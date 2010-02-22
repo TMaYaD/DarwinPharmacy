@@ -1,12 +1,13 @@
-<% semantic_form_for @search do |f| %>
-  <%= f.input :bill_number_like %>
-  <%= f.input :supplier_name_like %>
-  <%= f.input :created_at_greater_than %>
-  <%= f.input :created_at_less_than %>
-  <%= f.submit 'Search' %>
-<% end %>
-
 <% table_for @purchase_bills do |t| %>
+  <tr>
+    <% semantic_form_for @search do |f| %>
+      <th><%= f.input :bill_number_like %></th>
+      <th><%= f.input :supplier_name_like %></th>
+      <th><%= f.input :created_at_greater_than %></th>
+      <th><%= f.input :created_at_less_than %></th>
+      <th><%= f.submit 'Search' %></th>
+    <% end %>
+  </tr>
   <%= t.data :id, :bill_number, :supplier, :created_at, :due_date, :amount, :actions => :all %>
 <% end %>
 

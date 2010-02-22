@@ -4,7 +4,7 @@ class CustomersController < ApplicationController
   # GET /customers
   # GET /customers.xml
   def index
-    @search = Customer.search
+    @search = Customer.search(params[:search])
     @customers = @search.all
 
     respond_to do |format|

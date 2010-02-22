@@ -1,21 +1,16 @@
-<table>
-<thead>
+<% table_for @bills do |t| %>
   <tr>
-    <th>Customer</th>
-    <th>Franchise</th>
+  <% semantic_form_for @search do |f| %>
+    <th><%= f.input :id_like %></th>
+    <th><%= f.input :customer_name_like %></th>
+    <th><%= f.input :franchise_name_like %></th>
+    <th><%= f.input :created_at_greater_than %></th>
+    <th><%= f.input :created_at_less_than %></th>
+    <th><%= f.submit 'Search' %></th>
+  <% end %>
   </tr>
-</thead>
-<tbody>
-<% @bills.each do |bill| %>
-  <tr>
-    <td><%=h bill.customer.name %></td>
-    <td><%=h bill.franchise.name if bill.franchise %></td>
-    <td><%= link_to 'Show', bill %></td>
-    <td><%= link_to 'Edit', edit_bill_path(bill) %></td>
-    <td><%= link_to 'Destroy', bill, :confirm => 'Are you sure?', :method => :delete, :class =>'ui-icon ui-icon-trash' %></td>
-  </tr>
+
+  <%= t.data :id, :customer, :franchise, :created_at, :actions => :all %>
 <% end %>
-</thead>
-</table>
 
 <%= link_to 'New bill', new_bill_path, :id => 'add_new', :class => 'ui-icon ui-icon-plusthick' %>

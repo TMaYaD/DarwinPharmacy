@@ -4,7 +4,7 @@ class FranchisesController < ApplicationController
   # GET /franchises
   # GET /franchises.xml
   def index
-    @search = Franchise.search
+    @search = Franchise.search(params[:search])
     @franchises = @search.all
 
     respond_to do |format|
