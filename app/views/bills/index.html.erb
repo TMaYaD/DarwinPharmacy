@@ -1,12 +1,16 @@
-<% content_for :head do %>
-  <script>
-    var sColumns = [ 'bills.id', 'customers.name c', 'franchises.name f', 'bills.created_at' ]
-    var tName = 'bill'
-  </script>
+<% table_for @bills do |t| %>
+  <tr>
+  <% semantic_form_for @search do |f| %>
+    <th><%= f.input :id_like %></th>
+    <th><%= f.input :customer_name_like %></th>
+    <th><%= f.input :franchise_name_like %></th>
+    <th><%= f.input :created_at_greater_than %></th>
+    <th><%= f.input :created_at_less_than %></th>
+    <th><%= f.submit 'Search' %></th>
+  <% end %>
+  </tr>
+
+  <%= t.data :id, :customer, :franchise, :created_at, :actions => :all %>
 <% end %>
 
-<% table_for @bills, :html => { :class => 'data' } do |t| %>
-  <%= t.data :id, :customer, :franchise, :created_at %>
-<% end %>
-
-<%= link_to 'New bill', new_bill_path, :id => 'add_new', :class => 'ui-icon ui-icon-plusthick' %>
+<%= will_paginate @bills %> | <%= link_to 'New bill', new_bill_path, :id => 'add_new', :class => 'ui-icon ui-icon-plusthick' %>

@@ -1,12 +1,17 @@
-<% content_for :head do %>
-  <script>
-    var sColumns = ['id', 'name', 'manufacturer', 'schedule', 'composition', 'dosage_form', 'strength', 'common_uses']
-    var tName = 'product'
-  </script>
+
+<% table_for @products do |t| %>
+  <tr>
+    <% semantic_form_for @search do |f| %>
+      <th><%= f.input :name_like %></th>
+      <th><%= f.input :manufacturer_like %></th>
+      <th><%= f.input :composition_like %></th>
+      <th><%= f.input :dosage_form_like %></th>
+      <th><%= f.input :strength_like %></th>
+      <th><%= f.input :common_uses_like %></th>
+      <th><%= f.submit 'Search' %></th>
+    <% end %>
+  </tr>
+  <%= t.data :id, :name, :manufacturer, :schedule, :composition, :dosage_form, :strength, :common_uses %>
 <% end %>
 
-<% table_for @products, :html => { :class => 'data' } do |t| %>
-    <%= t.data :id, :name, :manufacturer, :schedule, :composition, :dosage_form, :strength, :common_uses %>
-<% end %>
-
-<%= link_to 'New product', new_product_path, :id => 'add_new', :class => 'ui-icon ui-icon-plusthick' %>
+<%= will_paginate @products %> | <%= link_to 'New product', new_product_path, :id => 'add_new', :class => 'ui-icon ui-icon-plusthick' %>

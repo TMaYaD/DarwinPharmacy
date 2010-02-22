@@ -1,12 +1,16 @@
-<% content_for :head do %>
-  <script>
-    var sColumns = ['product_batches.id', 'products.name', 'pack', 'batch_code', 'exp_date', 'mrp', 'vat', 'rate']
-    var tName = 'product_batch'
-  </script>
+<% table_for @product_batches do |t| %>
+  <tr>
+  <% semantic_form_for @search do |f| %>
+    <th><%= f.input :product_name_like %></th>
+    <th></th>
+    <th><%= f.input :batch_code_like %></th>
+    <th><%= f.input :exp_date_greater_than %>
+        <%= f.input :exp_date_less_than %></th>
+    <th><%= f.submit 'Search' %></th>
+  <% end %>
+  </tr>
+
+  <%= t.data :product, :pack, :batch_code, :exp_date, :mrp, :vat, :rate, :actions => :all %>
 <% end %>
 
-<% table_for @product_batches, :html => { :class => 'data'} do |t| %>
-  <%= t.data :id, :product, :pack, :batch_code, :exp_date, :mrp, :vat, :rate %>
-<% end %>
-
-<%= link_to 'New product_batch', new_product_batch_path, :id => 'add_new', :class => 'ui-icon ui-icon-plusthick' %>
+<%= will_paginate @product_batches %> | <%= link_to 'New product_batch', new_product_batch_path, :id => 'add_new', :class => 'ui-icon ui-icon-plusthick' %>

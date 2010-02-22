@@ -1,12 +1,15 @@
-<% content_for :head do %>
-  <script>
-    var sColumns = [ 'franchises.id', 'name', 'address', 'users.login', 'dl', 'tin' ]
-    var tName = 'franchise'
-  </script>
+<% table_for @franchises do |t| %>
+  <tr>
+    <% semantic_form_for @search do |f| %>
+      <th><%= f.inputs :name_like %></th>
+      <th><%= f.input :address_like %></th>
+      <th><%= f.input :dl_like %></th>
+      <th><%= f.input :tin_like %></th>
+      <th><%= f.input :franchisee_login_like %></th>
+      <th><%= f.submit 'Search' %></th>
+    <% end %>
+  </tr>
+  <%= t.data :actions => :all %>
 <% end %>
 
-<% table_for @franchises, :html => { :class => 'data' } do |t| %>
-  <%= t.data :id, :name, :address, :franchisee, :dl, :tin %>
-<% end %>
-
-<%= link_to 'New franchise', new_franchise_path, :id => 'add_new', :class => 'ui-icon ui-icon-plusthick' %>
+<%= will_paginate @franchises %> | <%= link_to 'New franchise', new_franchise_path, :id => 'add_new', :class => 'ui-icon ui-icon-plusthick' %>

@@ -1,12 +1,14 @@
-<% content_for :head do %>
-  <script>
-    var sColumns = [ 'id', 'login', 'email', 'phone', 'role', 'last_request_at', 'current_login_at', 'current_login_ip', 'last_login_ip' ]
-    var tName = 'user';
-  </script>
+<% table_for @users do |t| %>
+  <tr>
+    <% semantic_form_for @search do |f| %>
+      <th><%= f.input :login_like %></th>
+      <th><%= f.input :email_like %></th>
+      <th><%= f.input :phone_like %></th>
+      <th><%= f.input :role_like %></th>
+      <th><%= f.submit 'Search' %></th>
+    <% end %>
+  </tr>
+  <%= t.data :login, :email, :phone, :role, :actions => :all %>
 <% end %>
 
-<% table_for @users, :html => { :class => 'data' } do |t| %>
-  <%= t.data :id, :login, :email, :phone, :role, :last_request_at, :current_login_at, :current_login_ip, :last_login_ip %>
-<% end %>
-
-<%= link_to 'New user', new_user_path, :id => 'add_new', :class => 'ui-icon ui-icon-plusthick' %>
+<%= will_paginate @users %> | <%= link_to 'New user', new_user_path, :id => 'add_new', :class => 'ui-icon ui-icon-plusthick' %>

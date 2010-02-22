@@ -1,12 +1,14 @@
-<% content_for :head do %>
-  <script>
-    var sColumns = [ 'purchase_bills.id', 'bill_number', 'suppliers.name', 'due_date' ]
-    var tName = 'purchase_bill'
-  </script>
+<% table_for @purchase_bills do |t| %>
+  <tr>
+    <% semantic_form_for @search do |f| %>
+      <th><%= f.input :bill_number_like %></th>
+      <th><%= f.input :supplier_name_like %></th>
+      <th><%= f.input :created_at_greater_than %></th>
+      <th><%= f.input :created_at_less_than %></th>
+      <th><%= f.submit 'Search' %></th>
+    <% end %>
+  </tr>
+  <%= t.data :id, :bill_number, :supplier, :created_at, :due_date, :amount, :actions => :all %>
 <% end %>
 
-<% table_for @purchase_bills, :html => { :class => 'data' } do |t| %>
-  <%= t.data :id, :bill_number, :supplier, :due_date %>
-<% end %>
-
-<%= link_to 'New purchase_bill', new_purchase_bill_path, :id => 'add_new', :class => 'ui-icon ui-icon-plusthick' %>
+<%= will_paginate @purchase_bills %> | <%= link_to 'New purchase_bill', new_purchase_bill_path %>
