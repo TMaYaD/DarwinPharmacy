@@ -1,24 +1,15 @@
-<h1>Listing sale_bills</h1>
-
-<table>
+<% table_for @sale_bills do |t| %>
   <tr>
-    <th>Franchise</th>
-    <th>Created by</th>
-    <th>Modified by</th>
+  <% semantic_form_for @search do |f| %>
+    <th><%= f.input :id_like %></th>
+    <th><%= f.input :franchise_name_like %></th>
+    <th><%= f.input :created_at_greater_than %></th>
+    <th><%= f.input :created_at_less_than %></th>
+    <th><%= f.submit 'Search' %></th>
+  <% end %>
   </tr>
 
-<% @sale_bills.each do |sale_bill| %>
-  <tr>
-    <td><%=h sale_bill.franchise %></td>
-    <td><%=h sale_bill.created_by %></td>
-    <td><%=h sale_bill.modified_by %></td>
-    <td><%= link_to 'Show', sale_bill %></td>
-    <td><%= link_to 'Edit', edit_sale_bill_path(sale_bill) %></td>
-    <td><%= link_to 'Destroy', sale_bill, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+  <%= t.data :id, :franchise, :created_at, :amount, :actions => :all %>
 <% end %>
-</table>
-
-<br />
 
 <%= link_to 'New sale_bill', new_sale_bill_path %>

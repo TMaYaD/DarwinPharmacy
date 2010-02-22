@@ -1,24 +1,10 @@
-<h1>Listing franchises</h1>
-
-<table>
-  <tr>
-    <th>Franchisee</th>
-    <th>Name</th>
-    <th>Address</th>
-  </tr>
-
-<% @franchises.each do |franchise| %>
-  <tr>
-    <td><%=h franchise.franchisee.login %></td>
-    <td><%=h franchise.name %></td>
-    <td><%=h franchise.address %></td>
-    <td><%= link_to 'Show', franchise %></td>
-    <td><%= link_to 'Edit', edit_franchise_path(franchise) %></td>
-    <td><%= link_to 'Destroy', franchise, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+<% semantic_form_for @search do |f| %>
+  <%= f.inputs :name_like, :address_like, :dl_like, :tin_like, :franchisee_login_like %>
+  <%= f.submit 'Search' %>
 <% end %>
-</table>
 
-<br />
+<% table_for @franchises do |t| %>
+  <%= t.data :actions => :all %>
+<% end %>
 
-<%= link_to 'New franchise', new_franchise_path %>
+<%= link_to 'New franchise', new_franchise_path, :id => 'add_new', :class => 'ui-icon ui-icon-plusthick' %>

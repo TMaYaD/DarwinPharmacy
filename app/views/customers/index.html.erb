@@ -1,23 +1,10 @@
-<table>
-<thead>
-  <tr>
-    <th>Name</th>
-    <th>Phone</th>
-    <th>Address</th>
-  </tr>
-</thead>
-<tbody>
-<% @customers.each do |customer| %>
-  <tr>
-    <td><%=h customer.name %></td>
-    <td><%=h customer.phone %></td>
-    <td><%=h customer.address %></td>
-    <td><%= link_to 'Show', customer %></td>
-    <td><%= link_to 'Edit', edit_customer_path(customer) %></td>
-    <td><%= link_to 'Destroy', customer, :confirm => 'Are you sure?', :method => :delete, :class =>'ui-icon ui-icon-trash' %></td>
-  </tr>
+<% semantic_form_for @search do |f| %>
+  <%= f.inputs :name_like, :phone_like, :address_like %>
+  <%= f.submit 'Search' %>
 <% end %>
-</tbody>
-</table>
+
+<% table_for @customers do |t| %>
+  <%= t.data :actions => :all %>
+<% end %>
 
 <%= link_to 'New customer', new_customer_path, :id => 'add_new', :class => 'ui-icon ui-icon-plusthick' %>

@@ -4,31 +4,12 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.xml
   def index
-    params[:iDisplayLength] ||= 10
-    params[:iDisplayStart] ||= 0
-    params[:sSort] ||='name'
-    conditions = [' name LIKE :q
-      OR manufacturer LIKE :q
-      OR composition LIKE :q
-      OR common_uses LIKE :q
-      ', { :q => "%#{params[:sSearch]}%" } ]
-
-    @products = Product.all(
-        :limit => params[:iDisplayLength],
-        :offset => params[:iDisplayStart],
-        :order => params[:sSort],
-        :conditions => conditions
-    )
+    @search = Product.search(params[:search])
+    @products = @search.all
 
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @products }
-      format.js  { render :json => { 
-        :sEcho => params[:sEcho],
-        :iTotalRecords => Product.count,
-        :iTotalDisplayRecords => Product.count(:conditions => conditions),
-        :ajData => @products,
-      }}
     end
   end
 

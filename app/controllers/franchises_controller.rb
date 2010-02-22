@@ -4,7 +4,8 @@ class FranchisesController < ApplicationController
   # GET /franchises
   # GET /franchises.xml
   def index
-    @franchises = Franchise.all
+    @search = Franchise.search
+    @franchises = @search.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -15,8 +16,6 @@ class FranchisesController < ApplicationController
   # GET /franchises/1
   # GET /franchises/1.xml
   def show
-    @franchise = Franchise.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @franchise }
@@ -26,8 +25,6 @@ class FranchisesController < ApplicationController
   # GET /franchises/new
   # GET /franchises/new.xml
   def new
-    @franchise = Franchise.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @franchise }
@@ -36,14 +33,11 @@ class FranchisesController < ApplicationController
 
   # GET /franchises/1/edit
   def edit
-    @franchise = Franchise.find(params[:id])
   end
 
   # POST /franchises
   # POST /franchises.xml
   def create
-    @franchise = Franchise.new(params[:franchise])
-
     respond_to do |format|
       if @franchise.save
         flash[:notice] = 'Franchise was successfully created.'
@@ -59,8 +53,6 @@ class FranchisesController < ApplicationController
   # PUT /franchises/1
   # PUT /franchises/1.xml
   def update
-    @franchise = Franchise.find(params[:id])
-
     respond_to do |format|
       if @franchise.update_attributes(params[:franchise])
         flash[:notice] = 'Franchise was successfully updated.'
@@ -76,7 +68,6 @@ class FranchisesController < ApplicationController
   # DELETE /franchises/1
   # DELETE /franchises/1.xml
   def destroy
-    @franchise = Franchise.find(params[:id])
     @franchise.destroy
 
     respond_to do |format|

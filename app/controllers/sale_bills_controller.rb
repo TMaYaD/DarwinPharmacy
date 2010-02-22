@@ -4,7 +4,8 @@ class SaleBillsController < ApplicationController
   # GET /sale_bills
   # GET /sale_bills.xml
   def index
-    @sale_bills = SaleBill.all
+    @search = SaleBill.search(params[:search])
+    @sale_bills = @search.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -15,8 +16,6 @@ class SaleBillsController < ApplicationController
   # GET /sale_bills/1
   # GET /sale_bills/1.xml
   def show
-    @sale_bill = SaleBill.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @sale_bill }
@@ -26,8 +25,6 @@ class SaleBillsController < ApplicationController
   # GET /sale_bills/new
   # GET /sale_bills/new.xml
   def new
-    @sale_bill = SaleBill.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @sale_bill }
@@ -36,14 +33,11 @@ class SaleBillsController < ApplicationController
 
   # GET /sale_bills/1/edit
   def edit
-    @sale_bill = SaleBill.find(params[:id])
   end
 
   # POST /sale_bills
   # POST /sale_bills.xml
   def create
-    @sale_bill = SaleBill.new(params[:sale_bill])
-
     respond_to do |format|
       if @sale_bill.save
         flash[:notice] = 'SaleBill was successfully created.'
@@ -59,8 +53,6 @@ class SaleBillsController < ApplicationController
   # PUT /sale_bills/1
   # PUT /sale_bills/1.xml
   def update
-    @sale_bill = SaleBill.find(params[:id])
-
     respond_to do |format|
       if @sale_bill.update_attributes(params[:sale_bill])
         flash[:notice] = 'SaleBill was successfully updated.'
@@ -76,7 +68,6 @@ class SaleBillsController < ApplicationController
   # DELETE /sale_bills/1
   # DELETE /sale_bills/1.xml
   def destroy
-    @sale_bill = SaleBill.find(params[:id])
     @sale_bill.destroy
 
     respond_to do |format|

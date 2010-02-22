@@ -1,24 +1,13 @@
-<h1>Listing purchase_bills</h1>
-
-<table>
-  <tr>
-    <th>Bill number</th>
-    <th>Supplier</th>
-    <th>Due date</th>
-  </tr>
-
-<% @purchase_bills.each do |purchase_bill| %>
-  <tr>
-    <td><%=h purchase_bill.bill_number %></td>
-    <td><%=h purchase_bill.supplier.name %></td>
-    <td><%=h purchase_bill.due_date %></td>
-    <td><%= link_to 'Show', purchase_bill %></td>
-    <td><%= link_to 'Edit', edit_purchase_bill_path(purchase_bill) %></td>
-    <td><%= link_to 'Destroy', purchase_bill, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+<% semantic_form_for @search do |f| %>
+  <%= f.input :bill_number_like %>
+  <%= f.input :supplier_name_like %>
+  <%= f.input :created_at_greater_than %>
+  <%= f.input :created_at_less_than %>
+  <%= f.submit 'Search' %>
 <% end %>
-</table>
 
-<br />
+<% table_for @purchase_bills do |t| %>
+  <%= t.data :id, :bill_number, :supplier, :created_at, :due_date, :amount, :actions => :all %>
+<% end %>
 
 <%= link_to 'New purchase_bill', new_purchase_bill_path %>
