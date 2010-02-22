@@ -13,4 +13,4 @@
   <%= t.data :actions => :all %>
 <% end %>
 
-<%= link_to 'New franchise', new_franchise_path, :id => 'add_new', :class => 'ui-icon ui-icon-plusthick' %>
+<%= will_paginate @franchises %> | <%= link_to 'New franchise', new_franchise_path, :id => 'add_new', :class => 'ui-icon ui-icon-plusthick' %>

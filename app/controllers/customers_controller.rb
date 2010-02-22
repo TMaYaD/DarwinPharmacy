@@ -5,7 +5,7 @@ class CustomersController < ApplicationController
   # GET /customers.xml
   def index
     @search = Customer.search(params[:search])
-    @customers = @search.all
+    @customers = @search.paginate(:page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb

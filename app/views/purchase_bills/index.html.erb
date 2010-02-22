@@ -11,4 +11,4 @@
   <%= t.data :id, :bill_number, :supplier, :created_at, :due_date, :amount, :actions => :all %>
 <% end %>
 
-<%= link_to 'New purchase_bill', new_purchase_bill_path %>
+<%= will_paginate @purchase_bills %> | <%= link_to 'New purchase_bill', new_purchase_bill_path %>

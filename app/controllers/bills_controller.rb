@@ -5,7 +5,7 @@ class BillsController < ApplicationController
   # GET /bills.xml
   def index
     @search = Bill.with_permissions_to(:show).search(params[:search])
-    @bills = @search.all
+    @bills = @search.paginate(:page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb

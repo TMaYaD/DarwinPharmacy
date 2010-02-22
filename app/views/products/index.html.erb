@@ -14,4 +14,4 @@
   <%= t.data :id, :name, :manufacturer, :schedule, :composition, :dosage_form, :strength, :common_uses %>
 <% end %>
 
-<%= link_to 'New product', new_product_path, :id => 'add_new', :class => 'ui-icon ui-icon-plusthick' %>
+<%= will_paginate @products %> | <%= link_to 'New product', new_product_path, :id => 'add_new', :class => 'ui-icon ui-icon-plusthick' %>

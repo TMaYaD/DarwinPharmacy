@@ -5,7 +5,7 @@ class ProductsController < ApplicationController
   # GET /products.xml
   def index
     @search = Product.search(params[:search])
-    @products = @search.all
+    @products = @search.paginate(:page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb

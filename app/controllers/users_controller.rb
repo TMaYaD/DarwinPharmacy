@@ -4,8 +4,8 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.xml
   def index
-    @search = User.search(params[:search])  
-    @users = @search.all
+    @search = User.search(params[:search])
+    @users = @search.paginate(:page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb

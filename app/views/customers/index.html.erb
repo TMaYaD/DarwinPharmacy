@@ -10,4 +10,4 @@
   <%= t.data :actions => :all %>
 <% end %>
 
-<%= link_to 'New customer', new_customer_path, :id => 'add_new', :class => 'ui-icon ui-icon-plusthick' %>
+<%= will_paginate @customers %> | <%= link_to 'New customer', new_customer_path, :id => 'add_new', :class => 'ui-icon ui-icon-plusthick' %>

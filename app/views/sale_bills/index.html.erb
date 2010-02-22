@@ -12,4 +12,4 @@
   <%= t.data :id, :franchise, :created_at, :amount, :actions => :all %>
 <% end %>
 
-<%= link_to 'New sale_bill', new_sale_bill_path, :id => 'add_new', :class => 'ui-icon ui-icon-plusthick' %>
+<%= will_paginate @sale_bills %> | <%= link_to 'New sale_bill', new_sale_bill_path, :id => 'add_new', :class => 'ui-icon ui-icon-plusthick' %>

@@ -13,4 +13,4 @@
   <%= t.data :product, :pack, :batch_code, :exp_date, :mrp, :vat, :rate, :actions => :all %>
 <% end %>
 
-<%= link_to 'New product_batch', new_product_batch_path, :id => 'add_new', :class => 'ui-icon ui-icon-plusthick' %>
+<%= will_paginate @product_batches %> | <%= link_to 'New product_batch', new_product_batch_path, :id => 'add_new', :class => 'ui-icon ui-icon-plusthick' %>

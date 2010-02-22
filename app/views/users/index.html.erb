@@ -11,4 +11,4 @@
   <%= t.data :login, :email, :phone, :role, :actions => :all %>
 <% end %>
 
-<%= link_to 'New user', new_user_path, :id => 'add_new', :class => 'ui-icon ui-icon-plusthick' %>
+<%= will_paginate @users %> | <%= link_to 'New user', new_user_path, :id => 'add_new', :class => 'ui-icon ui-icon-plusthick' %>

@@ -5,7 +5,7 @@ class ProductBatchesController < ApplicationController
   # GET /product_batches.xml
   def index
     @search = ProductBatch.search(params[:search])
-    @product_batches = @search.all
+    @product_batches = @search.paginate(:page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb

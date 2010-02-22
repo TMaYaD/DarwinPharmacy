@@ -5,7 +5,7 @@ class PurchaseBillsController < ApplicationController
   # GET /purchase_bills.xml
   def index
     @search = PurchaseBill.search(params[:search])
-    @purchase_bills = @search.all
+    @purchase_bills = @search.paginate(:page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
