@@ -1,0 +1,9 @@
+<% table_for @stock_inventories do |t| %>
+  <% t.data :actions => :all do %>
+    <%= t.cell(:product_batch) {|p| "#{p.product_batch.product.name} - #{p.product_batch.batch_code}" } %>
+    <%= t.cell :franchise %>
+    <%= t.cell :quantity %>
+  <% end %>
+<% end %>
+
+<%= link_to 'New stock_inventory', new_stock_inventory_path %>
