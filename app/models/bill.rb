@@ -8,9 +8,9 @@ class Bill < ActiveRecord::Base
   belongs_to :modified_by, :class_name => "User"
   has_many :bill_items, :dependent => :destroy
 
-  validates_associated :bill_items
+  validates_associated :bill_items, :customer
   validates_size_of :bill_items, :minimum => 1
-  #validates_presence_of :customer_id
+  after_validation :find_customer_if_existing
   
   accepts_nested_attributes_for :customer
   accepts_nested_attributes_for :bill_items, :allow_destroy => true, :reject_if => proc { |attrs|
@@ -25,5 +25,10 @@ class Bill < ActiveRecord::Base
 
   def savings
     self.bill_items.reduce(0) { |sum, item| sum += item.savings }
+  end
+
+private
+  def find_customer_if_existing
+    self.customer = Customer.find(self.customer.id) if self.customer.id
   end
 end
