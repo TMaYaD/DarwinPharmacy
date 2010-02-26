@@ -26,6 +26,7 @@
   <thead>
     <tr>
       <th>Product</th>
+      <th>schedule</th>
       <th>Batch</th>
       <th>Exp. Date</th>
       <th>Quantity</th>
@@ -38,6 +39,7 @@
   <% for item in @bill.bill_items %>
     <tr>
       <td><%=h item.product_batch.product.name %></td>
+      <td><%=h item.product_batch.product.schedule %></td>
       <td><%=h item.product_batch.batch_code %></td>
       <td><%=h item.product_batch.exp_date %></td>
       <td><%=h item.quantity %></td>
@@ -49,11 +51,11 @@
   </tbody>
   <tfoot>
     <tr>
-      <th colspan=6>Total Amount:</th>
+      <th colspan=7>Total Amount:</th>
       <td><%=h @bill.amount %></td>
     </tr>
     <tr>
-      <th colspan=6>Total Savings:</th>
+      <th colspan=7>Total Savings:</th>
       <td><strong><%=h @bill.savings %></strong></td>
     </tr>
   </tfoot>
