@@ -17,6 +17,7 @@ $(document).ready(function() {
     };
     $this.autocomplete( $this.attr('autocomplete'), {
       autoFill: true,
+      cacheLength: 1,
       max: 10,
       minChars: ($this.attr('ac_minChars') ? $this.attr('ac_minChars') : 3),
       selectFirst: true,
