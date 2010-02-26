@@ -1,11 +1,13 @@
-<% content_for :head do %>
-  <script>
-    sColumns = ['id', 'name', 'phone', 'address'];
-    tName = 'customer';
-  </script>
-<% end %>
-<% table_for @customers, :html => { :class => 'data' } do |t| %>
-  <%= t.data :id, :name, :phone, :address %>
+<% table_for @customers do |t| %>
+  <tr>
+    <% semantic_form_for @search do |f| %>
+      <th><%= f.inputs :name_like %></th>
+      <th><%= f.input :phone_like %></th>
+      <th><%= f.input :address_like %></th>
+      <th><%= f.submit 'Search' %></th>
+    <% end %>
+  </tr>
+  <%= t.data :actions => :all %>
 <% end %>
 
-<%= link_to 'New customer', new_customer_path, :id => 'add_new', :class => 'ui-icon ui-icon-plusthick' %>
+<%= will_paginate @customers %> | <%= link_to 'New customer', new_customer_path, :id => 'add_new', :class => 'ui-icon ui-icon-plusthick' %>

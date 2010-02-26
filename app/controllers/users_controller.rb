@@ -4,32 +4,12 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.xml
   def index
-    params[:iDisplayLength] ||= 10
-    params[:iDisplayStart] ||= 0
-    params[:sColumns] ||= '*'
-    params[:sSort] ||= 'login'
-    conditions = [ 'login LIKE :q
-        OR phone LIKE :q
-        OR email LIKE :q
-    ', { :q => "%#{params[:sSearch]}%" } ]
-
-    @users = User.all(
-        :select => params[:sColumns],
-        :limit => params[:iDisplayLength],
-        :offset => params[:iDisplayStart],
-        :order => params[:sSort],
-        :conditions => conditions
-    )
+    @search = User.search(params[:search])
+    @users = @search.paginate(:page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @users }
-      format.js { render :json => {
-        :sEcho => params[:sEcho],
-        :iTotalRecords => User.count,
-        :iTotalDisplayRecords => User.count(:conditions => conditions),
-        :ajData => @users,
-      }}
     end
   end
 

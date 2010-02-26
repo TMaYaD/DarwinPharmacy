@@ -25,6 +25,8 @@ Rails::Initializer.run do |config|
   config.gem "factory_girl"
   config.gem 'acts_as_audited', :lib => false
   config.gem "tabletastic"
+  config.gem "searchlogic"
+  config.gem 'will_paginate'
 
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named

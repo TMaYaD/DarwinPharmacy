@@ -4,33 +4,12 @@ class PurchaseBillsController < ApplicationController
   # GET /purchase_bills
   # GET /purchase_bills.xml
   def index
-    params[:iDisplayLength] ||= 10
-    params[:iDisplayStart] ||= 0
-    params[:sSort] ||='due_date desc'
-    params[:sColumns] ||= '*'
-    conditions = [ 'bill_number LIKE :q
-      OR suppliers.name LIKE :q
-      ', { :q => "%#{params[:sSearch]}%" } ]
-
-    @purchase_bills = PurchaseBill.all(
-        :select => params[:sColumns],
-        :limit => params[:iDisplayLength],
-        :offset => params[:iDisplayStart],
-        :order => params[:sSort],
-        :joins => :supplier,
-        :conditions => conditions
-    )
+    @search = PurchaseBill.search(params[:search])
+    @purchase_bills = @search.paginate(:page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @purchase_bills }
-      format.js  { render :json => {
-        :sEcho => params[:sEcho],
-        :iTotalRecords => PurchaseBill.count,
-        :iTotalDisplayRecords => PurchaseBill.count(:joins => :supplier, :conditions => conditions),
-        :aColumns => { 'purchase_bills.id' => 'id', 'suppliers.name' => 'name' },
-        :ajData => @purchase_bills,
-      }}
     end
   end
 

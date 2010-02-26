@@ -4,32 +4,12 @@ class CustomersController < ApplicationController
   # GET /customers
   # GET /customers.xml
   def index
-    params[:iDisplayLength] ||= 10
-    params[:iDisplayStart] ||= 0
-    params[:sColumns] ||= '*'
-    params[:sSort] ||= 'name'
-    conditions = [ 'name LIKE :q
-        OR phone LIKE :q
-        OR address LIKE :q
-    ', { :q => "%#{params[:sSearch]}%" } ]
-
-    @customers = Customer.all(
-        :select => params[:sColumns],
-        :limit => params[:iDisplayLength],
-        :offset => params[:iDisplayStart],
-        :order => params[:sSort],
-        :conditions => conditions
-    )
+    @search = Customer.search(params[:search])
+    @customers = @search.paginate(:page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @customers }
-      format.js { render :json => {
-        :sEcho => params[:sEcho],
-        :iTotalRecords => Customer.count,
-        :iTotalDisplayRecords => Customer.count(:conditions => conditions),
-        :ajData => @customers,
-      }}
      end
   end
 

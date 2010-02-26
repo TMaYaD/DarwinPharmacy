@@ -4,44 +4,18 @@ class FranchisesController < ApplicationController
   # GET /franchises
   # GET /franchises.xml
   def index
-    params[:iDisplayLength] ||= 10
-    params[:iDisplayStart] ||= 0
-    params[:sColumns] ||= '*'
-    params[:sSort] ||= 'name'
-    conditions = [ 'name LIKE :q
-        OR users.login LIKE :q
-        OR address LIKE :q
-        OR dl LIKE :q
-        OR tin LIKE :q
-    ', { :q => "%#{params[:sSearch]}%" } ]
-
-    @franchises = Franchise.all(
-        :select => params[:sColumns],
-        :limit => params[:iDisplayLength],
-        :offset => params[:iDisplayStart],
-        :order => params[:sSort],
-        :joins => :franchisee,
-        :conditions => conditions
-    )
+    @search = Franchise.search(params[:search])
+    @franchises = @search.paginate(:page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @franchises }
-      format.js { render :json => {
-        :sEcho => params[:sEcho],
-        :iTotalRecords => Franchise.count,
-        :iTotalDisplayRecords => Franchise.count(:joins => :franchisee, :conditions => conditions),
-        :aColumns => { 'users.login' => 'login', 'franchises.id' => 'id' },
-        :ajData => @franchises,
-      }}
     end
   end
 
   # GET /franchises/1
   # GET /franchises/1.xml
   def show
-    @franchise = Franchise.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @franchise }
@@ -51,8 +25,6 @@ class FranchisesController < ApplicationController
   # GET /franchises/new
   # GET /franchises/new.xml
   def new
-    @franchise = Franchise.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @franchise }
@@ -61,14 +33,11 @@ class FranchisesController < ApplicationController
 
   # GET /franchises/1/edit
   def edit
-    @franchise = Franchise.find(params[:id])
   end
 
   # POST /franchises
   # POST /franchises.xml
   def create
-    @franchise = Franchise.new(params[:franchise])
-
     respond_to do |format|
       if @franchise.save
         flash[:notice] = 'Franchise was successfully created.'
@@ -84,8 +53,6 @@ class FranchisesController < ApplicationController
   # PUT /franchises/1
   # PUT /franchises/1.xml
   def update
-    @franchise = Franchise.find(params[:id])
-
     respond_to do |format|
       if @franchise.update_attributes(params[:franchise])
         flash[:notice] = 'Franchise was successfully updated.'
@@ -101,7 +68,6 @@ class FranchisesController < ApplicationController
   # DELETE /franchises/1
   # DELETE /franchises/1.xml
   def destroy
-    @franchise = Franchise.find(params[:id])
     @franchise.destroy
 
     respond_to do |format|

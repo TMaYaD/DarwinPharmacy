@@ -4,34 +4,12 @@ class SaleBillsController < ApplicationController
   # GET /sale_bills
   # GET /sale_bills.xml
   def index
-    params[:iDisplayLength] ||= 10
-    params[:iDisplayStart] ||= 0
-    params[:sSort] ||='sale_bills.created_at desc'
-    params[:sColumns] ||= '*'
-    conditions = [ 'sale_bills.id LIKE :q
-      OR franchises.name LIKE :q
-      ', { :q => "%#{params[:sSearch]}%" } ]
-
-    @sale_bills = SaleBill.all(
-        :select => params[:sColumns],
-        :limit => params[:iDisplayLength],
-        :offset => params[:iDisplayStart],
-        :order => params[:sSort],
-        :joins => :franchise,
-        :conditions => conditions
-    )
+    @search = SaleBill.search(params[:search])
+    @sale_bills = @search.paginate(:page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @sale_bills }
-      format.js  { render :json => {
-        :sEcho => params[:sEcho],
-        :iTotalRecords => SaleBill.count,
-        :iTotalDisplayRecords => SaleBill.count(:joins => :franchise, :conditions => conditions),
-        :aColumns => { 'sale_bills.id' => 'id', 'sale_bills.created_at' => 'created_at', 'franchises.name' => 'name' },
-        :ajData => @sale_bills,
-      }}
-
     end
   end
 

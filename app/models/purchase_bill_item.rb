@@ -6,11 +6,14 @@ class PurchaseBillItem < ActiveRecord::Base
 
 
   validates_associated :product_batch
-  #validates_presence_of :purchase_bill_id, :product_batch_id
   validates_presence_of :sale_quantity
   validates_numericality_of :sale_quantity, :greater_than => 0
   validates_numericality_of :free_quantity
   validates_numericality_of :discount, :less_than => 100
+
+  after_validation { |item|
+    item.product_batch = ProductBatch.find(self.product_batch.id) if self.product_batch.id
+  }
 
   accepts_nested_attributes_for :product_batch
 

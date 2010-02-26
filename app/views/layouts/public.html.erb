@@ -14,7 +14,7 @@
 <%= stylesheet_link_tag 'http://yui.yahooapis.com/2.8.0r4/build/reset/reset-min.css' %>
 <%= stylesheet_link_tag 'http://yui.yahooapis.com/2.8.0r4/build/fonts/fonts-min.css' %>
 <%= stylesheet_link_tag 'http://yui.yahooapis.com/2.8.0r4/build/base/base-min.css' %>
-<%= stylesheet_link_tag 'html5', 'layout/home' %>
+<%= stylesheet_link_tag 'html5', 'layout/public' %>
 <%= yield :style_sheets %>
 
 <%= javascript_include_tag 'jquery-1.4.1.min', 'html5' %>
@@ -42,12 +42,12 @@
   <nav>
     <!-- main blog navigation links -->
     <ul>
-      <li href=<%= url_for :controller => 'home' %>>Home</li>
+      <li href=<%= url_for :controller => 'public' %>>Home</li>
       <li class='disabled'>Services</li>
       <li class='disabled'>Store Locator</li>
       <li class='disabled'>Medicine Cabinet</li>
-      <li href=<%= url_for :controller => 'home', :action => 'franchise' %>>Work With Us</li>
-      <li href=<%= url_for :controller => 'home', :action => 'about' %>>About Us</li>
+      <li href=<%= url_for :controller => 'public', :action => 'franchise' %>>Work With Us</li>
+      <li href=<%= url_for :controller => 'public', :action => 'about' %>>About Us</li>
     </ul>
   </nav>
   <hgroup id='search'>

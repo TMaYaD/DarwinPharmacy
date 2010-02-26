@@ -12,3 +12,15 @@ dd {
 br {
 	clear: both;
 }
+
+h1 {
+	font-size: xx-large;
+}
+
+table {
+	width: 100%;
+}
+
+.print-only {
+	display: none;
+}

@@ -4,34 +4,12 @@ class BillsController < ApplicationController
   # GET /bills
   # GET /bills.xml
   def index
-    params[:iDisplayLength] ||= 10
-    params[:iDisplayStart] ||= 0
-    params[:sSort] ||='bills.created_at desc'
-    params[:sColumns] ||= '*'
-    conditions = [ 'bills.id LIKE :q
-      OR franchises.name LIKE :q
-      OR customers.name LIKE :q
-      ', { :q => "%#{params[:sSearch]}%" } ]
-
-    @bills = Bill.with_permissions_to(:show).all(
-        :select => params[:sColumns],
-        :limit => params[:iDisplayLength],
-        :offset => params[:iDisplayStart],
-        :order => params[:sSort],
-        :joins => [:franchise, :customer],
-        :conditions => conditions
-    )
+    @search = Bill.with_permissions_to(:show).search(params[:search])
+    @bills = @search.paginate(:page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @bills }
-      format.js  { render :json => {
-        :sEcho => params[:sEcho],
-        :iTotalRecords => Bill.with_permissions_to(:show).count,
-        :iTotalDisplayRecords => Bill.with_permissions_to(:show).count(:joins => [:franchise, :customer], :conditions => conditions),
-        :aColumns => { 'bills.id' => 'id', 'bills.created_at' => 'created_at', 'franchises.name f' => 'f', 'customers.name c' => 'c' },
-        :ajData => @bills,
-      }}
     end
   end
 

@@ -1,13 +1,27 @@
-<section>
-<h1>Customer</h1>
-  <dt>Name</dt>
-    <dd><%=h @bill.customer.name %></dd>
-  <dt>Phone</dt>
-    <dd><%=h @bill.customer.phone %></dd>
-  <dt>Address</dt>
-    <dd><%=h @bill.customer.address %></dd>
-</section>
-
+<table>
+<thead class='print-only'>
+<tr>
+  <th rowspan=3 colspan=3 ><h1>Darwin Pharmacy</h1></th>
+  <th>Address:</th><td colspan=3><%= @bill.franchise.address %></td>
+</tr>
+<tr>
+  <th>DL: </th><td><%= @bill.franchise.dl %></td>
+  <th>TIN: </th><td><%= @bill.franchise.tin %></td>
+</tr>
+<tr><td colspan=4></td></tr>
+</thead>
+<tbody>
+<tr>
+  <th>Bill Number</th><td><%= @bill.id %></td>
+  <td colspan=4></td>
+  <th>Date &amp; Time</th><td><%= @bill.created_at %></td>
+</tr>
+<tr id='customer'>
+  <th>Customer</th>
+  <th>Name</th><td><%=h @bill.customer.name %></td>
+  <th>Phone</th><td><%=h @bill.customer.phone %></td>
+  <th>Address</th><td colspan=3><%=h @bill.customer.address %></td>
+</tr>
 <table>
   <thead>
     <tr>
@@ -44,8 +58,9 @@
     </tr>
   </tfoot>
 </table>
+</tbody>
+</table>
 
-
-<%= link_to_function "Print this Bill", "javascript:print()" %> |
+<%= link_to_function "Print this Bill", h("print()") %> |
 <%= link_to 'Edit', edit_bill_path(@bill) %> |
 <%= link_to 'Back', bills_path %>
