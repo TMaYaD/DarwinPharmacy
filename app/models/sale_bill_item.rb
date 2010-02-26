@@ -27,8 +27,8 @@ class SaleBillItem < ActiveRecord::Base
     source_store_id = 7 #Franchise.find_by_name("DPPL - Vijayawada")
     destination_store_id = self.sale_bill.franchise.id
     StockInventory.find_by_product_batch_id_and_franchise_id(self.product_batch.id, source_store_id).
-        decrement(:quantity, self.quantity).save &&
+        decrement(:quantity, self.quantity * self.product_batch.pack).save &&
     StockInventory.find_or_initialize_by_product_batch_id_and_franchise_id(self.product_batch.id, destination_store_id).
-        increment(:quantity, self.quantity).save
+        increment(:quantity, self.quantity * self.product_batch.pack).save
   end
 end

@@ -23,6 +23,10 @@ ActiveRecord::Schema.define(:version => 20100223122116) do
     t.datetime "created_at"
   end
 
+  add_index "audits", ["auditable_id", "auditable_type"], :name => "auditable_index"
+  add_index "audits", ["created_at"], :name => "index_audits_on_created_at"
+  add_index "audits", ["user_id", "user_type"], :name => "user_index"
+
   create_table "bill_items", :force => true do |t|
     t.integer  "bill_id"
     t.integer  "product_batch_id"
