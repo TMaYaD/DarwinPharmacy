@@ -1,0 +1,18 @@
+<p>
+  <b>Franchise:</b>
+  <%=h @stock_inventory.franchise %>
+</p>
+
+<p>
+  <b>Product batch:</b>
+  <%=h @stock_inventory.product_batch %>
+</p>
+
+<p>
+  <b>Quantity:</b>
+  <%=h @stock_inventory.quantity %>
+</p>
+
+
+<%= link_to 'Edit', edit_stock_inventory_path(@stock_inventory) %> |
+<%= link_to 'Back', stock_inventories_path %>
