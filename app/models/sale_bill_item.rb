@@ -9,6 +9,7 @@ class SaleBillItem < ActiveRecord::Base
 
   validates_presence_of :product_batch_id, :quantity
   validates_numericality_of :quantity, :only_integer => true, :greater_than => 0
+  validate :has_stock_inventory_record
 
   def amount
     (self.quantity * self.product_batch.rate * (self.product_batch.vat + 100)).round / 100
@@ -23,6 +24,10 @@ class SaleBillItem < ActiveRecord::Base
   end
 
   private
+  def has_stock_inventory_record
+    errors.add(:product_batch_code, "doesn't have a stock record") unless StockInventory.find_by_product_batch_id_and_franchise_id(self.product_batch.id, 7)
+  end
+
   def transfer_stock_inventory
     source_store_id = 7 #Franchise.find_by_name("DPPL - Vijayawada")
     destination_store_id = self.sale_bill.franchise.id
