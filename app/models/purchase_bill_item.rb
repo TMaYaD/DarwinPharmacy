@@ -4,6 +4,7 @@ class PurchaseBillItem < ActiveRecord::Base
   belongs_to :purchase_bill
   belongs_to :product_batch
 
+  after_create :increment_stock_inventory
 
   validates_associated :product_batch
   validates_presence_of :sale_quantity
@@ -27,5 +28,13 @@ class PurchaseBillItem < ActiveRecord::Base
     visitor[vat_slab][:tax]  += (self.amount * vat_slab).floor / 100
     visitor[vat_slab][:amount]  += self.amount
     return visitor
+  end
+
+  private
+  def increment_stock_inventory
+    franchise_id = 7 #Franchise.find_by_name("DPPL - Vijayawada")
+    unless StockInventory.find_or_initialize_by_product_batch_id_and_franchise_id(self.product_batch.id, franchise_id).increment(:quantity, (self.sale_quantity + self.free_quantity)*self.product_batch.pack).save
+      raise ActiveRecord::Rollback
+    end
   end
 end
