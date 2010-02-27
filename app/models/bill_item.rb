@@ -10,6 +10,7 @@ class BillItem < ActiveRecord::Base
   validates_presence_of :product_batch_id
   validates_numericality_of :quantity, :only_integer => true, :greater_than => 0
   validates_numericality_of :discount, :less_than => 16
+  validate :has_stock_inventory_record
 
   def amount
     (self.product_batch.mrp * self.quantity / self.product_batch.pack * (100 - self.discount)).ceil / 100
@@ -20,7 +21,11 @@ class BillItem < ActiveRecord::Base
   end
 
   private
-  def transfer_stock_inventory
+  def has_stock_inventory_record
+    store_id = self.bill.franchise.id
+    errors.add(:product_batch_code, "missing stock inventory record") unless StockInventory.find_by_product_batch_id_and_franchise_id(self.product_batch.id, store_id)
+  end
+  def decrement_stock_inventory
     store_id = self.bill.franchise.id
     StockInventory.find_by_product_batch_id_and_franchise_id(self.product_batch.id, store_id).decrement(:quantity, self.quantity).save
   end
