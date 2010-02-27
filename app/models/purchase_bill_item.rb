@@ -12,9 +12,7 @@ class PurchaseBillItem < ActiveRecord::Base
   validates_numericality_of :free_quantity
   validates_numericality_of :discount, :less_than => 100
 
-  after_validation { |item|
-    item.product_batch = ProductBatch.find(self.product_batch.id) if self.product_batch.id
-  }
+  after_validation :find_product_batch_if_existing
 
   accepts_nested_attributes_for :product_batch
 
@@ -31,6 +29,9 @@ class PurchaseBillItem < ActiveRecord::Base
   end
 
   private
+  def find_product_batch_if_existing
+    self.product_batch = ProductBatch.find(self.product_batch.id) if self.product_batch.id
+  end
   def increment_stock_inventory
     franchise_id = 7 #Franchise.find_by_name("DPPL - Vijayawada")
     unless StockInventory.find_or_initialize_by_product_batch_id_and_franchise_id(self.product_batch.id, franchise_id).increment(:quantity, (self.sale_quantity + self.free_quantity)*self.product_batch.pack).save
