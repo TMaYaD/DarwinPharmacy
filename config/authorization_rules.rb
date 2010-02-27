@@ -7,7 +7,7 @@ authorization do
   end
 
   role :operator do
-    has_permission_on [:products], :to => [:index, :read, :create, :update]
+    has_permission_on [:products, :product_batches], :to => [:index, :read, :create, :update]
     has_permission_on [:purchase_bills, :sale_bills], :to => [:index, :read, :create, :update]
     has_permission_on [:products, :product_batches], :to => [:autocomplete]
     has_permission_on :users do
@@ -29,7 +29,7 @@ authorization do
       to :read
       if_attribute :franchise => is {user.franchise}
     end
-    has_permission_on [:products, :product_batches], :to => [:autocomplete]
+    has_permission_on [:products, :product_batches], :to => [:autocomplete, :read, :index]
     has_permission_on :users do
       to :update
       if_attribute :id => is {user.id}

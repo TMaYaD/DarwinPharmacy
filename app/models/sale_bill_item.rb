@@ -11,7 +11,7 @@ class SaleBillItem < ActiveRecord::Base
   validates_numericality_of :quantity, :only_integer => true, :greater_than => 0
 
   def amount
-    self.quantity * self.product_batch.rate
+    (self.quantity * self.product_batch.rate * (self.product_batch.vat + 100)).round / 100
   end
 
   def tax_add (visitor)

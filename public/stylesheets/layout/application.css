@@ -135,5 +135,13 @@ footer>p {
 	color: green;
 }
 .error {
-	color: red;
+	color: #ED3B3B;
+}
+
+.center {
+	text-align: center;
+}
+
+.right {
+	text-align: right;
 }
