@@ -10,7 +10,8 @@ class ProductBatch < ActiveRecord::Base
   # validates_presence_of :mfg_date 
   validates_numericality_of :mrp, :rate, :greater_than => 0
   validates_numericality_of :pack, :only_integer => true, :greater_than => 0
-  validate :uniqueness_of_batch_code
+  validates_uniqueness_of :batch_code, :scope => :product_id
+  validate_on_create :uniqueness_of_batch_code
   validate :exp_date_cannot_be_in_the_past
   # :exp_date_cannot_be_earlier_than_mfg_date,
   # :mfg_date_cannot_be_in_the_future
@@ -44,11 +45,11 @@ class ProductBatch < ActiveRecord::Base
     existing = ProductBatch.find_by_batch_code_and_product_id(self.batch_code, self.product_id)
     if existing
     then
-      self.errors.add(:pack, "doesn't match with stored value :#{existing.pack}") if self.pack == existing.pack
-      self.errors.add(:exp_date, "doesn't match with stored value :#{existing.exp_date}") if self.exp_date == existing.exp_date
-      self.errors.add(:rate, "doesn't match with stored value :#{existing.rate}") if self.rate == existing.rate
-      self.errors.add(:mrp, "doesn't match with stored value :#{existing.mrp}") if self.mrp == existing.mrp
-      self.errors.add(:vat, "doesn't match with stored value :#{existing.vat}") if self.vat == existing.vat
+      self.errors.add(:pack, "doesn't match with stored value :#{existing.pack}") unless self.pack == existing.pack
+      self.errors.add(:exp_date, "doesn't match with stored value :#{existing.exp_date.strftime("%Y %B")}") unless self.exp_date.year == existing.exp_date.year && self.exp_date.month == existing.exp_date.month
+      self.errors.add(:rate, "doesn't match with stored value :#{existing.rate}") unless self.rate == existing.rate
+      self.errors.add(:mrp, "doesn't match with stored value :#{existing.mrp}") unless self.mrp == existing.mrp
+      self.errors.add(:vat, "doesn't match with stored value :#{existing.vat}") unless self.vat == existing.vat
       if errors.size == 0
       then
         self.id = existing.id

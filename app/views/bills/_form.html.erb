@@ -1,16 +1,13 @@
 <% semantic_form_for(@bill) do |f| %>
   <% f.object.customer ||= Customer.new %>
   <% f.inputs :for => :customer do |c| %>
-    <%= c.input :id, :as => :hidden %>
-    <%= c.input :name %>
-    <%= c.input :phone %>
-    <%= c.input :address %>
+    <%= render 'customers/inputs', :f => c %>
   <% end %>
   <%= f.buttons %>
   <% f.inputs do %>
     <% f.object.bill_items.build if f.object.bill_items.count == 0 %>
     <% f.inputs :for => :bill_items, :class => 'item' do |builder| %>
-      <%= render 'bill_item_inputs', :f => builder %>
+      <%= render 'bill_items/inputs', :f => builder %>
     <% end %>
     <%= link_to_add_fieldset 'Add Item', f, :bill_items %>
   <% end %>

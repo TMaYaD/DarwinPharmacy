@@ -1,6 +1,6 @@
 <% f.object.product_batch ||= ProductBatch.new %>
 <% f.semantic_fields_for :product_batch do |builder| %>
-  <%= render 'product_batch_inputs', :f => builder %>
+  <%= render 'product_batches/inputs', :f => builder %>
 <% end %>
 <%= f.input :sale_quantity %>
 <%= f.input :free_quantity %>
