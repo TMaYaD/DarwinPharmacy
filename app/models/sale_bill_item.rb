@@ -12,7 +12,11 @@ class SaleBillItem < ActiveRecord::Base
   validate :has_stock_inventory_record
 
   def amount
-    (self.quantity * self.product_batch.rate * (self.product_batch.vat + 100)).round / 100
+    self.quantity * self.product_batch.rate
+  end
+
+  def net_amount
+    (self.amount * (self.product_batch.vat + 100)).round / 100
   end
 
   def tax_add (visitor)
