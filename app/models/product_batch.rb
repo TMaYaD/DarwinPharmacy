@@ -10,7 +10,7 @@ class ProductBatch < ActiveRecord::Base
   # validates_presence_of :mfg_date 
   validates_numericality_of :mrp, :rate, :greater_than => 0
   validates_numericality_of :pack, :only_integer => true, :greater_than => 0
-  validates_uniqueness_of :batch_code, :scope => :product_id
+  #validates_uniqueness_of :batch_code, :scope => :product_id
   validate_on_create :uniqueness_of_batch_code
   validate :exp_date_cannot_be_in_the_past
   # :exp_date_cannot_be_earlier_than_mfg_date,
