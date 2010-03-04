@@ -15,6 +15,8 @@ authorization do
       if_attribute :id => is {user.id}
     end
 
+    has_permission_on [:stock_inventories], :to => [:index]
+
     has_permission_on :user_sessions, :to => [:destroy]
   end
 
