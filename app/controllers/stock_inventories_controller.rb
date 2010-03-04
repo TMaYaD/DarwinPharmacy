@@ -1,8 +1,11 @@
 class StockInventoriesController < ApplicationController
+  filter_resource_access
+
   # GET /stock_inventories
   # GET /stock_inventories.xml
   def index
-    @stock_inventories = StockInventory.all
+    @search = StockInventory.ascend_by_product_batch_product_name.search(params[:search])
+    @stock_inventories = @search.paginate(:page => params[:page], :per_page => 40)
 
     respond_to do |format|
       format.html # index.html.erb
