@@ -1,6 +1,19 @@
 <% table_for @stock_inventories do |t| %>
-  <% t.data :actions => :all do %>
-    <%= t.cell(:product_batch) {|p| "#{p.product_batch.product.name} - #{p.product_batch.batch_code}" } %>
+  <tr>
+  <% semantic_form_for @search do |f| %>
+    <th></th>
+    <th><%= f.input :product_batch_product_name_like %>
+        <%= f.input :product_batch_batch_code_like %></th>
+    <th><%= f.input :franchise_name_like %></th>
+    <th><%= f.input :quantity_greater_than %>
+        <%= f.input :quantity_less_than %></th>
+    <th colspan=4><%= f.submit 'Search' %></th>
+  <% end %>
+  </tr>
+
+<% t.data :actions => :all do %>
+    <%= t.cell :id %>
+    <%= t.cell(:product_batch) {|p| "#{p.product_batch.product.name} #{p.product_batch.product.strength}- #{p.product_batch.batch_code}" } %>
     <%= t.cell :franchise %>
     <%= t.cell :quantity %>
   <% end %>

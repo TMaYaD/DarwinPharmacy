@@ -5,7 +5,7 @@
   <% f.inputs do %>
     <% f.object.sale_bill_items.build if f.object.sale_bill_items.count == 0 %>
     <% f.inputs :for => :sale_bill_items, :class => 'item' do |builder| %>
-      <%= render 'sale_bill_item_inputs', :f => builder %>
+      <%= render 'sale_bill_items/inputs', :f => builder %>
     <% end %>
     <%= link_to_add_fieldset "Add Item", f, :sale_bill_items %>
   <% end %>
