@@ -4,6 +4,10 @@ class ProductBatch < ActiveRecord::Base
   belongs_to :product
   include Product::AutocompleteFields
 
+  has_many :purchase_bill_items
+  has_many :sale_bill_items
+  has_many :bill_items
+
   VATS = [0, 4, 12.5, 14.5]
 
   validates_presence_of :product_id, :batch_code, :exp_date, :mrp, :rate, :vat
