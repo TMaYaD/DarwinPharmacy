@@ -15,5 +15,32 @@
 
 <br>
 
+<h6>Purchase Bills:</h6>
+<% table_for @product_batch.purchase_bill_items do |t| %>
+  <% t.data do %>
+    <%= t.cell(:purchase_bill) {|p| p.purchase_bill && link_to(p.purchase_bill.bill_number, p.purchase_bill) } %>
+    <%= t.cell :sale_quantity %>
+    <%= t.cell :free_quantity %>
+    <%= t.cell :discount %>
+  <% end %>
+<% end %>
+
+<h6>Sale Bills:</h6>
+<% table_for @product_batch.sale_bill_items do |t| %>
+  <% t.data do %>
+    <%= t.cell(:sale_bill) {|p| p.sale_bill && link_to(p.sale_bill.id, p.sale_bill) } %>
+    <%= t.cell :quantity %>
+  <% end %>
+<% end %>
+
+<h6>Retail Bills:</h6>
+<% table_for @product_batch.bill_items do |t| %>
+  <% t.data do %>
+    <%= t.cell(:bill) {|p| p.bill && link_to(p.bill.id, p.bill) } %>
+    <%= t.cell :quantity %>
+    <%= t.cell :discount %>
+  <% end %>
+<% end %>
+
 <%= link_to 'Edit', edit_product_batch_path(@product_batch) %> |
 <%= link_to 'Back', product_batches_path %>
