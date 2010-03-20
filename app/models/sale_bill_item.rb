@@ -29,11 +29,11 @@ class SaleBillItem < ActiveRecord::Base
 
   private
   def has_stock_inventory_record
-    errors.add(:product_batch_code, "doesn't have a stock record") unless StockInventory.find_by_product_batch_id_and_franchise_id(self.product_batch.id, 7)
+    errors.add(:product_batch_code, "doesn't have a stock record") unless StockInventory.find_by_product_batch_id_and_franchise_id(self.product_batch.id, Franchise.find_by_name("DPPL - Vijayawada").id)
   end
 
   def transfer_stock_inventory
-    source_store_id = 7 #Franchise.find_by_name("DPPL - Vijayawada")
+    source_store_id = Franchise.find_by_name("DPPL - Vijayawada").id
     destination_store_id = self.sale_bill.franchise.id
     StockInventory.find_by_product_batch_id_and_franchise_id(self.product_batch.id, source_store_id).
         decrement(:quantity, self.quantity * self.product_batch.pack).save &&
