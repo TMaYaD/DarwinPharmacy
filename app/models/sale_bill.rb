@@ -21,14 +21,18 @@ class SaleBill < ActiveRecord::Base
   end
 
   def amount
-    self.sale_bill_items.reduce(0) { |sum, item| sum += item.amount }
+   self.taxable_amount.values.reduce(0) { |sum, item| sum += item }
   end
 
   def net_amount
-    self.sale_bill_items.reduce(0) { |sum, item| sum += item.net_amount }
+    self.taxable_amount.to_a.reduce(0) { |sum,item| sum += ((100 + item[0]) * item[1]).round()/100 }
   end
 
-  def tax
-    self.sale_bill_items.reduce({}) { |sum, item| sum = item.tax_add(sum) }
+  def taxable_amount
+    @taxable_amount ||= self.sale_bill_items.reduce({}) { |sum, item|
+      sum[item.vat] ||= 0
+      sum[item.vat] += item.amount
+      sum
+    }
   end
 end

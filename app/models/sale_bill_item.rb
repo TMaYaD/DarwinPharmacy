@@ -19,12 +19,8 @@ class SaleBillItem < ActiveRecord::Base
     (self.amount * (self.product_batch.vat + 100)).round / 100
   end
 
-  def tax_add (visitor)
-    vat_slab = self.product_batch.vat
-    visitor[vat_slab] ||= {:amount => 0, :tax => 0}
-    visitor[vat_slab][:tax]  += (self.amount * vat_slab).floor / 100
-    visitor[vat_slab][:amount]  += self.amount
-    return visitor
+  def vat
+    self.product_batch.vat
   end
 
   private
