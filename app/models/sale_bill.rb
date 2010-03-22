@@ -35,4 +35,14 @@ class SaleBill < ActiveRecord::Base
       sum
     }
   end
+
+  def SaleBill.tax(sale_bills)
+    sale_bills.reduce({}) { |sum, item|
+      item.taxable_amount.each { |key, value|
+        sum[key] ||= 0
+        sum[key] += value
+      }
+      sum
+    }
+  end
 end
