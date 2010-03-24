@@ -1,0 +1,5 @@
+<% table_for @requirements do |t| %>
+  <%= t.data :actions => :all %>
+<% end %>
+
+<%= link_to 'New requirement', new_requirement_path %>

@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :requirements
+
   map.resources :stock_inventories
 
   map.resources :franchises

@@ -1,6 +1,16 @@
 <nav><h1><%= ((current_user ? current_user.login + "  >>  " : ' ') + controller_name + ' >> ' + (params[:id] || '')).titleize %></h1>
 <ul>
-<% for resource in [:users, :franchises, :customers, :products, :product_batches, :stock_inventories, :purchase_bills, :sale_bills, :bills] %>
+<% for resource in [	:users,
+			:franchises,
+			:customers,
+			:products,
+			:product_batches,
+			:stock_inventories,
+			:requirements,
+			:purchase_bills,
+			:sale_bills,
+			:bills
+		] %>
   <% if permitted_to? :index, resource %>
     <li><%= link_to resource.to_s.humanize, :controller => resource %></li>
   <% end %>

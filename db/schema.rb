@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100223122116) do
+ActiveRecord::Schema.define(:version => 20100322183029) do
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"
@@ -22,10 +22,6 @@ ActiveRecord::Schema.define(:version => 20100223122116) do
     t.integer  "version",        :default => 0
     t.datetime "created_at"
   end
-
-  add_index "audits", ["auditable_id", "auditable_type"], :name => "auditable_index"
-  add_index "audits", ["created_at"], :name => "index_audits_on_created_at"
-  add_index "audits", ["user_id", "user_type"], :name => "user_index"
 
   create_table "bill_items", :force => true do |t|
     t.integer  "bill_id"
@@ -109,6 +105,14 @@ ActiveRecord::Schema.define(:version => 20100223122116) do
     t.date     "due_date"
     t.integer  "created_by_id"
     t.integer  "modified_by_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "requirements", :force => true do |t|
+    t.integer  "product_id"
+    t.integer  "quantity"
+    t.integer  "franchise_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
