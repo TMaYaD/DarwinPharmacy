@@ -27,7 +27,7 @@ authorization do
     end
 
     has_permission_on [:stock_inventories], :to => [:index]
-    has_permission_on [:requirements], :to => [:index, :read, :update, :delete]
+    has_permission_on [:requirements], :to => [:index, :read, :update, :destroy]
 
     has_permission_on :user_sessions, :to => [:destroy]
   end
@@ -52,7 +52,7 @@ authorization do
 
     has_permission_on :requirements, :to => [:index, :create]
     has_permission_on :requirements do
-      to :read, :update, :delete
+      to :read, :update, :destroy
       if_attribute :franchise => is_in {user.franchises}
     end
   end
