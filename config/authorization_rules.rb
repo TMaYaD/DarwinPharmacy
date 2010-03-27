@@ -5,7 +5,7 @@ authorization do
 			:sale_bills,
 			:products,
 			:product_batches,
-			:requirements,
+			:purchase_requests,
 			:stock_inventories,
 			:users,
 			:franchises,
@@ -27,7 +27,7 @@ authorization do
     end
 
     has_permission_on [:stock_inventories], :to => [:index]
-    has_permission_on [:requirements], :to => [:index, :read, :update, :destroy]
+    has_permission_on [:purchase_requests], :to => [:index, :read, :update, :destroy]
 
     has_permission_on :user_sessions, :to => [:destroy]
   end
@@ -50,8 +50,8 @@ authorization do
     end
     has_permission_on :user_sessions, :to => [:destroy]
 
-    has_permission_on :requirements, :to => [:index, :create]
-    has_permission_on :requirements do
+    has_permission_on :purchase_requests, :to => [:index, :create]
+    has_permission_on :purchase_requests do
       to :read, :update, :destroy
       if_attribute :franchise => is_in {user.franchises}
     end

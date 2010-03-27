@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :requirements
+  map.resources :purchase_requests
 
   map.resources :stock_inventories
 

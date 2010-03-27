@@ -109,7 +109,7 @@ ActiveRecord::Schema.define(:version => 20100322183029) do
     t.datetime "updated_at"
   end
 
-  create_table "requirements", :force => true do |t|
+  create_table "purchase_requests", :force => true do |t|
     t.integer  "product_id"
     t.integer  "quantity"
     t.integer  "franchise_id"

@@ -1,4 +1,4 @@
-class Requirement < ActiveRecord::Base
+class PurchaseRequest < ActiveRecord::Base
   belongs_to :product
   include Product::AutocompleteFields
 

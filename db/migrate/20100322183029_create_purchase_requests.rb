@@ -1,6 +1,6 @@
-class CreateRequirements < ActiveRecord::Migration
+class CreatePurchaseRequests < ActiveRecord::Migration
   def self.up
-    create_table :requirements do |t|
+    create_table :purchase_requests do |t|
       t.references :product
       t.integer :quantity
       t.references :franchise
@@ -10,6 +10,6 @@ class CreateRequirements < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :requirements
+    drop_table :purchase_requests 
   end
 end
