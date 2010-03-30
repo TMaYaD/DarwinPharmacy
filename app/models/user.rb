@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
     c.maintain_sessions = false
   end
 
-  ROLES = %w[admin franchise operator]
+  ROLES = %w[admin franchise operator accountant]
 
   has_and_belongs_to_many :franchises
 
