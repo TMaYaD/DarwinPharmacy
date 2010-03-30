@@ -9,6 +9,7 @@
     <%= f.input :phone %>
     <% has_role? :admin do %>
       <%= f.input :role, :collection => User::ROLES, :label_method => Proc.new{ |a| a.to_s.humanize } %>
+      <%= f.input :active %>
       <%= f.input :franchises %>
     <% end %>
   <% end %>
