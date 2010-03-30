@@ -1,8 +1,20 @@
 authorization do
   role :admin do
-    has_permission_on [:bills, :purchase_bills, :sale_bills, :products, :product_batches, :stock_inventories, :users, :franchises, :customers, :suppliers], :to => [:index, :crud]
+    has_permission_on [
+    		:bills,
+		:customers,
+		:franchises,
+		:product_batches,
+		:products,
+		:purchase_bills,
+		:sale_bills,
+		:stock_inventories,
+		:suppliers,
+		:users
+    ], :to => [:index, :crud]
     has_permission_on [:products, :product_batches], :to => [:autocomplete]
 
+    has_permission_on [:report], :to => [:index, :retail_sales, :sales_tax]
     has_permission_on :user_sessions, :to => [:destroy]
   end
 
@@ -38,6 +50,9 @@ authorization do
     end
 
     has_permission_on :user_sessions, :to => [:destroy]
+  end
+  role :accountant do
+    has_permission_on [:report], :to => [:index, :retail_sales, :sales_tax]
   end
   role :guest do
     has_permission_on :user_sessions, :to => [:new, :create]
