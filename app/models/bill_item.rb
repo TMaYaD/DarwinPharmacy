@@ -22,8 +22,8 @@ class BillItem < ActiveRecord::Base
 
   private
   def has_stock_inventory_record
-    store_id = self.bill.franchise.id
-    errors.add(:product_batch_code, "missing stock inventory record") unless StockInventory.find_by_product_batch_id_and_franchise_id(self.product_batch.id, store_id)
+    store_id = self.bill && self.bill.franchise_id || Authorization.current_user.franchises[0].id
+    errors.add(:product_batch_code, "stock not available") unless StockInventory.find_by_product_batch_id_and_franchise_id(self.product_batch.id, store_id)
   end
   def decrement_stock_inventory
     store_id = self.bill.franchise.id
