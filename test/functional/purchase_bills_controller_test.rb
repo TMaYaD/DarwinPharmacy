@@ -4,6 +4,7 @@ class PurchaseBillsControllerTest < ActionController::TestCase
   setup :activate_authlogic
   def setup
     UserSession.create(Factory(:user))
+    Factory(:franchise, :name => "DPPL - Vijayawada")
     @purchase_bill_id = Factory(:purchase_bill).to_param
   end
 
