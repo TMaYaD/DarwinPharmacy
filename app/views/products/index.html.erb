@@ -11,7 +11,7 @@
       <th><%= f.submit 'Search' %></th>
     <% end %>
   </tr>
-  <%= t.data :id, :name, :manufacturer, :schedule, :composition, :dosage_form, :strength, :common_uses %>
+  <%= t.data :id, :name, :manufacturer, :schedule, :composition, :dosage_form, :strength, :common_uses, :actions => :all %>
 <% end %>
 
 <%= will_paginate @products %> | <%= link_to 'New product', new_product_path, :id => 'add_new', :class => 'ui-icon ui-icon-plusthick' %>
