@@ -11,7 +11,7 @@
   <% end %>
   </tr>
 
-<% t.data :actions => :all do %>
+<% t.data do %>
     <%= t.cell :id %>
     <%= t.cell(:product_batch) {|p| "#{p.product_batch.product.name} #{p.product_batch.product.strength}- #{p.product_batch.batch_code}" } %>
     <%= t.cell :franchise %>
@@ -19,4 +19,4 @@
   <% end %>
 <% end %>
 
-<%= link_to 'New stock_inventory', new_stock_inventory_path %>
+<%= will_paginate @stock_inventories %>
