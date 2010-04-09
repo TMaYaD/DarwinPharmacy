@@ -10,6 +10,12 @@
   </tr>
 
   <%= t.data :id, :franchise, :created_at, :amount, :actions => :all %>
+  <tfoot>
+	  <tr>
+		  <th> total </th>
+		  <td> <%= @sale_bills.reduce(0) {|sum, item| sum += item.net_amount()} %></td>
+	  </tr>
+  </tfoot>
 <% end %>
 
 <%= will_paginate @sale_bills %> | <%= link_to 'New sale_bill', new_sale_bill_path, :id => 'add_new', :class => 'ui-icon ui-icon-plusthick' %>

@@ -20,6 +20,10 @@ class PurchaseBillItem < ActiveRecord::Base
     (sale_quantity * product_batch.rate * ( 100 - discount )).round / 100 
   end
 
+  def net_amount
+    (self.amount * (self.product_batch.vat + 100)).round / 100
+  end
+
   def tax_add (visitor)
     vat_slab = self.product_batch.vat
     visitor[vat_slab] ||= {:amount => 0, :tax => 0}

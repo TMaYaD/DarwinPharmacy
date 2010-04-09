@@ -8,7 +8,14 @@
       <th><%= f.submit 'Search' %></th>
     <% end %>
   </tr>
-  <%= t.data :id, :bill_number, :supplier, :created_at, :due_date, :amount, :actions => :all %>
+  <%= t.data :id, :bill_number, :supplier, :created_at, :due_date, :net_amount, :actions => :all %>
+  <tfoot>
+          <tr>
+                  <th> total </th>
+                  <td> <%= @purchase_bills.reduce(0) {|sum, item| sum += item.net_amount()} %></td>
+          </tr>
+  </tfoot>
+
 <% end %>
 
 <%= will_paginate @purchase_bills %> | <%= link_to 'New purchase_bill', new_purchase_bill_path %>

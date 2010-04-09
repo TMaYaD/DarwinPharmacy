@@ -75,15 +75,6 @@
       <td>&nbsp;</td>
       <td class = 'right'><%= @sale_bill.amount %></td>
     </tr>
-    <% @sale_bill.tax.each do |key, val| %>
-    <tr>
-      <th>Total <%= key %>% Taxable Amount</th>
-      <td class = 'right'><%= val[:amount] %></td>
-      <th colspan=2>Total <%= key %>% Tax</th>
-      <td class = 'right'><%= val[:tax] %></td>
-      <td colspan=6>&nbsp;</td>
-    </tr>
-    <% end %>
     <tr>
       <td colspan=5>&nbsp;</td>
       <th colspan=2>Net Amount</th>
