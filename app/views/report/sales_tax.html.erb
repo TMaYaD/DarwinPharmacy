@@ -5,4 +5,20 @@
   <%= f.submit 'Search' %>
 <% end %>
 
-<%= debug @sales_tax %>
+<% table_for @sale_bills do |t| %>
+  <% t.data do %>
+    <%= t.cell(:id) %>
+    <%= t.cell(:taxable_amount_0) { |b| b.taxable_amount[BigDecimal('0')] } %>
+    <%= t.cell(:taxable_amount_4) { |b| b.taxable_amount[BigDecimal('4')] } %>
+    <%= t.cell(:taxable_amount_14_5) { |b| b.taxable_amount[BigDecimal('14.5')] } %>
+  <% end %>
+
+  <tfoot>
+    <tr><strong>
+      <th>Total: </th>
+      <td><%= @sales_tax[BigDecimal('0')] %></td>
+      <td><%= @sales_tax[BigDecimal('4')] %></td>
+      <td><%= @sales_tax[BigDecimal('14.5')] %></td>
+    </strong></tr>
+  </tfoot>
+<% end %>
