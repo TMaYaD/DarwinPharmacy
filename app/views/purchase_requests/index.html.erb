@@ -1,0 +1,5 @@
+<% table_for @purchase_requests do |t| %>
+  <%= t.data :actions => :all %>
+<% end %>
+
+<%= link_to 'New purchase_request', new_purchase_request_path %>

@@ -1,0 +1,18 @@
+<p>
+  <b>Product:</b>
+  <%=h @purchase_request.product %>
+</p>
+
+<p>
+  <b>Quantity:</b>
+  <%=h @purchase_request.quantity %>
+</p>
+
+<p>
+  <b>Franchise:</b>
+  <%=h @purchase_request.franchise %>
+</p>
+
+
+<%= link_to 'Edit', edit_purchase_request_path(@purchase_request) %> |
+<%= link_to 'Back', purchase_requests_path %>

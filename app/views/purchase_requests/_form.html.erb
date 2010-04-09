@@ -1,0 +1,6 @@
+<% semantic_form_for(@purchase_request) do |f| %>
+  <% f.inputs do %>
+    <%= render 'inputs', :f => f %>
+  <% end %>
+  <%= f.buttons %>
+<% end %>
