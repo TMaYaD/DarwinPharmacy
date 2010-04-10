@@ -13,6 +13,7 @@ class PurchaseBillItem < ActiveRecord::Base
   validates_numericality_of :discount, :less_than => 100
 
   after_validation :find_product_batch_if_existing
+  after_save :update_rate_and_vat_for_the_product_batch
 
   accepts_nested_attributes_for :product_batch
 
@@ -41,5 +42,10 @@ class PurchaseBillItem < ActiveRecord::Base
     unless StockInventory.find_or_initialize_by_product_batch_id_and_franchise_id(self.product_batch.id, franchise_id).increment(:quantity, (self.sale_quantity + self.free_quantity)*self.product_batch.pack).save
       raise ActiveRecord::Rollback
     end
+  end
+  def update_rate_and_vat_for_the_product_batch
+    self.product_batch.vat = self.vat
+    self.product_batch.rate = self.rate
+    self.product_batch.save
   end
 end

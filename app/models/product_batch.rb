@@ -10,9 +10,9 @@ class ProductBatch < ActiveRecord::Base
 
   VATS = [0, 4, 12.5, 14.5]
 
-  validates_presence_of :product_id, :batch_code, :exp_date, :mrp, :rate, :vat
+  validates_presence_of :product_id, :batch_code, :exp_date, :mrp
   # validates_presence_of :mfg_date 
-  validates_numericality_of :mrp, :rate, :greater_than => 0
+  validates_numericality_of :mrp, :greater_than => 0
   validates_numericality_of :pack, :only_integer => true, :greater_than => 0
   #validates_uniqueness_of :batch_code, :scope => :product_id
   validate_on_create :uniqueness_of_batch_code
@@ -20,7 +20,7 @@ class ProductBatch < ActiveRecord::Base
   # :exp_date_cannot_be_earlier_than_mfg_date,
   # :mfg_date_cannot_be_in_the_future
   # :has_profit
-  validates_inclusion_of :vat, :in => VATS
+  #validates_inclusion_of :vat, :in => VATS
 
   module AutocompleteFields
     include Product::AutocompleteFields
@@ -51,9 +51,9 @@ class ProductBatch < ActiveRecord::Base
     then
       self.errors.add(:pack, "doesn't match with stored value :#{existing.pack}") unless self.pack == existing.pack
       self.errors.add(:exp_date, "doesn't match with stored value :#{existing.exp_date.strftime("%Y %B")}") unless self.exp_date.year == existing.exp_date.year && self.exp_date.month == existing.exp_date.month
-      self.errors.add(:rate, "doesn't match with stored value :#{existing.rate}") unless self.rate == existing.rate
+      #self.errors.add(:rate, "doesn't match with stored value :#{existing.rate}") unless self.rate == existing.rate
       self.errors.add(:mrp, "doesn't match with stored value :#{existing.mrp}") unless self.mrp == existing.mrp
-      self.errors.add(:vat, "doesn't match with stored value :#{existing.vat}") unless self.vat == existing.vat
+      #self.errors.add(:vat, "doesn't match with stored value :#{existing.vat}") unless self.vat == existing.vat
       if errors.size == 0
       then
         self.id = existing.id
