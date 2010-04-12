@@ -8,3 +8,4 @@ Thumbs.db
 /db/test.sqlite3
 /public/favicon.ico
 /tmp/*
+db/schema.rb
