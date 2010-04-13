@@ -28,7 +28,7 @@ authorization do
       if_attribute :id => is {user.id}
     end
 
-    has_permission_on [:audited_stock_records], :to => [:read, :create, :update]
+    has_permission_on [:audited_stock_records], :to => [:index, :read, :create, :update]
     has_permission_on [:purchase_requests], :to => [:index, :read, :update, :destroy]
 
     has_permission_on :user_sessions, :to => [:destroy]

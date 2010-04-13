@@ -19,4 +19,5 @@
   <% end %>
 <% end %>
 
-<%= will_paginate @running_stock_records %>
+<%= will_paginate @running_stock_records %> | <%= link_to 'New Audited StockRecord', new_audited_stock_record_path, :id => 'add_new', :class => 'ui-icon ui-icon-plusthick' %>
+
