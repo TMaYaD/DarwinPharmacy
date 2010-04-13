@@ -4,7 +4,7 @@ class Product < ActiveRecord::Base
   DOSAGE_FORMS = %w[Ampoule Capsule Cream Drops Gel Gelly Granules Injection Inhaler Liquid Lotion Ointment Powder Sachet Soap Suspension Spray Suppositories Syrup Tablet Suture Fluid Disposable Biscuits Shampoo]
 
   validates_presence_of :name, :manufacturer, :dosage_form 
-  validates_uniqueness_of :name
+  validates_uniqueness_of :strength, :scope => :name
   validates_inclusion_of :dosage_form, :in => DOSAGE_FORMS
 
   def to_label
