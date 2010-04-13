@@ -103,3 +103,7 @@ footer {
 footer p {
 	margin:0px;
 }
+
+.hidden {
+	display:none;
+}

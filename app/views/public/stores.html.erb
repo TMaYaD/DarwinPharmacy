@@ -1,0 +1,12 @@
+<% table_for @franchises do |t| %>
+  <tr>
+    <% semantic_form_for @search do |f| %>
+      <th><%= f.input :name_like %></th>
+      <th><%= f.input :address_like %></th>
+      <%= f.submit 'Search', :class => 'hidden' %>
+    <% end %>
+  </tr>
+  <%= t.data :name, :address %>
+<% end %>
+
+<%= will_paginate @franchises %>
