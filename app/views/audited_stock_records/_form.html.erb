@@ -1,4 +1,4 @@
 <% semantic_form_for(@audited_stock_record) do |f| %>
-  <%= f.inputs %>
+  <%= f.inputs :for => "audited_stock_records[]", audited_stock_record %>
   <%= f.buttons %>
 <% end %>

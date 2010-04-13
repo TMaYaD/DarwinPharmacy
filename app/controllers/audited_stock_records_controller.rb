@@ -13,6 +13,7 @@ class AuditedStockRecordsController < ApplicationController
 
   # GET /audited_stock_records/new
   def new
+    @audited_stock_records = Array.new(10) { AuditedStockRecord.new }
   end
 
   # GET /audited_stock_records/1/edit
@@ -21,9 +22,11 @@ class AuditedStockRecordsController < ApplicationController
 
   # POST /audited_stock_records
   def create
-    if @audited_stock_record.save
+    @audited_stock_records = params[:audited_stock_records].values.collect { |audited_stock_record| AuditedStockRecord.new(audited_stock_record) }
+    if @audited_stock_records.all?(&:valid?)
+      @audited_stock_records.each(&:save!)
       flash[:notice] = 'AuditedStockRecord was successfully created.'
-      redirect_to(@audited_stock_record)
+      redirect_to :action => "index"
     else
       render :action => "new"
     end

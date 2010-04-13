@@ -1,3 +1,13 @@
-<%= render 'form' %>
+<% semantic_form_for @audited_stock_record do |f| %>
+  <% @audited_stock_records.each_with_index do |audited_stock_record, index| %>
+    <% f.inputs do %>
+      <% semantic_fields_for "audited_stock_records[#{index}]", audited_stock_record do |r| %>
+        <%= render 'product_batches/autocomplete_inputs', :f => r %>
+        <%= r.input :quantity %>
+      <% end %>
+    <% end %>
+  <% end %>
+  <%= f.buttons %>
+<% end %>
 
 <%= link_to 'Back', audited_stock_records_path %>
