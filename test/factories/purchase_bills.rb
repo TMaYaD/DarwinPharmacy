@@ -10,4 +10,6 @@ Factory.define :purchase_bill_item, :default_strategy => :attributes_for do |p|
   p.sale_quantity 7
   p.free_quantity 1
   p.discount 10
+  p.rate 12.3
+  p.vat 4
 end

@@ -18,18 +18,17 @@ class PurchaseBillItem < ActiveRecord::Base
   accepts_nested_attributes_for :product_batch
 
   def amount
-    (sale_quantity * product_batch.rate * ( 100 - discount )).round / 100 
+    (sale_quantity * rate * ( 100 - discount )).round / 100 
   end
 
   def net_amount
-    (self.amount * (self.product_batch.vat + 100)).round / 100
+    (self.amount * (self.vat + 100)).round / 100
   end
 
   def tax_add (visitor)
-    vat_slab = self.product_batch.vat
-    visitor[vat_slab] ||= {:amount => 0, :tax => 0}
-    visitor[vat_slab][:tax]  += (self.amount * vat_slab).floor / 100
-    visitor[vat_slab][:amount]  += self.amount
+    visitor[self.vat] ||= {:amount => 0, :tax => 0}
+    visitor[self.vat][:tax]  += (self.amount * self.vat).floor / 100
+    visitor[self.vat][:amount]  += self.amount
     return visitor
   end
 
@@ -44,8 +43,8 @@ class PurchaseBillItem < ActiveRecord::Base
     end
   end
   def update_rate_and_vat_for_the_product_batch
-    self.product_batch.vat = self.vat
-    self.product_batch.rate = self.rate
+    self.product_batch.vat ||= self.vat
+    self.product_batch.rate ||= self.rate
     self.product_batch.save
   end
 end
