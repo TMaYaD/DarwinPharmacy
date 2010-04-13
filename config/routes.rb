@@ -1,7 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :purchase_requests
 
-  map.resources :stock_inventories
+  map.resources :audited_stock_records
 
   map.resources :franchises
 

@@ -1,4 +1,4 @@
-<% table_for @stock_inventories do |t| %>
+<% table_for @running_stock_records do |t| %>
   <tr>
   <% semantic_form_for @search do |f| %>
     <th></th>
@@ -19,4 +19,4 @@
   <% end %>
 <% end %>
 
-<%= will_paginate @stock_inventories %>
+<%= will_paginate @running_stock_records %>

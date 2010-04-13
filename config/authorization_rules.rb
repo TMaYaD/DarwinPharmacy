@@ -9,7 +9,7 @@ authorization do
 		:purchase_bills,
 		:purchase_requests,
 		:sale_bills,
-		:stock_inventories,
+		:audited_stock_records,
 		:suppliers,
 		:users
     ], :to => [:index, :crud]
@@ -28,7 +28,7 @@ authorization do
       if_attribute :id => is {user.id}
     end
 
-    has_permission_on [:stock_inventories], :to => [:index]
+    has_permission_on [:audited_stock_records], :to => [:read, :create, :update]
     has_permission_on [:purchase_requests], :to => [:index, :read, :update, :destroy]
 
     has_permission_on :user_sessions, :to => [:destroy]

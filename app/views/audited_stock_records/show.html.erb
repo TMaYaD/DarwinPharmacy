@@ -1,0 +1,18 @@
+<p>
+  <b>Franchise:</b>
+  <%=h @audited_stock_record.franchise %>
+</p>
+
+<p>
+  <b>Product batch:</b>
+  <%=h @audited_stock_record.product_batch %>
+</p>
+
+<p>
+  <b>Quantity:</b>
+  <%=h @audited_stock_record.quantity %>
+</p>
+
+
+<%= link_to 'Edit', edit_audited_stock_record_path(@audited_stock_record) %> |
+<%= link_to 'Back', audited_stock_records_path %>

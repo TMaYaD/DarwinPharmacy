@@ -4,7 +4,7 @@ class PurchaseBillItem < ActiveRecord::Base
   belongs_to :purchase_bill
   belongs_to :product_batch
 
-  after_create :increment_stock_inventory
+  after_create :increment_stock_record
 
   validates_associated :product_batch
   validates_presence_of :sale_quantity
@@ -36,9 +36,9 @@ class PurchaseBillItem < ActiveRecord::Base
   def find_product_batch_if_existing
     self.product_batch = ProductBatch.find(self.product_batch.id) if self.product_batch.id
   end
-  def increment_stock_inventory
+  def increment_stock_record
     franchise_id = Franchise.find_by_name("DPPL - Vijayawada").id
-    unless StockInventory.find_or_initialize_by_product_batch_id_and_franchise_id(self.product_batch.id, franchise_id).increment(:quantity, (self.sale_quantity + self.free_quantity)*self.product_batch.pack).save
+    unless RunningStockRecord.find_or_initialize_by_product_batch_id_and_franchise_id(self.product_batch.id, franchise_id).increment(:quantity, (self.sale_quantity + self.free_quantity)*self.product_batch.pack).save
       raise ActiveRecord::Rollback
     end
   end
