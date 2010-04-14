@@ -46,6 +46,7 @@ authorization do
       if_attribute :franchise => is_in {user.franchises}
     end
     has_permission_on [:products, :product_batches], :to => [:autocomplete, :read, :index]
+    has_permission_on [:audited_stock_records], :to => [:index]
     has_permission_on :users do
       to :update
       if_attribute :id => is {user.id}
