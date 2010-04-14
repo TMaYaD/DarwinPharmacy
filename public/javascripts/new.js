@@ -6,14 +6,14 @@ $(document).ready(function() {
   $('input[autocomplete]').livequery( function() {
     $this = $(this);
     function get_ac_params($ac_field) {
-        var ac_params = {};
-        $.each( eval($ac_field.attr('ac_params')) || [], function(index, param) {
-	  ac_params[param] = function() {
-	    // The selector below is rather eloborate. I don't like it!
-	    return $ac_field.parent().prev('[id*='+param+']').children('input').val();
-	  };
-	});
-	return ac_params;
+      var ac_params = {};
+      $.each( eval($ac_field.attr('ac_params')) || [], function(index, param) {
+	      ac_params[param] = function() {
+	        // The selector below is rather eloborate. I don't like it!
+	        return $ac_field.parent().prevAll('[id*='+param+']').children('input').val();
+	      };
+	    });
+	    return ac_params;
     };
     $this.autocomplete( $this.attr('autocomplete'), {
       autoFill: true,
@@ -24,7 +24,12 @@ $(document).ready(function() {
       extraParams: get_ac_params($this),
     }).result( function (event, data, formatted) {
       if (data) {
-        $(this).parent().next().find('input[type=hidden]').val(data[1]);
+        $ac_field = $(this)
+        // set the extra data
+        additional_fields = eval(data[1]) || {};
+        $.each(eval(data[1]) || {}, function(param, value) {
+          $ac_field.parent().nextAll('[id*='+param+']').children('input').val(value);
+        });
       };
     });
   });

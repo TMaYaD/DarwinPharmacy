@@ -1,3 +1,6 @@
 <% @products.each do |p| %>
-<%= p.to_label %>|<%= p.id %>
+<% extra_data = {
+     :product_id => p.id
+   } %>
+<%= p.to_label %>| ( <%= extra_data.to_json %> )
 <% end %>

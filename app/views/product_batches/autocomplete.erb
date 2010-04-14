@@ -1,3 +1,6 @@
 <% @product_batches.each do |pb| %>
-<%=pb.batch_code%>|<%=pb.id%>
+<% extra_data = {
+     :product_batch_id => pb.id
+   } %>
+<%=pb.batch_code%>| ( <%= extra_data.to_json %> )
 <% end %>
