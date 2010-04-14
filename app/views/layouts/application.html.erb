@@ -5,6 +5,7 @@
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 <meta http-equiv="X-UA-Compatible" content="chrome=1" />
 
+<%- if "production" == RAILS_ENV -%>
 <!-- Exception Hub start -->
 <script type="text/javascript">
   var ehHost = (("https:" == document.location.protocol) ? "https://" : "http://");
@@ -14,6 +15,7 @@
   ExceptionHub.setup("14d94f531717c7a3f5f2b01732f5fb88", 246, 'production');
 </script>
 <!-- Exception Hub end -->
+<%- end -%>
 
 <%= stylesheet_link_tag 'yui', 'html5', 'layout/application', action_name %>
 <%= stylesheet_link_tag 'print', :media => 'print' %>
