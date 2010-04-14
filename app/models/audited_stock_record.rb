@@ -2,6 +2,8 @@ class AuditedStockRecord < StockInventory
   after_save :update_running_stock_record
   before_validation :set_franchise_and_date
 
+  validates_presence_of :product_batch_id, :franchise_id, :quantity
+ 
   include ProductBatch::AutocompleteFields
 
 private
