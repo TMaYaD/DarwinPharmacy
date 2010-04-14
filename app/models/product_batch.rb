@@ -8,7 +8,7 @@ class ProductBatch < ActiveRecord::Base
   has_many :sale_bill_items
   has_many :bill_items
 
-  VATS = [0, 4, 12.5, 14.5]
+  VATS = [0, 4, 14.5]
 
   validates_presence_of :product_id, :batch_code, :exp_date, :mrp
   # validates_presence_of :mfg_date 
@@ -21,6 +21,8 @@ class ProductBatch < ActiveRecord::Base
   # :mfg_date_cannot_be_in_the_future
   # :has_profit
   #validates_inclusion_of :vat, :in => VATS
+
+  after_save :update_product
 
   module AutocompleteFields
     include Product::AutocompleteFields
@@ -69,5 +71,13 @@ class ProductBatch < ActiveRecord::Base
 #  def exp_date_cannot_be_earlier_than_mfg_date
 #    errors.add(:exp_date, "can't be earlier than the Manufacturing Date") if  !exp_date.blank? and !mfg_date.blank? and exp_date < mfg_date
 #  end
+
+  def update_product
+    self.product.mrp = self.mrp
+    self.product.rate = self.rate
+    self.product.vat = self.vat
+    self.product.pack = self.pack
+    self.product.save
+  end
 
 end
