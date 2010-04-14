@@ -1,6 +1,10 @@
 <% @products.each do |p| %>
 <% extra_data = {
-     :product_id => p.id
+     :product_id => p.id,
+     :pack => p.pack,
+     :mrp => p.mrp,
+     :rate => p.rate,
+     :vat => p.vat
    } %>
 <%= p.to_label %>| ( <%= extra_data.to_json %> )
 <% end %>
