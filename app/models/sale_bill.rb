@@ -2,8 +2,6 @@ class SaleBill < ActiveRecord::Base
   acts_as_audited
 
   belongs_to :franchise
-  belongs_to :created_by, :class_name => 'User'
-  belongs_to :modified_by, :class_name => 'User'
   has_many :sale_bill_items, :dependent => :destroy
 
   validates_associated :sale_bill_items

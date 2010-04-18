@@ -4,8 +4,6 @@ class Bill < ActiveRecord::Base
 
   belongs_to :customer
   belongs_to :franchise
-  belongs_to :created_by, :class_name => "User"
-  belongs_to :modified_by, :class_name => "User"
   has_many :bill_items, :dependent => :destroy
 
   validates_associated :bill_items, :customer
