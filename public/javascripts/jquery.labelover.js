@@ -19,7 +19,11 @@ jQuery.fn.labelOver = function(overClass) {
                 label.hide();
             });
             input.blur(function() {
-                if (input.val() == '') label.show();
+                if (input.val() == '') {
+                    label.show();
+                } else {
+                    label.hide();
+                }
             });
             
             label.addClass(overClass).css({
@@ -27,9 +31,9 @@ jQuery.fn.labelOver = function(overClass) {
                 'padding-left': 4,
                 'position': 'relative',
                 'z-index': 1,
-                'cursor': 'text',
+                'cursor': 'text'
             }).click(function(){ input.focus() });
             if (input.val() != '') label.hide(); 
         }
-    })
-}
+    });
+};
