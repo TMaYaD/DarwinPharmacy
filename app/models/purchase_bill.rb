@@ -19,7 +19,7 @@ class PurchaseBill < ActiveRecord::Base
   def supplier_name
     supplier.name if supplier
   end
-  
+
   def supplier_name=(name)
     self.supplier = Supplier.find_or_create_by_name(name) unless name.blank?
   end
@@ -35,5 +35,5 @@ class PurchaseBill < ActiveRecord::Base
   def tax
     self.purchase_bill_items.reduce({}) { |sum, item| sum = item.tax_add(sum) }
   end
-    
+
 end
