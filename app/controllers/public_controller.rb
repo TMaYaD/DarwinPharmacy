@@ -2,8 +2,8 @@ class PublicController < ApplicationController
   layout :select_layout
 
   def stores
-    @search = Franchise.search(params[:search])
-    @franchises = @search.paginate(:page => params[:page])
+    @search = Store.search(params[:search])
+    @stores = @search.paginate(:page => params[:page])
   end
 
   private

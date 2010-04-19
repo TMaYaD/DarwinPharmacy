@@ -1,21 +1,21 @@
 class SaleBill < ActiveRecord::Base
   acts_as_audited
 
-  belongs_to :franchise
+  belongs_to :store
   has_many :sale_bill_items, :dependent => :destroy
 
   validates_associated :sale_bill_items
   validates_size_of :sale_bill_items, :minimum => 1
-  validates_presence_of :franchise_name
+  validates_presence_of :store_name
 
   accepts_nested_attributes_for :sale_bill_items, :allow_destroy => true, :reject_if => proc { |attrs| attrs.all? { |k, v| v.blank? } }
 
-  def franchise_name
-    franchise.name if franchise
+  def store_name
+    store.name if store
   end
 
-  def franchise_name=(name)
-    self.franchise = Franchise.find_by_name(name) unless name.blank?
+  def store_name=(name)
+    self.store = Store.find_by_name(name) unless name.blank?
   end
 
   def amount

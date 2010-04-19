@@ -3,7 +3,7 @@ require 'test_helper'
 class BillsControllerTest < ActionController::TestCase
   setup :activate_authlogic
   def setup
-    @user = Factory(:user, :role => 'franchise')
+    @user = Factory(:user, :role => 'store')
     UserSession.create(@user)
     @bill_id = Factory(:bill).to_param
   end

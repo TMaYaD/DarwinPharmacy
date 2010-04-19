@@ -1,0 +1,18 @@
+<p>
+  <b>Storee:</b>
+  <%=h @store.franchisee %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%=h @store.name %>
+</p>
+
+<p>
+  <b>Address:</b>
+  <%=h @store.address %>
+</p>
+
+
+<%= link_to 'Edit', edit_store_path(@store) %> |
+<%= link_to 'Back', stores_path %>

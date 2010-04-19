@@ -37,8 +37,8 @@ class PurchaseBillItem < ActiveRecord::Base
     self.product_batch = ProductBatch.find(self.product_batch.id) if self.product_batch.id
   end
   def increment_stock_record
-    franchise_id = Franchise.find_by_name("DPPL - Vijayawada").id
-    unless RunningStockRecord.find_or_initialize_by_product_batch_id_and_franchise_id(self.product_batch.id, franchise_id).increment(:quantity, (self.sale_quantity + self.free_quantity)*self.product_batch.pack).save
+    store_id = Store.find_by_name("DPPL - Vijayawada").id
+    unless RunningStockRecord.find_or_initialize_by_product_batch_id_and_store_id(self.product_batch.id, store_id).increment(:quantity, (self.sale_quantity + self.free_quantity)*self.product_batch.pack).save
       raise ActiveRecord::Rollback
     end
   end

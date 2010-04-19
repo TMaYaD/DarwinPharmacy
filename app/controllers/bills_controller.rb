@@ -38,7 +38,7 @@ class BillsController < ApplicationController
   # POST /bills
   # POST /bills.xml
   def create
-    @bill.franchise = current_user.franchises[0]
+    @bill.store = current_user.stores[0]
 
     respond_to do |format|
       if @bill.save

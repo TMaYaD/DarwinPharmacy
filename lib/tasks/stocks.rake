@@ -10,8 +10,8 @@ namespace :stocks do
           #puts row.inspect
           #batch = batches[0]
           #product = batch.product
-          #franchise_id = Franchise.find_by_name("DPPL - Vijayawada").id
-          #stock_inventory = StockInventory.find_or_initialize_by_product_batch_id_and_franchise_id(batch.id, franchise_id)
+          #store_id = Store.find_by_name("DPPL - Vijayawada").id
+          #stock_inventory = StockInventory.find_or_initialize_by_product_batch_id_and_store_id(batch.id, store_id)
           #product.name = row[1]
           #product.units = row[3].to_f
           #batch.pack = row[3].to_f
@@ -39,11 +39,11 @@ namespace :stocks do
 
   desc "Regenerate running stock inventory from recent audits"
   task :regenerate_for_store => :environment do
-    franchise_id = Franchise.find_by_name("DPPL - Vijayawada").id
+    store_id = Store.find_by_name("DPPL - Vijayawada").id
     default_date = Date.parse("01 Apr 2010")
     # import the values from audited_stock_records 
     ProductBatch.all.each { |product_batch|
-      audited_stock_record = AuditedStockRecord.product_batch_id_is(product_batch.id).franchise_id_is(franchise_id).all(:order => 'created_at desc', :limit =>1).first
+      audited_stock_record = AuditedStockRecord.product_batch_id_is(product_batch.id).store_id_is(store_id).all(:order => 'created_at desc', :limit =>1).first
       if audited_stock_record
 	quantity = audited_stock_record.quantity
         date = audited_stock_record.created_at
@@ -57,7 +57,7 @@ namespace :stocks do
 
       quantity -= SaleBillItem.product_batch_id_is(product_batch.id).created_at_greater_than(date).sum(:quantity)
 
-      running_stock_record = RunningStockRecord.find_or_initialize_by_product_batch_id_and_franchise_id(product_batch.id, franchise_id)
+      running_stock_record = RunningStockRecord.find_or_initialize_by_product_batch_id_and_store_id(product_batch.id, store_id)
       running_stock_record.quantity = quantity
       running_stock_record.save
     }

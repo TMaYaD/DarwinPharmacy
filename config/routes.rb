@@ -3,7 +3,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :audited_stock_records
 
-  map.resources :franchises
+  map.resources :stores
 
   map.resources :sale_bills
 
@@ -15,7 +15,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :product_batches, :collection => { :autocomplete => :get }
 
-  map.resources :franchises
+  map.resources :stores
 
   map.resources :customers
 

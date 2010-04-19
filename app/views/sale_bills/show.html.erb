@@ -23,16 +23,16 @@
 </thead>
 <tbody>
   <tr>
-    <td colspan=4><%=h @sale_bill.franchise.name %></td>
+    <td colspan=4><%=h @sale_bill.store.name %></td>
     <th>Invoice Number</th><td><%= @sale_bill.id %></td>
   </tr>
   <tr>
-    <td colspan=4><pre><%=h @sale_bill.franchise.address %></pre></td>
+    <td colspan=4><pre><%=h @sale_bill.store.address %></pre></td>
     <th>Date &amp; Time</th><td><%= @sale_bill.created_at %></td>
   </tr>
   <tr>
-    <th>DL</th><td><%=h @sale_bill.franchise.dl %></td>
-    <th>TIN</th><td><%=h @sale_bill.franchise.tin %></td>
+    <th>DL</th><td><%=h @sale_bill.store.dl %></td>
+    <th>TIN</th><td><%=h @sale_bill.store.tin %></td>
     <td colspan=2>&nbsp;</td>
   </tr>
   <tr>

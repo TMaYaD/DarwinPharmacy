@@ -1,4 +1,4 @@
-<% table_for @franchises do |t| %>
+<% table_for @stores do |t| %>
   <tr>
     <% semantic_form_for @search do |f| %>
       <th><%= f.input :name_like %></th>
@@ -9,4 +9,4 @@
   <%= t.data :name, :address %>
 <% end %>
 
-<%= will_paginate @franchises %>
+<%= will_paginate @stores %>

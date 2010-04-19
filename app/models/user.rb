@@ -3,9 +3,9 @@ class User < ActiveRecord::Base
     c.maintain_sessions = false
   end
 
-  ROLES = %w[admin franchise operator accountant]
+  ROLES = %w[admin store operator accountant]
 
-  has_and_belongs_to_many :franchises
+  has_and_belongs_to_many :stores
 
   validates_inclusion_of :role, :in => ROLES
 

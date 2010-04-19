@@ -1,4 +1,4 @@
-<% table_for @franchises do |t| %>
+<% table_for @stores do |t| %>
   <tr>
     <% semantic_form_for @search do |f| %>
       <th><%= f.inputs :name_like %></th>
@@ -12,4 +12,4 @@
   <%= t.data :actions => :all %>
 <% end %>
 
-<%= will_paginate @franchises %> | <%= link_to 'New franchise', new_franchise_path, :id => 'add_new', :class => 'ui-icon ui-icon-plusthick' %>
+<%= will_paginate @stores %> | <%= link_to 'New store', new_store_path, :id => 'add_new', :class => 'ui-icon ui-icon-plusthick' %>

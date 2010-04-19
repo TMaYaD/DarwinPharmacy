@@ -6,7 +6,7 @@ class PurchaseRequestsControllerTest < ActionController::TestCase
     @franchisee = Factory(:franchisee)
     UserSession.create(@franchisee)
     Authorization.current_user = @franchisee
-    @purchase_request_id = Factory(:purchase_request, :franchise => @franchisee.franchises[0]).to_param
+    @purchase_request_id = Factory(:purchase_request, :store => @franchisee.stores[0]).to_param
   end
 
   test "should get index" do

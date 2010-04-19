@@ -20,7 +20,7 @@ class SaleBillsControllerTest < ActionController::TestCase
 
   test "should create sale_bill" do
     assert_difference('SaleBill.count') do
-      post :create, :sale_bill => Factory.attributes_for(:sale_bill, :franchise_name => Factory(:franchise).name)
+      post :create, :sale_bill => Factory.attributes_for(:sale_bill, :store_name => Factory(:store).name)
     end
 
     assert_redirected_to sale_bill_path(assigns(:sale_bill))

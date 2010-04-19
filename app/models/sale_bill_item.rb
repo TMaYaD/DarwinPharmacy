@@ -27,15 +27,15 @@ class SaleBillItem < ActiveRecord::Base
   end
 
   def has_stock_record
-    errors.add(:product_batch_code, "doesn't have a stock record") unless RunningStockRecord.find_by_product_batch_id_and_franchise_id(self.product_batch.id, Franchise.find_by_name("DPPL - Vijayawada").id)
+    errors.add(:product_batch_code, "doesn't have a stock record") unless RunningStockRecord.find_by_product_batch_id_and_store_id(self.product_batch.id, Store.find_by_name("DPPL - Vijayawada").id)
   end
 
   def transfer_stock_record
-    source_store_id = Franchise.find_by_name("DPPL - Vijayawada").id
-    destination_store_id = self.sale_bill.franchise.id
-    RunningStockRecord.find_by_product_batch_id_and_franchise_id(self.product_batch.id, source_store_id).
+    source_store_id = Store.find_by_name("DPPL - Vijayawada").id
+    destination_store_id = self.sale_bill.store.id
+    RunningStockRecord.find_by_product_batch_id_and_store_id(self.product_batch.id, source_store_id).
         decrement(:quantity, self.quantity * self.product_batch.pack).save &&
-    RunningStockRecord.find_or_initialize_by_product_batch_id_and_franchise_id(self.product_batch.id, destination_store_id).
+    RunningStockRecord.find_or_initialize_by_product_batch_id_and_store_id(self.product_batch.id, destination_store_id).
         increment(:quantity, self.quantity * self.product_batch.pack).save
   end
 end

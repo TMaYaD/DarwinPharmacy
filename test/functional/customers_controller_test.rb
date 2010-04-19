@@ -4,7 +4,7 @@ class CustomersControllerTest < ActionController::TestCase
   setup :activate_authlogic
   def setup
     @customer_id = Factory(:customer).to_param
-    UserSession.create(Factory(:user, :role => 'franchise'))
+    UserSession.create(Factory(:user, :role => 'store'))
   end
 
   test "should get index" do

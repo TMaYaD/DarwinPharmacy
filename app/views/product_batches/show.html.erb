@@ -30,7 +30,7 @@
 <% table_for @product_batch.sale_bill_items do |t| %>
   <% t.data do %>
     <%= t.cell(:sale_bill) {|p| p.sale_bill && link_to(p.sale_bill.id, p.sale_bill) } %>
-    <%= t.cell(:sale_bill) {|p| p.sale_bill && p.sale_bill.franchise_name } %>
+    <%= t.cell(:sale_bill) {|p| p.sale_bill && p.sale_bill.store_name } %>
     <%= t.cell :quantity %>
   <% end %>
 <% end %>

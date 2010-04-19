@@ -1,4 +1,4 @@
-class Franchise < ActiveRecord::Base
+class Store < ActiveRecord::Base
   acts_as_audited
 
   has_and_belongs_to_many :users

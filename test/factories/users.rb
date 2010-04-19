@@ -7,6 +7,6 @@ Factory.define :user do |u|
 end
 
 Factory.define :franchisee, :parent => :user do |u|
-  u.role 'franchise'
-  u.after_create {|u| u.franchises = [Factory(:franchise)] }
+  u.role 'store'
+  u.after_create {|u| u.stores = [Factory(:store)] }
 end

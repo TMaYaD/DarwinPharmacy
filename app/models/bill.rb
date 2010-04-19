@@ -3,7 +3,7 @@ class Bill < ActiveRecord::Base
   acts_as_audited
 
   belongs_to :customer
-  belongs_to :franchise
+  belongs_to :store
   has_many :bill_items, :dependent => :destroy
 
   validates_associated :bill_items, :customer

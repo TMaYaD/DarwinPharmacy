@@ -22,11 +22,11 @@ class BillItem < ActiveRecord::Base
 
   private
   def has_stock_record
-    store_id = self.bill && self.bill.franchise_id || Authorization.current_user.franchises[0].id
-    errors.add(:product_batch_code, "stock not available") unless RunningStockRecord.find_by_product_batch_id_and_franchise_id(self.product_batch.id, store_id)
+    store_id = self.bill && self.bill.store_id || Authorization.current_user.stores[0].id
+    errors.add(:product_batch_code, "stock not available") unless RunningStockRecord.find_by_product_batch_id_and_store_id(self.product_batch.id, store_id)
   end
   def decrement_stock_record
-    store_id = self.bill.franchise.id
-    RunningStockRecord.find_by_product_batch_id_and_franchise_id(self.product_batch.id, store_id).decrement(:quantity, self.quantity).save
+    store_id = self.bill.store.id
+    RunningStockRecord.find_by_product_batch_id_and_store_id(self.product_batch.id, store_id).decrement(:quantity, self.quantity).save
   end
 end

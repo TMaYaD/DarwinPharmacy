@@ -3,7 +3,7 @@ authorization do
     has_permission_on [
     		:bills,
 		:customers,
-		:franchises,
+		:stores,
 		:product_batches,
 		:products,
 		:purchase_bills,
@@ -34,16 +34,16 @@ authorization do
     has_permission_on :user_sessions, :to => [:destroy]
   end
 
-  role :franchise do
+  role :store do
     has_permission_on :customers, :to => [:read, :create, :update]
     has_permission_on :bills, :to => [:index, :create]
     has_permission_on :bills do
       to :read
-      if_attribute :franchise => is_in {user.franchises}
+      if_attribute :store => is_in {user.stores}
     end
     has_permission_on :sale_bills do
       to :read
-      if_attribute :franchise => is_in {user.franchises}
+      if_attribute :store => is_in {user.stores}
     end
     has_permission_on [:products, :product_batches], :to => [:autocomplete, :read, :index]
     has_permission_on [:audited_stock_records], :to => [:index]
@@ -56,7 +56,7 @@ authorization do
     has_permission_on :purchase_requests, :to => [:index, :create]
     has_permission_on :purchase_requests do
       to :read, :update, :destroy
-      if_attribute :franchise => is_in {user.franchises}
+      if_attribute :store => is_in {user.stores}
     end
   end
   role :accountant do
