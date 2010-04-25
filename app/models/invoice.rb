@@ -1,4 +1,6 @@
 class Invoice < ActiveRecord::Base
+  acts_as_audited
+  
   belongs_to :store
   belongs_to :customer, :class_name => 'Store'
 

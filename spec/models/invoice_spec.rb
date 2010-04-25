@@ -24,5 +24,7 @@ describe Invoice do
 
   it "should generate a bill number unique to the store in case it is not given"
 
-  it "should be audited"
+  it "should be audited" do
+    Invoice.auditing_enabled.should be true
+  end
 end
