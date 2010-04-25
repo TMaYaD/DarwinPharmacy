@@ -22,9 +22,14 @@ describe Invoice do
     lambda{ Invoice.create!(attributes) }.should raise_exception
   end
 
-  it "should generate a bill number unique to the store in case it is not given"
+  it "should generate a bill number unique to the store in case it is not given" do
+    invoice = Factory(:invoice, :invoice_number => nil)
+    invoice.invoice_number.should_not be_nil
+  end
 
   it "should be audited" do
     Invoice.auditing_enabled.should be true
   end
+
+  it "should have many items"
 end
