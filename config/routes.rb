@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :invoices
+
   map.resources :purchase_requests
 
   map.resources :audited_stock_records
