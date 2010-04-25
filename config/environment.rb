@@ -22,7 +22,6 @@ Rails::Initializer.run do |config|
   config.gem "tmayad-formtastic", :lib => "formtastic"
   config.gem "authlogic"
   config.gem "declarative_authorization"
-  config.gem "factory_girl"
   config.gem 'acts_as_audited', :lib => false
   config.gem "tabletastic"
   config.gem "searchlogic"

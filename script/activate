@@ -21,8 +21,6 @@ deactivate () {
         unset _OLD_VIRTUAL_PS1
     fi
 
-    unset RAILS_ENV
-
     unset VIRTUAL_ENV
     if [ ! "$1" = "nondestructive" ] ; then
     # Self destruct!
@@ -49,8 +47,6 @@ else
     PS1="(`basename \"$VIRTUAL_ENV\"`)$PS1"
 fi
 export PS1
-
-export RAILS_ENV=development
 
 # This should detect bash and zsh, which have a hash command that must
 # be called to get it to forget past commands.  Without forgetting
