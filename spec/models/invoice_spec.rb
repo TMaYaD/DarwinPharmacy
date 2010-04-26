@@ -8,18 +8,24 @@ describe Invoice do
 
   it "should belong to a valid store" do
     attributes = Factory.build(:invoice, :store => nil).attributes
-    lambda{ Invoice.create!(attributes) }.should raise_exception
+    lambda{
+      Invoice.create!(attributes)
+    }.should raise_exception ActiveRecord::RecordInvalid, "Validation failed: Store can't be blank"
   end
 
-  it "should be created for a valid customer" do
+  it "should not be created without a valid customer" do
     attributes = Factory.build(:invoice, :customer => nil).attributes
-    lambda{ Invoice.create!(attributes) }.should raise_exception
+    lambda{
+      Invoice.create!(attributes)
+    }.should raise_exception ActiveRecord::RecordInvalid, "Validation failed: Customer can't be blank"
   end
 
-  it "s customer should not be the same as store" do
+  it "'s customer should not be the same as store" do
     store = Factory(:store)
     attributes = Factory.build(:invoice, :store => store, :customer => store).attributes
-    lambda{ Invoice.create!(attributes) }.should raise_exception
+    lambda{
+      Invoice.create!(attributes)
+    }.should raise_exception ActiveRecord::RecordInvalid, "Validation failed: Customer can not be the same as the store"
   end
 
   it "should generate a bill number unique to the store in case it is not given" do
@@ -31,5 +37,7 @@ describe Invoice do
     Invoice.auditing_enabled.should be true
   end
 
-  it "should have many items"
+  it "should have many items" do
+    should have_many :invoice_items
+  end
 end

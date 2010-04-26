@@ -4,6 +4,8 @@ class Invoice < ActiveRecord::Base
   belongs_to :store
   belongs_to :customer, :class_name => 'Store'
 
+  has_many :invoice_items
+
   validates_presence_of :store_id, :customer_id
   validate :store_and_customer_are_different
 
