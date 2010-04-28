@@ -6,4 +6,8 @@ class InvoiceItem < ActiveRecord::Base
 
   validates_numericality_of :sale_quantity, :greater_than_or_equal_to => 0
   validates_presence_of :product_batch_id
+
+  def amount
+    (((sale_quantity * rate) * (100 - discount) / 100) * (100 + vat)).round / 100
+  end
 end

@@ -41,6 +41,7 @@ describe Invoice do
     should have_many :invoice_items
   end
 
+  it "should delete associated invoice items when deleted"
   it "should have a state (draft, billed, verified, accepted)"
   it "should be accepted only by the customer user"
   it "should be billed only by the store user"
