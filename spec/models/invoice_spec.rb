@@ -41,6 +41,12 @@ describe Invoice do
     should have_many :invoice_items
   end
 
+  it "should take attributes for invoice item" do
+    invoice_item_attributes = Factory.build(:invoice_item).attributes
+    invoice_attributes = Factory.build(:invoice, :invoice_items_attributes => { 0 => invoice_item_attributes}).attributes
+    Invoice.create!(invoice_attributes)
+  end
+
   it "should delete associated invoice items when deleted"
   it "should have a state (draft, billed, verified, accepted)"
   it "should be accepted only by the customer user"

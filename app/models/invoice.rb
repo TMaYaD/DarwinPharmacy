@@ -1,4 +1,6 @@
 class Invoice < ActiveRecord::Base
+  attr_accessible :invoice_number, :customer_id, :store_id
+
   acts_as_audited
   
   belongs_to :store
@@ -10,6 +12,8 @@ class Invoice < ActiveRecord::Base
   validate :store_and_customer_are_different
 
   after_save :set_invoice_number_if_missing
+
+  accepts_nested_attributes_for :invoice_items
 
 private
   def store_and_customer_are_different
