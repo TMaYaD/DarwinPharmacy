@@ -17,8 +17,14 @@ describe "/invoices/edit.html.erb" do
 
     response.should have_tag("form[action=#{invoice_path(@invoice)}][method=post]") do
       with_tag('input#invoice_invoice_number[name=?]', "invoice[invoice_number]")
-      with_tag('input#invoice_store[name=?]', "invoice[store]")
-      with_tag('input#invoice_customer[name=?]', "invoice[customer]")
+      with_tag('select#invoice_store_id[name=?]', "invoice[store_id]")
+      with_tag('select#invoice_customer_id[name=?]', "invoice[customer_id]")
     end
+  end
+
+  it "should allow to add more than one invoice items" do
+    render
+
+    response.should have_tag("a", :text => "Add Item")
   end
 end

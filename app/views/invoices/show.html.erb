@@ -1,18 +1,20 @@
-<p>
-  <b>Invoice number:</b>
-  <%=h @invoice.invoice_number %>
-</p>
+<% title "Invoice" %>
 
 <p>
-  <b>Store:</b>
+  <strong>Invoice Number:</strong>
+  <%=h @invoice.invoice_number %>
+</p>
+<p>
+  <strong>Customer:</strong>
+  <%=h @invoice.customer %>
+</p>
+<p>
+  <strong>Store:</strong>
   <%=h @invoice.store %>
 </p>
 
 <p>
-  <b>Customer:</b>
-  <%=h @invoice.customer %>
+  <%= link_to "Edit", edit_invoice_path(@invoice) %> |
+  <%= link_to "Destroy", @invoice, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", invoices_path %>
 </p>
-
-
-<%= link_to 'Edit', edit_invoice_path(@invoice) %> |
-<%= link_to 'Back', invoices_path %>

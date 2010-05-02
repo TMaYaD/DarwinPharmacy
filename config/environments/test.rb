@@ -30,5 +30,6 @@ config.action_mailer.delivery_method = :test
 config.gem "factory_girl"
 config.gem "rspec-rails", :lib => false
 config.gem "shoulda", :lib => false
+config.gem "mocha", :lib => false
 config.gem "webrat", :lib => false
 config.gem "cucumber-rails", :lib => false
