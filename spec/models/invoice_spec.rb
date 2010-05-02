@@ -51,7 +51,7 @@ describe Invoice do
   it "should have a state (draft, billed, verified, accepted)"
   it "should be accepted only by the customer user"
   it "should be billed only by the store user"
-  it "shuold be verified by the the store user"
+  it "should be verified by the the store user"
   it "should not be verified by the same user as the billed"
   
 end

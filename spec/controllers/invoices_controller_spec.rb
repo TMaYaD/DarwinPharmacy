@@ -10,7 +10,7 @@ describe InvoicesController do
   end
   
   it "show action should render show template" do
-    get :show, :id => Factory.create(:invoice)
+    get :show, :id => Factory.create(:invoice).id
     response.should render_template(:show)
   end
 
@@ -33,7 +33,7 @@ describe InvoicesController do
   end
   
   it "edit action should render edit template" do
-    get :edit, :id => Factory.create(:invoice)
+    get :edit, :id => Factory.create(:invoice).id
     response.should render_template(:edit)
   end
 
@@ -41,7 +41,7 @@ describe InvoicesController do
   it "update action should render edit template when model is invalid" do
     invoice = Factory.create(:invoice)
     Invoice.any_instance.stubs(:valid?).returns(false)
-    put :update, :id => invoice
+    put :update, :id => invoice.id
     response.should render_template(:edit)
   end
 
