@@ -22,7 +22,24 @@ describe "/invoices/new.html.erb" do
     end
   end
 
-  it "should have at least one set of fields for invoice items"
+  it "should have atleast one set of fields for invoice items" do
+    render
+    response.should have_tag("fieldset.item", :count => 1) do
+      # product name : auto complete
+      with_tag("input[name=?][autocomplete]", "invoice[invoice_items_attributes][0][product_name]" )
+      # product batch code: auto complete
+      with_tag("input[name=?][autocomplete]", "invoice[invoice_items_attributes][0][product_batch_code]" )
+      # quantity, sale and free
+      with_tag("input[name=?]", "invoice[invoice_items_attributes][0][sale_quantity]" )
+      with_tag("input[name=?]", "invoice[invoice_items_attributes][0][free_quantity]" )
+      # discount
+      with_tag("input[name=?]", "invoice[invoice_items_attributes][0][discount]" )
+      # rate
+      with_tag("input[name=?]", "invoice[invoice_items_attributes][0][rate]" )
+      # vat
+      with_tag("input[name=?]", "invoice[invoice_items_attributes][0][vat]" )
+   end
+  end
   it "should allow to add more than one invoice items" do
     render
 

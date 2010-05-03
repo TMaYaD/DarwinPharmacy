@@ -3,7 +3,13 @@
     <%= form.input :invoice_number, :label => 'Invoice Number' %>
     <%= form.input :customer, :label => 'Customer' %>
     <%= form.input :store, :label => 'Store' %>
-    <%= link_to_add_fieldset 'Add Item', form, :invoice_items %> 
+  <% end %>
+  <% form.inputs do %>
+    <% form.object.invoice_items.build if form.object.invoice_items.count == 0 %>
+    <% form.inputs :for => :invoice_items, :class => 'item' do |builder| %>
+      <%= render 'invoice_items/inputs', :f => builder %>
+    <% end %>
+    <%= link_to_add_fieldset 'Add Item', form, :invoice_items %>
   <% end %>
   <%= form.buttons %>
 <% end %>
