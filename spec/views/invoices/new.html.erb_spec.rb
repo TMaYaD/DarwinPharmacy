@@ -45,4 +45,10 @@ describe "/invoices/new.html.erb" do
 
     response.should have_tag("a", :text => "Add Item")
   end
+  it "should allow to remove unwanted invoice items" do
+    render
+    response.should have_tag("fieldset.item") do
+      with_tag("a", :text => "Remove Item")
+    end
+  end
 end
