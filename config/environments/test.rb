@@ -33,3 +33,5 @@ config.gem "shoulda", :lib => false
 config.gem "mocha", :lib => false
 config.gem "webrat", :lib => false
 config.gem "cucumber-rails", :lib => false
+config.gem "pickle", :lib => false
+
