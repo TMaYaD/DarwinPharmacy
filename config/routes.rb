@@ -1,4 +1,10 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :tests
+
+  map.resources :tests
+
+  map.resources :tests
+
   map.resources :stores,
                 :customers,
                 :suppliers,

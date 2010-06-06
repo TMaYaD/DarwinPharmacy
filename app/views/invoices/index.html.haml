@@ -1,0 +1,17 @@
+- title "Invoices"
+
+%table
+  %tr
+    %th Invoice number
+    %th Store
+    %th Customer
+  - for invoice in @invoices
+    %tr
+      %td= h invoice.invoice_number
+      %td= h invoice.store
+      %td= h invoice.customer
+      %td= link_to 'Show', invoice
+      %td= link_to 'Edit', edit_invoice_path(invoice)
+      %td= link_to 'Destroy', invoice, :confirm => 'Are you sure?', :method => :delete
+
+%p= link_to "New Invoice", new_invoice_path

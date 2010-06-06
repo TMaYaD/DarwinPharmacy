@@ -1,0 +1,18 @@
+- title "Invoice"
+
+%p
+  %strong Invoice Number:
+  =h @invoice.invoice_number
+%p
+  %strong Store:
+  =h @invoice.store
+%p
+  %strong Customer:
+  =h @invoice.customer
+
+%p
+  = link_to "Edit", edit_invoice_path(@invoice)
+  |
+  = link_to "Destroy", @invoice, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", invoices_path

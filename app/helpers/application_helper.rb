@@ -5,11 +5,10 @@ module ApplicationHelper
   end
   def link_to_add_fieldset(name, f, association)
     new_object = f.object.class.reflect_on_association(association).klass.new
-    fieldset = capture {
-      f.inputs(:for => ["#{association}_attributes][new_#{association}", new_object], :class => 'item') do |builder|
+    fieldset = f.inputs(:for => ["#{association}_attributes][new_#{association}", new_object], :class => 'item') do |builder|
         render(association.to_s.pluralize + "/inputs", :f => builder)
-      end
-    }
+    end
+    logger.debug fieldset
     link_to_function(name, h("add_fieldset(this, \"#{association}\", \"#{escape_javascript(fieldset)}\")"))
   end
 end
